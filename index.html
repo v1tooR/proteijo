@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wireframe — Proteijo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gray-100: #f5f5f5;
+      --gray-200: #e0e0e0;
+      --gray-300: #cccccc;
+      --gray-400: #aaaaaa;
+      --gray-500: #888888;
+      --gray-600: #666666;
+      --gray-700: #444444;
+      --gray-900: #111111;
+      --border: 1.5px dashed #aaaaaa;
+      --section-border: 1px solid #cccccc;
+    }
+
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background: #ffffff;
+      color: var(--gray-900);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ── Annotation labels ── */
+    .section-label {
+      display: inline-block;
+      background: var(--gray-900);
+      color: #fff;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      padding: 2px 7px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    /* ── Layout helpers ── */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      border-bottom: var(--section-border);
+      padding: 48px 0;
+    }
+
+    /* ── Placeholder boxes ── */
+    .placeholder-img {
+      border: var(--border);
+      background: var(--gray-100);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-500);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      gap: 6px;
+    }
+
+    .placeholder-img::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--gray-400);
+      border-radius: 50%;
+      background: var(--gray-200);
+    }
+
+    .placeholder-btn {
+      display: inline-block;
+      border: 2px solid var(--gray-900);
+      padding: 10px 24px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: transparent;
+      cursor: pointer;
+      color: var(--gray-900);
+    }
+
+    .placeholder-btn.secondary {
+      border-color: var(--gray-500);
+      color: var(--gray-600);
+      background: var(--gray-100);
+    }
+
+    .placeholder-btn.filled {
+      background: var(--gray-900);
+      color: #fff;
+    }
+
+    .placeholder-tag {
+      display: inline-block;
+      border: var(--border);
+      padding: 4px 10px;
+      font-size: 11px;
+      color: var(--gray-500);
+      background: var(--gray-100);
+      margin: 3px;
+    }
+
+    .placeholder-input {
+      border: var(--border);
+      background: var(--gray-100);
+      padding: 10px 12px;
+      color: var(--gray-400);
+      font-family: inherit;
+      font-size: 12px;
+      width: 100%;
+      font-style: italic;
+    }
+
+    /* ── Typography ── */
+    h1.wf { font-size: 32px; font-weight: 900; line-height: 1.15; letter-spacing: -0.01em; color: var(--gray-900); margin-bottom: 16px; }
+    h2.wf { font-size: 22px; font-weight: 700; line-height: 1.25; color: var(--gray-900); margin-bottom: 12px; }
+    h3.wf { font-size: 16px; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
+    p.wf  { color: var(--gray-600); margin-bottom: 12px; font-size: 13px; }
+    p.wf.big { font-size: 16px; color: var(--gray-700); font-style: italic; line-height: 1.6; }
+    p.wf.quote { font-size: 18px; color: var(--gray-700); font-style: italic; line-height: 1.6; border-left: 3px solid var(--gray-300); padding-left: 16px; }
+
+    /* ── Grid helpers ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .grid-hero { display: grid; grid-template-columns: 1fr 380px; gap: 40px; align-items: center; }
+
+    /* ── Navbar ── */
+    .navbar {
+      border-bottom: var(--section-border);
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 99;
+    }
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .logo-box {
+      border: var(--border);
+      padding: 6px 20px;
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--gray-600);
+      background: var(--gray-100);
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+    .nav-links span {
+      color: var(--gray-500);
+      font-size: 12px;
+      border-bottom: 1px solid var(--gray-300);
+    }
+
+    /* ── Hero ── */
+    #hero { background: var(--gray-100); }
+    .hero-badge {
+      border: var(--border);
+      display: inline-block;
+      padding: 3px 10px;
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-bottom: 14px;
+      background: #fff;
+    }
+    .hero-subtext {
+      color: var(--gray-500);
+      font-size: 14px;
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+    .hero-img { width: 100%; height: 320px; }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ── Credibility strip ── */
+    #credibility {
+      background: var(--gray-900);
+      padding: 20px 0;
+    }
+    .credibility-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .credibility-headline {
+      font-size: 13px;
+      font-weight: bold;
+      color: #fff;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    .credibility-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+    .cred-tag {
+      border: 1px solid var(--gray-500);
+      padding: 4px 12px;
+      font-size: 11px;
+      color: var(--gray-300);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── Problem ── */
+    #problem { background: #fff; }
+    .problem-inner { max-width: 720px; }
+
+    /* ── Why sells ── */
+    #why-sells { background: var(--gray-100); }
+    .why-card {
+      border: var(--border);
+      background: #fff;
+      padding: 20px;
+    }
+    .why-card-num {
+      font-size: 10px;
+      font-weight: bold;
+      color: var(--gray-400);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    /* ── Social proof ── */
+    #social-proof { background: var(--gray-200); text-align: center; }
+    #social-proof .container { max-width: 720px; }
+    .proof-highlight {
+      border: 2px solid var(--gray-900);
+      display: inline-block;
+      padding: 6px 20px;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      color: var(--gray-700);
+    }
+
+    /* ── Ingredients ── */
+    #ingredients { background: #fff; }
+    .ingredients-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+      align-items: start;
+    }
+    .ingredients-img { width: 100%; height: 200px; }
+    .ingredient-list {
+      border: var(--border);
+      background: var(--gray-100);
+      padding: 16px;
+    }
+    .ingredient-list p {
+      font-size: 11px;
+      color: var(--gray-500);
+      border-bottom: 1px dotted var(--gray-300);
+      padding: 5px 0;
+      margin: 0;
+    }
+    .nutrition-table {
+      border: var(--border);
+      background: var(--gray-100);
+      padding: 0;
+      overflow: hidden;
+    }
+    .nutrition-table .nt-header {
+      background: var(--gray-700);
+      color: #fff;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 12px;
+    }
+    .nt-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dotted var(--gray-300);
+      padding: 5px 12px;
+      font-size: 11px;
+      color: var(--gray-600);
+    }
+    .nt-row:last-child { border-bottom: none; }
+
+    /* ── How partnership works ── */
+    #how-it-works { background: var(--gray-100); }
+    .steps-grid { display: flex; gap: 0; margin-top: 24px; }
+    .step {
+      flex: 1;
+      border: var(--border);
+      border-right: none;
+      padding: 24px 16px;
+      background: #fff;
+      text-align: center;
+      position: relative;
+    }
+    .step:last-child { border-right: var(--border); }
+    .step-num {
+      width: 36px; height: 36px;
+      border: 2px solid var(--gray-400);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--gray-600);
+      margin: 0 auto 12px;
+      background: var(--gray-100);
+    }
+    .step h3.wf { font-size: 14px; margin-bottom: 6px; }
+    .step p { font-size: 11px; color: var(--gray-500); }
+    .step-arrow {
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: var(--gray-400);
+      z-index: 1;
+      background: #fff;
+      padding: 2px;
+    }
+
+    /* ── Audience ── */
+    #audience { background: #fff; }
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .audience-item {
+      border: var(--border);
+      padding: 14px;
+      background: var(--gray-100);
+      font-size: 12px;
+      color: var(--gray-600);
+      text-align: center;
+      line-height: 1.4;
+    }
+    .audience-icon {
+      width: 36px;
+      height: 36px;
+      border: var(--border);
+      background: var(--gray-200);
+      margin: 0 auto 8px;
+    }
+
+    /* ── FAQ ── */
+    #faq { background: var(--gray-100); }
+    .faq-list { margin-top: 20px; }
+    .faq-item {
+      border: var(--border);
+      margin-bottom: 8px;
+      background: #fff;
+    }
+    .faq-q {
+      padding: 14px 16px;
+      font-weight: bold;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--gray-900);
+    }
+    .faq-q::after { content: '+'; font-size: 18px; color: var(--gray-400); }
+    .faq-a {
+      padding: 10px 16px 14px;
+      font-size: 12px;
+      color: var(--gray-500);
+      border-top: 1px solid var(--gray-200);
+      font-style: italic;
+    }
+
+    /* ── Final CTA / Form ── */
+    #final-cta { background: var(--gray-900); color: #fff; }
+    .final-cta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .final-cta-text h2.wf { color: #fff; font-size: 26px; }
+    .final-cta-text p.wf { color: var(--gray-400); }
+    .form-box {
+      border: var(--border);
+      border-color: var(--gray-600);
+      background: rgba(255,255,255,0.05);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .form-label {
+      font-size: 10px;
+      color: var(--gray-400);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+      display: block;
+    }
+    .form-field { display: flex; flex-direction: column; }
+    .whatsapp-link {
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray-500);
+      border-top: 1px solid var(--gray-700);
+      padding-top: 14px;
+      margin-top: 4px;
+    }
+    .whatsapp-link span {
+      border-bottom: 1px solid var(--gray-600);
+      color: var(--gray-400);
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: var(--section-border);
+      padding: 28px 0;
+      background: var(--gray-100);
+    }
+    .footer-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+    }
+    .footer-col h3.wf { font-size: 13px; margin-bottom: 10px; }
+    .footer-links { list-style: none; }
+    .footer-links li { font-size: 11px; color: var(--gray-500); padding: 3px 0; border-bottom: 1px dotted var(--gray-200); }
+    .footer-bottom {
+      max-width: 960px; margin: 16px auto 0; padding: 12px 24px 0;
+      border-top: 1px solid var(--gray-200);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bottom span { font-size: 11px; color: var(--gray-400); }
+
+    /* ── Fixed note ── */
+    .wf-note {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      background: var(--gray-900);
+      color: #fff;
+      font-size: 10px;
+      padding: 6px 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 2px solid var(--gray-700);
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <div class="logo-box">[ LOGO — Proteijo ]</div>
+    <div class="nav-links">
+      <span>Por que o Proteijo</span>
+      <span>Como funciona</span>
+      <span>Para quem é</span>
+      <span>FAQ</span>
+    </div>
+    <button class="placeholder-btn" style="padding: 8px 18px; font-size: 12px;">Quero ser revendedor</button>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════
+     S1 — HERO
+══════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="grid-hero">
+
+      <!-- Texto -->
+      <div>
+        <span class="section-label">S1 · Hero</span>
+        <div class="hero-badge">[ Badge ] Pão de Queijo Artesanal · Desde 2015</div>
+        <h1 class="wf">O pão de queijo que seus clientes pedem pelo nome.</h1>
+        <p class="hero-subtext">
+          Há 9 anos liderando vendas em hortifrútis, empórios e lojas de produtos naturais.
+          Feito com Queijo Minas Frescal, fonte de proteína e cálcio — e com a recorrência que sua loja precisa.
+        </p>
+        <div class="hero-ctas">
+          <button class="placeholder-btn filled">[ CTA PRINCIPAL ] Quero ser revendedor</button>
+          <button class="placeholder-btn secondary">[ CTA ] Falar no WhatsApp ↗</button>
+        </div>
+      </div>
+
+      <!-- Imagem -->
+      <div class="placeholder-img hero-img">
+        [ IMAGEM HERO ]<br/>Foto do pão de queijo Proteijo
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S2 — FAIXA DE CREDIBILIDADE
+══════════════════════════════════════════════ -->
+<section id="credibility" style="padding: 0; border-bottom: none;">
+  <div class="credibility-inner">
+    <p class="credibility-headline">9 anos na mesa das famílias brasileiras</p>
+    <div class="credibility-tags">
+      <span class="cred-tag">Sem Glúten</span>
+      <span class="cred-tag">Sem Conservantes</span>
+      <span class="cred-tag">Sem Corantes</span>
+      <span class="cred-tag">Fonte de Proteína</span>
+      <span class="cred-tag">Fonte de Cálcio</span>
+      <span class="cred-tag">Artesanal</span>
+      <span class="cred-tag">Recomendado por Nutricionistas</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S3 — O PROBLEMA
+══════════════════════════════════════════════ -->
+<section id="problem">
+  <div class="container">
+    <span class="section-label">S3 · O Problema</span>
+    <div class="problem-inner">
+      <h2 class="wf" style="font-size: 26px;">Pão de queijo virou commodity.<br/>O seu não precisa ser.</h2>
+      <p class="wf big">
+        A gôndola está cheia de marcas iguais, com receitas iguais, brigando por preço.
+        O lojista que entra nessa disputa perde margem, perde diferenciação e perde o cliente
+        que busca algo melhor.
+      </p>
+      <p class="wf" style="font-size: 16px; font-weight: bold; color: var(--gray-900); margin-top: 8px;">
+        O Proteijo joga em outro campeonato.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S4 — POR QUE O PROTEIJO VENDE SOZINHO
+══════════════════════════════════════════════ -->
+<section id="why-sells">
+  <div class="container">
+    <span class="section-label">S4 · Por que o Proteijo Vende Sozinho</span>
+    <h2 class="wf">Quatro razões que explicam a recorrência.</h2>
+
+    <div class="grid-2" style="margin-top: 24px;">
+
+      <div class="why-card">
+        <div class="why-card-num">Diferencial 01</div>
+        <h3 class="wf">Mais queijo do que qualquer concorrente.</h3>
+        <p class="wf">
+          O queijo é o primeiro ingrediente da nossa lista. Não é detalhe — é o nosso segredo.
+          É o que faz o cliente provar, sentir a diferença e voltar na semana seguinte.
+        </p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card-num">Diferencial 02</div>
+        <h3 class="wf">O único feito com Queijo Minas Frescal.</h3>
+        <p class="wf">
+          Enquanto o mercado padroniza com queijos industriais, o Proteijo usa Minas Frescal de verdade.
+          Sabor artesanal autêntico, impossível de imitar.
+        </p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card-num">Diferencial 03</div>
+        <h3 class="wf">Fonte de proteína e cálcio.</h3>
+        <p class="wf">
+          Não é só gostoso — é nutritivo. Encaixa naturalmente no público que busca alimentação
+          saudável, fitness e funcional. Recomendado por nutricionistas.
+        </p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card-num">Diferencial 04</div>
+        <h3 class="wf">Sem glúten, sem conservantes, sem corantes.</h3>
+        <p class="wf">
+          Atende ao consumidor com restrição alimentar e ao consumidor consciente —
+          dois dos públicos que mais crescem no varejo alimentar brasileiro.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S5 — PROVA SOCIAL
+══════════════════════════════════════════════ -->
+<section id="social-proof">
+  <div class="container">
+    <span class="section-label">S5 · Prova Social</span>
+    <div class="proof-highlight">Líder de vendas onde chega.</div>
+    <p class="wf big" style="text-align:center;">
+      Há 9 anos o Proteijo é referência em hortifrútis, empórios e lojas de produtos naturais.
+      Não pela embalagem. Não pela propaganda. Pelo produto.
+    </p>
+    <br/>
+    <p class="wf quote" style="text-align:left; max-width:560px; margin:0 auto;">
+      Quem prova, volta. Quem vende, repete o pedido.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S6 — INGREDIENTES E INFORMAÇÃO NUTRICIONAL
+══════════════════════════════════════════════ -->
+<section id="ingredients">
+  <div class="container">
+    <span class="section-label">S6 · Ingredientes e Informação Nutricional</span>
+    <h2 class="wf">Transparência total. Do rótulo à mesa.</h2>
+
+    <div class="ingredients-grid">
+
+      <!-- Imagem produto -->
+      <div class="placeholder-img ingredients-img">
+        [ IMAGEM ]<br/>Embalagem / Produto
+      </div>
+
+      <!-- Lista de ingredientes -->
+      <div class="ingredient-list">
+        <p style="font-weight:bold; color: var(--gray-700); font-size:12px; margin-bottom:6px; border-bottom: 1.5px solid var(--gray-400); padding-bottom:6px; text-transform:uppercase; letter-spacing:0.06em;">Ingredientes</p>
+        <p>[ Queijo Minas Frescal ]</p>
+        <p>[ Polvilho azedo ]</p>
+        <p>[ Polvilho doce ]</p>
+        <p>[ Ovos ]</p>
+        <p>[ Óleo vegetal ]</p>
+        <p>[ Sal ]</p>
+        <p style="font-size:10px; color:var(--gray-400); margin-top:8px; font-style:italic; border-top: 1px dotted var(--gray-300); padding-top:6px; border-bottom:none;">
+          [ Lista completa conforme rótulo aprovado pela ANVISA ]
+        </p>
+      </div>
+
+      <!-- Tabela nutricional -->
+      <div class="nutrition-table">
+        <div class="nt-header">Informação Nutricional</div>
+        <div class="nt-row" style="font-size:10px; color:var(--gray-400); font-style:italic;">Porção de [ X ] g · [ Y ] porções</div>
+        <div class="nt-row"><span>Valor energético</span><span>[ ] kcal</span></div>
+        <div class="nt-row"><span>Proteínas</span><span>[ ] g</span></div>
+        <div class="nt-row"><span>Carboidratos</span><span>[ ] g</span></div>
+        <div class="nt-row"><span>Gorduras totais</span><span>[ ] g</span></div>
+        <div class="nt-row"><span>Gorduras saturadas</span><span>[ ] g</span></div>
+        <div class="nt-row"><span>Sódio</span><span>[ ] mg</span></div>
+        <div class="nt-row"><span>Cálcio</span><span>[ ] mg</span></div>
+        <div class="nt-row" style="font-size:10px; color:var(--gray-400); font-style:italic; border-top: 1px solid var(--gray-300);">
+          [ Dados conforme tabela nutricional oficial ]
+        </div>
+      </div>
+
+    </div>
+
+    <p class="wf" style="margin-top:20px; font-weight:bold; color:var(--gray-700);">
+      Nada para esconder. Tudo para mostrar.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S7 — COMO FUNCIONA A PARCERIA
+══════════════════════════════════════════════ -->
+<section id="how-it-works">
+  <div class="container">
+    <span class="section-label">S7 · Como Funciona a Parceria</span>
+    <h2 class="wf">Simples assim:</h2>
+
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3 class="wf">Entre em contato</h3>
+        <p>Conte sobre sua loja e seu volume estimado.</p>
+        <span class="step-arrow">›</span>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3 class="wf">Receba sua proposta comercial</h3>
+        <p>Condições, preços e prazos personalizados para o seu negócio.</p>
+        <span class="step-arrow">›</span>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3 class="wf">Entregamos no seu CD</h3>
+        <p>Sem complicação logística. Você só recebe e abastece.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S8 — PARA QUEM É O PROTEIJO
+══════════════════════════════════════════════ -->
+<section id="audience">
+  <div class="container">
+    <span class="section-label">S8 · Para Quem É o Proteijo</span>
+    <h2 class="wf">Se a sua loja atende quem valoriza qualidade,<br/>o Proteijo tem espaço garantido na sua gôndola.</h2>
+
+    <div class="audience-grid">
+      <div class="audience-item">
+        <div class="audience-icon"></div>
+        Hortifrútis
+      </div>
+      <div class="audience-item">
+        <div class="audience-icon"></div>
+        Empórios e mercearias premium
+      </div>
+      <div class="audience-item">
+        <div class="audience-icon"></div>
+        Lojas de produtos naturais
+      </div>
+      <div class="audience-item">
+        <div class="audience-icon"></div>
+        Supermercados de bairro
+      </div>
+      <div class="audience-item">
+        <div class="audience-icon"></div>
+        Cafeterias
+      </div>
+      <div class="audience-item">
+        <div class="audience-icon"></div>
+        Padarias artesanais
+      </div>
+      <div class="audience-item">
+        <div class="audience-icon"></div>
+        Restaurantes e buffets
+      </div>
+      <div class="audience-item" style="border-style:dotted; background:#fff; color:var(--gray-400); font-style:italic; font-size:11px;">
+        + outros canais a definir
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S9 — FAQ
+══════════════════════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <span class="section-label">S9 · Perguntas Frequentes</span>
+    <h2 class="wf">Dúvidas sobre a parceria</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Qual o pedido mínimo?</div>
+        <div class="faq-a">[ A definir conforme política comercial ]</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Quais regiões vocês atendem?</div>
+        <div class="faq-a">[ A definir ]</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Qual o prazo de entrega?</div>
+        <div class="faq-a">[ A definir ]</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Qual a validade do produto?</div>
+        <div class="faq-a">[ A definir ]</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Quais as condições de pagamento?</div>
+        <div class="faq-a">[ A definir ]</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Vocês enviam degustação?</div>
+        <div class="faq-a">[ A definir ]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S10 — CTA FINAL + FORMULÁRIO
+══════════════════════════════════════════════ -->
+<section id="final-cta" style="border-bottom: none;">
+  <div class="container">
+    <span class="section-label" style="background:#fff; color:#111;">S10 · CTA Final</span>
+
+    <div class="final-cta-grid">
+
+      <!-- Texto esquerdo -->
+      <div class="final-cta-text">
+        <h2 class="wf">Pronto para vender o pão de queijo que fideliza?</h2>
+        <p class="wf">
+          Preencha o formulário e nosso time entra em contato para fechar a parceria.
+        </p>
+        <br/>
+        <p class="wf" style="font-size: 12px; color: var(--gray-600); border: var(--border); border-color: var(--gray-700); padding: 12px; background: rgba(255,255,255,0.04);">
+          [ ÍCONE ] Sem compromisso. Sem taxa de adesão.<br/>
+          Você recebe uma proposta personalizada para o perfil da sua loja.
+        </p>
+      </div>
+
+      <!-- Formulário direito -->
+      <div class="form-box">
+        <div class="form-field">
+          <span class="form-label">Nome</span>
+          <input class="placeholder-input" type="text" placeholder="Nome completo" disabled />
+        </div>
+        <div class="form-field">
+          <span class="form-label">Empresa / Razão Social</span>
+          <input class="placeholder-input" type="text" placeholder="Nome da empresa" disabled />
+        </div>
+        <div class="form-field">
+          <span class="form-label">Cidade / Estado</span>
+          <input class="placeholder-input" type="text" placeholder="Ex.: São Paulo / SP" disabled />
+        </div>
+        <div class="form-field">
+          <span class="form-label">Tipo de estabelecimento</span>
+          <input class="placeholder-input" type="text" placeholder="Ex.: Hortifrúti, Empório..." disabled />
+        </div>
+        <div class="form-field">
+          <span class="form-label">WhatsApp</span>
+          <input class="placeholder-input" type="text" placeholder="(00) 00000-0000" disabled />
+        </div>
+        <div class="form-field">
+          <span class="form-label">E-mail</span>
+          <input class="placeholder-input" type="text" placeholder="seu@email.com.br" disabled />
+        </div>
+        <button class="placeholder-btn" style="width:100%; border-color:#fff; color:#fff; text-align:center; margin-top:4px;">
+          [ CTA ] Quero ser revendedor Proteijo
+        </button>
+        <div class="whatsapp-link">
+          Ou fale agora no WhatsApp → <span>[ Link WhatsApp ]</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="logo-box" style="margin-bottom:12px;">[ LOGO — Proteijo ]</div>
+      <p style="font-size:11px; color:var(--gray-500); line-height:1.6;">
+        Há 9 anos na mesa<br/>das famílias brasileiras.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3 class="wf">Navegação</h3>
+      <ul class="footer-links">
+        <li>Por que o Proteijo</li>
+        <li>Como funciona a parceria</li>
+        <li>Para quem é</li>
+        <li>FAQ</li>
+        <li>Política de Privacidade</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3 class="wf">Contato</h3>
+      <ul class="footer-links">
+        <li>[ WhatsApp ]</li>
+        <li>[ Instagram ]</li>
+        <li>[ E-mail ]</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Proteijo · Há 9 anos na mesa das famílias · [ CNPJ ]</span>
+    <span>[ Política de Privacidade ]</span>
+  </div>
+</footer>
+
+<div class="wf-note">Wireframe · Proteijo</div>
+
+</body>
+</html>
