@@ -310,19 +310,104 @@
       margin-bottom: 12px;
       background: #fff;
     }
-    /* Image first on mobile (visual priority) */
+
+    /* Image wrapper + floating protein badge */
+    .hero-img-wrap {
+      position: relative;
+      margin-bottom: 36px; /* espaço para badge não clipar */
+    }
     .hero-img {
       width: 100%;
       height: 200px;
-      margin-bottom: 20px;
     }
+    .hero-protein-badge {
+      position: absolute;
+      bottom: -22px;
+      right: 14px;
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      background: var(--gray-900);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8px;
+      z-index: 2;
+      /* duplo anel: branco externo + dashed interno */
+      box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--gray-600);
+    }
+    .hero-protein-badge::before {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      border: 1px dashed var(--gray-500);
+    }
+    .hero-protein-badge-num {
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1;
+      color: #fff;
+    }
+    .hero-protein-badge-unit {
+      font-size: 7px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-top: 3px;
+      line-height: 1.3;
+    }
+
     .hero-subtext {
       color: var(--gray-500);
       font-size: 13px;
       margin-bottom: 20px;
       line-height: 1.7;
     }
-    .hero-ctas { display: flex; flex-direction: column; gap: 10px; }
+    .hero-ctas { display: flex; flex-direction: column; gap: 6px; }
+
+    /* Annotation below each CTA (audience label) */
+    .cta-annotation {
+      font-size: 8px;
+      color: var(--gray-400);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 3px;
+    }
+
+    /* Key stats strip */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      margin-top: 18px;
+      border: var(--border);
+      background: #fff;
+    }
+    .hero-stat {
+      padding: 10px 6px;
+      text-align: center;
+      border-right: var(--border);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num {
+      display: block;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--gray-900);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      display: block;
+      font-size: 8px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
 
     /* ════════════════════════════════
        S2 · CREDIBILITY STRIP
@@ -746,6 +831,95 @@
     .footer-bottom span { font-size: 10px; color: var(--gray-400); }
 
     /* ════════════════════════════════
+       PROTEIN SEAL
+    ════════════════════════════════ */
+    .protein-seal-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      margin-top: 20px;
+      padding: 20px 0 4px;
+      border-top: var(--section-border);
+    }
+    .protein-seal {
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      border: 3px solid var(--gray-900);
+      background: var(--gray-100);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .protein-seal::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      border: 1.5px dashed var(--gray-400);
+    }
+    .protein-seal-num {
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--gray-900);
+    }
+    .protein-seal-unit {
+      font-size: 10px;
+      color: var(--gray-600);
+      letter-spacing: 0.05em;
+      margin-top: 3px;
+    }
+    .protein-seal-label {
+      font-size: 8px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+    .protein-seal-sub {
+      font-size: 8px;
+      color: var(--gray-400);
+      margin-top: 2px;
+      font-style: italic;
+    }
+    .protein-seal-copy {
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.7;
+      font-style: italic;
+      max-width: 240px;
+    }
+    .protein-seal-copy strong {
+      font-style: normal;
+      font-weight: bold;
+      color: var(--gray-900);
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .protein-mini-badge {
+      display: inline-block;
+      border: 1.5px solid var(--gray-500);
+      padding: 4px 9px;
+      font-size: 9px;
+      font-weight: bold;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--gray-700);
+      margin-top: 10px;
+      background: var(--gray-200);
+    }
+
+    /* ════════════════════════════════
        WIREFRAME BADGE
     ════════════════════════════════ */
     .wf-note {
@@ -790,11 +964,15 @@
         align-items: center;
       }
       /* Restore natural order: text left, image right */
-      .hero-img {
-        height: 280px;
-        margin-bottom: 0;
+      .hero-img-wrap {
         order: 0;
+        margin-bottom: 0;
+        padding-bottom: 26px; /* espaço para o badge overflow em desktop */
       }
+      .hero-img { height: 280px; }
+      .hero-protein-badge { width: 96px; height: 96px; bottom: -4px; right: 16px; }
+      .hero-protein-badge-num { font-size: 28px; }
+      .hero-protein-badge-unit { font-size: 8px; }
       .hero-text-col { order: -1; }
       .hero-ctas { flex-direction: row; flex-wrap: wrap; gap: 10px; }
       .btn { width: auto; display: inline-block; }
@@ -843,6 +1021,10 @@
       .form-box { margin-top: 0; }
       .final-cta-text h2.wf { font-size: 26px; }
 
+      /* Protein seal — horizontal on desktop */
+      .protein-seal-wrap { flex-direction: row; align-items: center; justify-content: flex-start; padding-left: 0; }
+      .protein-seal-copy { text-align: left; }
+
       /* Footer */
       .footer-inner {
         flex-direction: row;
@@ -885,8 +1067,10 @@
     body.frame-mode .nav-cta-desktop { display: none !important; }
     body.frame-mode .navbar-inner { padding: 11px 16px; }
     body.frame-mode .hero-layout { display: block !important; }
-    body.frame-mode .hero-img { margin-bottom: 20px; height: 200px; }
-    body.frame-mode .hero-ctas { flex-direction: column !important; gap: 10px; }
+    body.frame-mode .hero-img-wrap { margin-bottom: 36px !important; padding-bottom: 0 !important; order: 0 !important; }
+    body.frame-mode .hero-img { height: 200px !important; }
+    body.frame-mode .hero-protein-badge { width: 82px !important; height: 82px !important; bottom: -22px !important; right: 14px !important; }
+    body.frame-mode .hero-ctas { flex-direction: column !important; gap: 6px; }
     body.frame-mode .btn { width: 100% !important; display: block !important; }
     body.frame-mode .why-list { display: flex !important; flex-direction: column !important; }
     body.frame-mode .ingredients-stack { display: flex !important; flex-direction: column !important; }
@@ -903,6 +1087,8 @@
     body.frame-mode .wf-note { display: none; }
     body.frame-mode .credibility-inner { padding: 0 16px; max-width: none; }
     body.frame-mode .cred-tag { font-size: 9px; }
+    body.frame-mode .protein-seal-wrap { flex-direction: column !important; align-items: center !important; }
+    body.frame-mode .protein-seal-copy { text-align: center !important; }
   </style>
 </head>
 <body>
@@ -962,22 +1148,57 @@
 
     <div class="hero-layout">
 
-      <!-- Image appears first on mobile (visual priority) -->
-      <div class="placeholder-img hero-img">
-        [ IMAGEM HERO ]<br/>Foto do pão de queijo Proteijo
+      <!-- Image first on mobile + floating protein badge -->
+      <div class="hero-img-wrap">
+        <div class="placeholder-img hero-img">
+          [ IMAGEM HERO ]<br/>Foto do pão de queijo Proteijo
+        </div>
+        <!-- Badge flutua sobre o canto da imagem -->
+        <div class="hero-protein-badge">
+          <span class="hero-protein-badge-num">48g</span>
+          <span class="hero-protein-badge-unit">proteína<br/>natural</span>
+        </div>
       </div>
 
-      <!-- Text col -->
+      <!-- Text col — order: -1 no desktop (texto à esquerda) -->
       <div class="hero-text-col">
-        <div class="hero-badge">[ Badge ] Pão de Queijo Artesanal · Desde 2015</div>
-        <h1 class="wf">O pão de queijo que seus clientes pedem pelo nome.</h1>
+        <div class="hero-badge">[ Badge ] Artesanal · Proteico · Sem Glúten · Desde 2015</div>
+
+        <h1 class="wf">O pão de queijo que, quem prova, não para de pedir.</h1>
+
         <p class="hero-subtext">
-          Há 9 anos liderando vendas em hortifrútis, empórios e lojas de produtos naturais.
-          Feito com Queijo Minas Frescal, fonte de proteína e cálcio — e com a recorrência que sua loja precisa.
+          Feito com Queijo Minas Frescal de verdade —
+          48g de proteína natural por embalagem, o dobro de qualquer concorrente.
+          Sem glúten, sem conservantes, sem corantes.
+          Há 9 anos sendo pedido de volta.
         </p>
+
+        <!-- CTAs bifurcados: B2C + B2B -->
         <div class="hero-ctas">
-          <button class="btn filled">[ CTA PRINCIPAL ] Quero ser revendedor</button>
-          <button class="btn secondary">[ CTA ] Falar no WhatsApp ↗</button>
+          <div>
+            <button class="btn filled">[ CTA ] Onde Encontrar</button>
+            <div class="cta-annotation">→ consumidor final</div>
+          </div>
+          <div>
+            <button class="btn secondary">[ CTA ] Quero Revender ↗</button>
+            <div class="cta-annotation">→ lojista / revendedor</div>
+          </div>
+        </div>
+
+        <!-- Stats strip: âncoras numéricas rápidas -->
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="hero-stat-num">48g</span>
+            <span class="hero-stat-label">Proteína<br/>por embalagem</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">2×</span>
+            <span class="hero-stat-label">mais que a<br/>concorrência</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">9+</span>
+            <span class="hero-stat-label">anos no<br/>mercado</span>
+          </div>
         </div>
       </div>
 
@@ -1029,8 +1250,8 @@
 ══════════════════════════════════════════════ -->
 <section id="why-sells">
   <div class="container">
-    <span class="section-label">S4 · Por que o Proteijo Vende Sozinho</span>
-    <h2 class="wf">Quatro razões que explicam a recorrência.</h2>
+    <span class="section-label">S4 · Diferenciais do Produto</span>
+    <h2 class="wf">O que faz o Proteijo diferente de tudo.</h2>
 
     <div class="why-list">
       <div class="why-card">
@@ -1056,6 +1277,7 @@
           Não é só gostoso — é nutritivo. Encaixa naturalmente no público que busca alimentação
           saudável, fitness e funcional. Recomendado por nutricionistas.
         </p>
+        <div class="protein-mini-badge">[ SELÃO ] 48g proteína natural · por embalagem</div>
       </div>
       <div class="why-card">
         <div class="why-card-num">Diferencial 04</div>
@@ -1118,7 +1340,7 @@
         <div class="nt-header">Informação Nutricional</div>
         <div class="nt-row dim">Porção de [ X ] g · [ Y ] porções</div>
         <div class="nt-row"><span>Valor energético</span><span>[ ] kcal</span></div>
-        <div class="nt-row"><span>Proteínas</span><span>[ ] g</span></div>
+        <div class="nt-row" style="font-weight: bold; color: var(--gray-900); background: var(--gray-200);"><span>Proteínas ★</span><span>[ ] g</span></div>
         <div class="nt-row"><span>Carboidratos</span><span>[ ] g</span></div>
         <div class="nt-row"><span>Gorduras totais</span><span>[ ] g</span></div>
         <div class="nt-row"><span>Gorduras saturadas</span><span>[ ] g</span></div>
@@ -1127,6 +1349,22 @@
         <div class="nt-row dim">[ Dados conforme tabela nutricional oficial ]</div>
       </div>
 
+    </div>
+
+    <!-- Protein Seal — selão grande -->
+    <div class="protein-seal-wrap">
+      <div class="protein-seal">
+        <span class="protein-seal-num">48g</span>
+        <span class="protein-seal-unit">de proteína</span>
+        <span class="protein-seal-label">por embalagem</span>
+        <span class="protein-seal-sub">proteína natural</span>
+      </div>
+      <div class="protein-seal-copy">
+        <strong>O dobro da concorrência.</strong>
+        Proteína naturalmente presente no queijo Minas Frescal — não adicionada, não processada.
+        O Proteijo tem mais proteína que qualquer pão de queijo do mercado.<br/>
+        <span style="font-size:10px; color: var(--gray-400);">[ comparativo baseado em embalagem equivalente ]</span>
+      </div>
     </div>
 
     <p class="wf ingredients-note">Nada para esconder. Tudo para mostrar.</p>
@@ -1370,7 +1608,7 @@
      STICKY BOTTOM CTA (mobile only)
 ══════════════════════════════════════════════ -->
 <div class="sticky-bottom">
-  <button class="s-primary">Quero ser revendedor</button>
+  <button class="s-primary">Quero o Proteijo</button>
   <button class="s-wpp">WhatsApp ↗</button>
 </div>
 
