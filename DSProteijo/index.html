@@ -1,8 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design System Proteijo | Direção visual para landing page</title>
+<meta name="description" content="Design System da Proteijo para orientar uma landing page acolhedora, artesanal, apetitosa e profissional, com cores, tipografia, componentes, CTAs e regras responsivas.">
+<meta name="keywords" content="Proteijo, design system, landing page, pão de queijo, marca artesanal, identidade visual, UI design, conversão">
+<meta name="author" content="Proteijo">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#EA1C24">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Proteijo">
+<meta property="og:title" content="Design System Proteijo">
+<meta property="og:description" content="Sistema visual para uma landing page de alta conversão: acolhedora, artesanal, apetitosa e profissional.">
+<meta property="og:image" content="assets/cheese-pull.jpg">
+<meta property="og:image:alt" content="Pão de queijo Proteijo com textura apetitosa e queijo puxando.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Design System Proteijo">
+<meta name="twitter:description" content="Direção visual, tokens, componentes e CTAs para a landing page da Proteijo.">
+<meta name="twitter:image" content="assets/cheese-pull.jpg">
+<link rel="icon" href="assets/logo-primary.jpg">
+<link rel="apple-touch-icon" href="assets/logo-primary.jpg">
+<link rel="preload" as="image" href="assets/logo-primary.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Design System Proteijo",
+  "description": "Sistema visual da Proteijo para orientar uma landing page acolhedora, artesanal, apetitosa e profissional.",
+  "inLanguage": "pt-BR",
+  "about": {
+    "@type": "Brand",
+    "name": "Proteijo",
+    "slogan": "Pão de queijo feito com muuuuito queijo branco"
+  },
+  "image": "assets/cheese-pull.jpg"
+}
+</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -56,6 +92,50 @@ details[open] summary span{transform:rotate(45deg);}
 @media (prefers-reduced-motion:reduce){
   .reveal{transition:none;opacity:1;transform:none;}
 }
+@media (max-width:700px){
+  html,body{overflow-x:hidden;}
+  body{font-size:16px;line-height:1.58;}
+  img,svg,video{max-width:100%;height:auto;}
+  .doc{width:100%!important;max-width:none!important;padding:0 14px 72px!important;}
+  .doc-frame,.doc-frame tbody,.doc-frame tr,.doc-frame td{display:block;width:100%!important;}
+  header{margin-top:16px!important;border-radius:20px!important;padding:24px 18px!important;}
+  header > div[style*="position:absolute"]{transform:scale(.72);opacity:.1!important;}
+  header > div[style*="position:relative;display:flex"]{align-items:flex-start!important;gap:22px!important;}
+  header > div[style*="position:relative;display:flex"] > div{width:100%;max-width:100%!important;}
+  header div[style*="width:230px"]{width:min(180px,72vw)!important;height:min(180px,72vw)!important;margin:0 auto;padding:14px!important;}
+  header h1{font-size:clamp(36px,13vw,48px)!important;line-height:1!important;letter-spacing:-.01em!important;}
+  header p{font-size:16px!important;line-height:1.55!important;}
+  header p[style*="Caveat"]{font-size:24px!important;}
+  .hero-tags{display:grid!important;grid-template-columns:1fr!important;gap:8px!important;width:100%!important;max-width:100%!important;}
+  .hero-tags span{display:flex!important;align-items:center;justify-content:center;text-align:center;min-height:40px;padding:8px 10px!important;font-size:13px!important;white-space:normal;}
+  nav[aria-label]{margin-top:24px!important;border-radius:18px!important;padding:18px!important;}
+  nav[aria-label] ol{display:grid!important;grid-template-columns:1fr!important;gap:0!important;}
+  nav[aria-label] a{min-height:44px;align-items:center;}
+  section{margin-top:54px!important;scroll-margin-top:14px!important;}
+  section > .reveal:first-child > div[style*="display:flex"]{align-items:flex-start!important;}
+  section h2{font-size:clamp(27px,9vw,36px)!important;line-height:1.08!important;letter-spacing:-.01em!important;}
+  section p[style*="font-size:clamp"]{font-size:16px!important;line-height:1.58!important;}
+  .keep[style*="display:grid"], div[style*="display:grid"][style*="minmax"]{grid-template-columns:1fr!important;gap:14px!important;}
+  div[style*="grid-template-columns:repeat(auto-fit"], div[style*="grid-template-columns:repeat(auto-fill"]{grid-template-columns:1fr!important;}
+  div[style*="padding:26px"], div[style*="padding:24px"], div[style*="padding:22px"]{padding:18px!important;}
+  div[style*="border-radius:28px"]{border-radius:20px!important;}
+  #s13 .keep > div{flex-direction:column!important;gap:12px!important;padding:18px!important;}
+  #s13 .keep > div > div:first-child{width:42px!important;height:42px!important;flex-basis:auto!important;}
+  div[style*="justify-content:space-between"][style*="flex-wrap:wrap"]{align-items:flex-start!important;}
+  div[style*="gap:40px"]{gap:22px!important;flex-wrap:wrap!important;}
+  div[style*="margin-left:auto"]{margin-left:0!important;width:100%;}
+  a[style*="border-radius:var(--r-pill)"], button[style*="border-radius:var(--r-pill)"]{min-height:44px;text-align:center;}
+  pre{font-size:12px!important;line-height:1.6!important;}
+  code{word-break:break-word;}
+  [style*="overflow-x:auto"]{-webkit-overflow-scrolling:touch;max-width:100%;}
+}
+@media (max-width:380px){
+  .doc{padding-left:12px!important;padding-right:12px!important;}
+  header{padding:22px 16px!important;}
+  header h1{font-size:34px!important;}
+  section h2{font-size:26px!important;}
+  div[style*="padding:18px"]{padding:16px!important;}
+}
 </style>
 </helmet>
 <main class="doc" style="max-width:1140px;margin:0 auto;padding:0 clamp(20px,5vw,40px) 120px;">
@@ -79,7 +159,7 @@ details[open] summary span{transform:rotate(45deg);}
       <img src="assets/logo-primary.jpg" alt="Logo Proteijo" style="width:100%;height:100%;object-fit:contain;border-radius:14px;"/>
     </div>
   </div>
-  <div style="position:relative;margin-top:34px;display:flex;flex-wrap:wrap;gap:10px;">
+  <div class="hero-tags" style="position:relative;margin-top:34px;display:flex;flex-wrap:wrap;gap:10px;">
     <span style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-pill);padding:8px 15px;font-size:13.5px;font-weight:600;color:var(--marrom-2);">Acolhedor</span>
     <span style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-pill);padding:8px 15px;font-size:13.5px;font-weight:600;color:var(--marrom-2);">Artesanal premium</span>
     <span style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-pill);padding:8px 15px;font-size:13.5px;font-weight:600;color:var(--marrom-2);">Brasileiro</span>
