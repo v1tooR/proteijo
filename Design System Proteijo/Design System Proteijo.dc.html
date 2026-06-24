@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Mulish:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#EA1C24; --red-700:#C2151B; --red-900:#8F1016;
+  --vinho:#6B1815;
+  --queijo:#FAAD3D; --queijo-600:#F2962E; --queijo-100:#FDEBCB; --queijo-50:#FBF1DD;
+  --creme:#FBF4E9; --card:#FFFDF8; --bege:#F3E5CE; --line:#E7D6BC;
+  --marrom:#3A2A22; --marrom-2:#6E5A4E; --branco:#FFFFFF;
+  --r-sm:8px; --r-md:14px; --r-lg:22px; --r-pill:999px;
+  --sh-sm:0 1px 2px rgba(58,27,20,.06);
+  --sh-md:0 10px 26px rgba(58,27,20,.08);
+  --sh-lg:0 20px 50px rgba(107,24,21,.12);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{margin:0;background:var(--creme);color:var(--marrom);
+  font-family:'Mulish',system-ui,sans-serif;font-size:17px;line-height:1.65;}
+h1,h2,h3,h4{font-family:'Bricolage Grotesque',system-ui,sans-serif;text-wrap:balance;margin:0;}
+p{text-wrap:pretty;margin:0;}
+a{color:inherit;}
+.doc-frame{width:100%;border-collapse:collapse;}
+.doc-frame td{padding:0;}
+.hdr-space,.ftr-space{display:none;}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+.reveal.in{opacity:1;transform:none;}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+details summary::-webkit-details-marker{display:none}
+details summary span{display:inline-block;transition:transform .2s var(--ease);}
+details[open] summary span{transform:rotate(45deg);}
+@keyframes shimmer{0%{background-position:-160% 0}100%{background-position:260% 0}}
+@page{size:letter;margin:0;}
+@media print{
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  html,body{margin:0;padding:0;background:#fff;}
+  .doc{max-width:none!important;margin:0!important;padding:0 .6in!important;box-shadow:none!important;}
+  .hdr-space,.ftr-space{display:table-cell;height:.6in;}
+  h1,h2,h3,h4{break-after:avoid;}
+  figure,blockquote,img,tr,.keep{break-inside:avoid;}
+  p,li{orphans:3;widows:3;}
+  .reveal{opacity:1!important;transform:none!important;}
+  .screen-only{display:none!important;}
+}
+@media (prefers-reduced-motion:reduce){
+  .reveal{transition:none;opacity:1;transform:none;}
+}
+</style>
+</helmet>
+<main class="doc" style="max-width:1140px;margin:0 auto;padding:0 clamp(20px,5vw,40px) 120px;">
+<table class="doc-frame" role="presentation"><thead><tr><td class="hdr-space"></td></tr></thead>
+<tbody><tr><td>
+
+<!-- ===================== COVER ===================== -->
+<header style="margin-top:clamp(28px,6vw,64px);background:linear-gradient(160deg,#FFFDF8 0%,#FBF1DD 60%,#FDEBCB 100%);border:1px solid var(--line);border-radius:28px;padding:clamp(32px,5vw,64px);box-shadow:var(--sh-md);position:relative;overflow:hidden;">
+  <div style="position:absolute;right:-70px;top:-70px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FBB861,#F2962E);opacity:.18;"></div>
+  <div style="position:absolute;right:90px;bottom:-60px;width:150px;height:150px;border-radius:50%;background:var(--red);opacity:.06;"></div>
+  <div style="position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:28px;justify-content:space-between;">
+    <div style="max-width:640px;">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:var(--branco);border:1px solid var(--line);border-radius:var(--r-pill);padding:7px 14px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);box-shadow:var(--sh-sm);">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--queijo);"></span>Design System · v1.0
+      </div>
+      <h1 style="margin:22px 0 0;font-size:clamp(40px,7vw,68px);font-weight:800;line-height:.98;letter-spacing:-.025em;color:var(--vinho);">Design System<br><span style="color:var(--red);">Proteijo</span></h1>
+      <p style="margin:20px 0 0;font-size:clamp(17px,2.2vw,21px);line-height:1.55;color:var(--marrom-2);max-width:560px;">O sistema visual que orienta a criação de uma landing page de alta conversão para a Proteijo — acolhedora, artesanal, apetitosa e profissional.</p>
+      <p style="margin:18px 0 0;font-family:'Caveat',cursive;font-size:27px;color:var(--queijo-600);transform:rotate(-1.5deg);">feito com muuuuito queijo branco 🧀</p>
+    </div>
+    <div style="flex:0 0 auto;width:230px;height:230px;border-radius:24px;background:var(--branco);border:1px solid var(--line);box-shadow:var(--sh-lg);display:flex;align-items:center;justify-content:center;padding:18px;">
+      <img src="assets/logo-primary.jpg" alt="Logo Proteijo" style="width:100%;height:100%;object-fit:contain;border-radius:14px;"/>
+    </div>
+  </div>
+  <div style="position:relative;margin-top:34px;display:flex;flex-wrap:wrap;gap:10px;">
+    <span style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-pill);padding:8px 15px;font-size:13.5px;font-weight:600;color:var(--marrom-2);">Acolhedor</span>
+    <span style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-pill);padding:8px 15px;font-size:13.5px;font-weight:600;color:var(--marrom-2);">Artesanal premium</span>
+    <span style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-pill);padding:8px 15px;font-size:13.5px;font-weight:600;color:var(--marrom-2);">Brasileiro</span>
+    <span style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-pill);padding:8px 15px;font-size:13.5px;font-weight:600;color:var(--marrom-2);">Apetitoso</span>
+    <span style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-pill);padding:8px 15px;font-size:13.5px;font-weight:600;color:var(--marrom-2);">Confiável</span>
+  </div>
+</header>
+
+<!-- ===================== SUMÁRIO ===================== -->
+<nav aria-label="Sumário" style="margin-top:40px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(22px,3vw,32px);box-shadow:var(--sh-sm);">
+  <div style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Sumário</div>
+  <ol style="margin:18px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 28px;counter-reset:toc;">
+    <li style="counter-increment:toc;"><a href="#s1" style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F0E6D4;text-decoration:none;font-weight:600;color:var(--marrom);"><span style="color:var(--queijo-600);font-family:'Bricolage Grotesque';font-weight:700;min-width:22px;">01</span>Direção Visual</a></li>
+    <li><a href="#s2" style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F0E6D4;text-decoration:none;font-weight:600;color:var(--marrom);"><span style="color:var(--queijo-600);font-family:'Bricolage Grotesque';font-weight:700;min-width:22px;">02</span>Paleta de Cores</a></li>
+    <li><a href="#s3" style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F0E6D4;text-decoration:none;font-weight:600;color:var(--marrom);"><span style="color:var(--queijo-600);font-family:'Bricolage Grotesque';font-weight:700;min-width:22px;">03</span>Tipografia</a></li>
+    <li><a href="#s4" style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F0E6D4;text-decoration:none;font-weight:600;color:var(--marrom);"><span style="color:var(--queijo-600);font-family:'Bricolage Grotesque';font-weight:700;min-width:22px;">04</span>Grid e Layout</a></li>
+    <li><a href="#s5" style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F0E6D4;text-decoration:none;font-weight:600;color:var(--marrom);"><span style="color:var(--queijo-600);font-family:'Bricolage Grotesque';font-weight:700;min-width:22px;">05</span>Espaçamento</a></li>
+    <li><a href="#s6" style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F0E6D4;text-decoration:none;font-weight:600;color:var(--marrom);"><span style="color:var(--queijo-600);font-family:'Bricolage Grotesque';font-weight:700;min-width:22px;">06</span>Componentes Base</a></li>
+    <li><a href="#s7" style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F0E6D4;text-decoration:none;font-weight:600;color:var(--marrom);"><span style="color:var(--queijo-600);font-family:'Bricolage Grotesque';font-weight:700;min-width:22px;">07</span>Sistema de CTA</a></li>
+    <li><a href="#s8" style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F0E6D4;text-decoration:none;font-weight:600;color:var(--marrom);"><span style="color:var(--queijo-600);font-family:'Bricolage Grotesque';font-weight:700;min-width:22px;">08</span>Imagens e Elementos</a></li>
+    <li><a href="#s9" style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F0E6D4;text-decoration:none;font-weight:600;color:var(--marrom);"><span style="color:var(--queijo-600);font-family:'Bricolage Grotesque';font-weight:700;min-width:22px;">09</span>Motion System</a></li>
+    <li><a href="#s10" style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F0E6D4;text-decoration:none;font-weight:600;color:var(--marrom);"><span style="color:var(--queijo-600);font-family:'Bricolage Grotesque';font-weight:700;min-width:22px;">10</span>Acessibilidade</a></li>
+    <li><a href="#s11" style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F0E6D4;text-decoration:none;font-weight:600;color:var(--marrom);"><span style="color:var(--queijo-600);font-family:'Bricolage Grotesque';font-weight:700;min-width:22px;">11</span>Regras Responsivas</a></li>
+    <li><a href="#s12" style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F0E6D4;text-decoration:none;font-weight:600;color:var(--marrom);"><span style="color:var(--queijo-600);font-family:'Bricolage Grotesque';font-weight:700;min-width:22px;">12</span>Tokens de Design</a></li>
+    <li><a href="#s13" style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F0E6D4;text-decoration:none;font-weight:600;color:var(--marrom);"><span style="color:var(--queijo-600);font-family:'Bricolage Grotesque';font-weight:700;min-width:22px;">13</span>Aplicação na LP</a></li>
+  </ol>
+</nav>
+
+<!-- ===================== 01 DIREÇÃO VISUAL ===================== -->
+<section id="s1" style="margin-top:clamp(56px,9vw,100px);scroll-margin-top:24px;">
+  <div class="reveal">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;color:#fff;background:var(--red);width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-sm);">01</span>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Direção Visual</span>
+    </div>
+    <h2 style="margin:18px 0 0;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.02;letter-spacing:-.02em;color:var(--vinho);">Calor de cozinha brasileira, cuidado de marca premium.</h2>
+    <p style="margin:18px 0 0;max-width:760px;font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--marrom-2);">A Proteijo nasce do universo do pão de queijo: sabor caseiro, mesa de família e afeto. A interface traduz isso em uma experiência <strong style="color:var(--marrom);">quente, clara e apetitosa</strong> — artesanal no espírito, mas organizada e profissional na execução. A logo já carrega toda a personalidade; o sistema existe para dar <strong style="color:var(--marrom);">clareza, hierarquia e conversão</strong>.</p>
+  </div>
+
+  <div class="reveal keep" style="margin-top:34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;">
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-sm);">
+      <div style="width:46px;height:46px;border-radius:14px;background:var(--queijo-50);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:22px;">🤲</div>
+      <h3 style="margin:16px 0 6px;font-size:20px;font-weight:700;color:var(--marrom);">Acolhimento</h3>
+      <p style="font-size:15.5px;color:var(--marrom-2);">Tons creme, cantos arredondados orgânicos e respiro generoso. A página deve dar a sensação de receber alguém em casa.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-sm);">
+      <div style="width:46px;height:46px;border-radius:14px;background:var(--queijo-50);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:22px;">✋</div>
+      <h3 style="margin:16px 0 6px;font-size:20px;font-weight:700;color:var(--marrom);">Feito à mão</h3>
+      <p style="font-size:15.5px;color:var(--marrom-2);">Detalhes manuais (acentos em Caveat, selos artesanais) entram com parcimônia para lembrar a origem caseira, sem virar bagunça.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-sm);">
+      <div style="width:46px;height:46px;border-radius:14px;background:var(--queijo-50);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:22px;">🔥</div>
+      <h3 style="margin:16px 0 6px;font-size:20px;font-weight:700;color:var(--marrom);">Apetite</h3>
+      <p style="font-size:15.5px;color:var(--marrom-2);">Fotografia quente e próxima é a estrela. O vermelho é energia pontual; o amarelo-queijo é sabor. Tudo serve à fome.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-sm);">
+      <div style="width:46px;height:46px;border-radius:14px;background:var(--queijo-50);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:22px;">✅</div>
+      <h3 style="margin:16px 0 6px;font-size:20px;font-weight:700;color:var(--marrom);">Confiança</h3>
+      <p style="font-size:15.5px;color:var(--marrom-2);">Composições simples e escaneáveis, contraste correto e CTAs claros. Bonito porque é bem cuidado — não porque é enfeitado.</p>
+    </div>
+  </div>
+
+  <div class="reveal keep" style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;">
+    <div style="background:#F4FBF2;border:1px solid #CDE8C8;border-radius:var(--r-lg);padding:24px;">
+      <div style="font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#2E7D32;">A marca deve parecer</div>
+      <ul style="margin:14px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px;">
+        <li style="background:#fff;border:1px solid #CDE8C8;border-radius:var(--r-pill);padding:6px 13px;font-size:14px;font-weight:600;color:#2E7D32;">Acolhedora</li>
+        <li style="background:#fff;border:1px solid #CDE8C8;border-radius:var(--r-pill);padding:6px 13px;font-size:14px;font-weight:600;color:#2E7D32;">Confiável</li>
+        <li style="background:#fff;border:1px solid #CDE8C8;border-radius:var(--r-pill);padding:6px 13px;font-size:14px;font-weight:600;color:#2E7D32;">Artesanal</li>
+        <li style="background:#fff;border:1px solid #CDE8C8;border-radius:var(--r-pill);padding:6px 13px;font-size:14px;font-weight:600;color:#2E7D32;">Brasileira</li>
+        <li style="background:#fff;border:1px solid #CDE8C8;border-radius:var(--r-pill);padding:6px 13px;font-size:14px;font-weight:600;color:#2E7D32;">Apetitosa</li>
+        <li style="background:#fff;border:1px solid #CDE8C8;border-radius:var(--r-pill);padding:6px 13px;font-size:14px;font-weight:600;color:#2E7D32;">Familiar</li>
+        <li style="background:#fff;border:1px solid #CDE8C8;border-radius:var(--r-pill);padding:6px 13px;font-size:14px;font-weight:600;color:#2E7D32;">Profissional</li>
+      </ul>
+    </div>
+    <div style="background:#FCF3F2;border:1px solid #F1CFCC;border-radius:var(--r-lg);padding:24px;">
+      <div style="font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red-700);">Nunca deve parecer</div>
+      <ul style="margin:14px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px;">
+        <li style="background:#fff;border:1px solid #F1CFCC;border-radius:var(--r-pill);padding:6px 13px;font-size:14px;font-weight:600;color:var(--red-700);text-decoration:line-through;text-decoration-color:#E9A9A4;">Fria</li>
+        <li style="background:#fff;border:1px solid #F1CFCC;border-radius:var(--r-pill);padding:6px 13px;font-size:14px;font-weight:600;color:var(--red-700);text-decoration:line-through;text-decoration-color:#E9A9A4;">Corporativa demais</li>
+        <li style="background:#fff;border:1px solid #F1CFCC;border-radius:var(--r-pill);padding:6px 13px;font-size:14px;font-weight:600;color:var(--red-700);text-decoration:line-through;text-decoration-color:#E9A9A4;">Tecnológica demais</li>
+        <li style="background:#fff;border:1px solid #F1CFCC;border-radius:var(--r-pill);padding:6px 13px;font-size:14px;font-weight:600;color:var(--red-700);text-decoration:line-through;text-decoration-color:#E9A9A4;">Infantil</li>
+        <li style="background:#fff;border:1px solid #F1CFCC;border-radius:var(--r-pill);padding:6px 13px;font-size:14px;font-weight:600;color:var(--red-700);text-decoration:line-through;text-decoration-color:#E9A9A4;">Genérica</li>
+        <li style="background:#fff;border:1px solid #F1CFCC;border-radius:var(--r-pill);padding:6px 13px;font-size:14px;font-weight:600;color:var(--red-700);text-decoration:line-through;text-decoration-color:#E9A9A4;">Poluída</li>
+        <li style="background:#fff;border:1px solid #F1CFCC;border-radius:var(--r-pill);padding:6px 13px;font-size:14px;font-weight:600;color:var(--red-700);text-decoration:line-through;text-decoration-color:#E9A9A4;">Gourmetizada em excesso</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-top:24px;background:var(--vinho);border-radius:var(--r-lg);padding:clamp(22px,3vw,30px);color:#fff;box-shadow:var(--sh-md);">
+    <div style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--queijo);">Palavras-chave visuais</div>
+    <p style="margin:12px 0 0;font-family:'Bricolage Grotesque';font-weight:700;font-size:clamp(20px,3vw,30px);line-height:1.3;color:#FFF6E8;">Quente · Caseiro · Claro · Apetitoso · Limpo · Brasileiro · Cuidado · Direto</p>
+    <p style="margin:14px 0 0;font-size:15.5px;color:#F3D9C6;max-width:640px;">Nível de sofisticação: <strong style="color:#fff;">artesanal premium</strong> — o equilíbrio fica em 60% calor afetivo / 40% rigor profissional. Amigável e comercial, sem exagero decorativo.</p>
+  </div>
+</section>
+
+<!-- ===================== 02 PALETA DE CORES ===================== -->
+<section id="s2" style="margin-top:clamp(56px,9vw,100px);scroll-margin-top:24px;">
+  <div class="reveal">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;color:#fff;background:var(--red);width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-sm);">02</span>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Paleta de Cores</span>
+    </div>
+    <h2 style="margin:18px 0 0;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.02;letter-spacing:-.02em;color:var(--vinho);">Extraída direto da logo e da embalagem.</h2>
+    <p style="margin:18px 0 0;max-width:760px;font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--marrom-2);">Vermelho como energia e identidade, amarelo-queijo como sabor e calor, e uma base creme que mantém a leitura confortável. O vermelho é usado <strong style="color:var(--marrom);">com intenção</strong> — nunca em grandes blocos de texto ou áreas extensas.</p>
+  </div>
+
+  <!-- proporção de uso -->
+  <div class="reveal keep" style="margin-top:30px;">
+    <div style="display:flex;height:64px;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-sm);">
+      <div style="flex:62;background:var(--creme);display:flex;align-items:flex-end;padding:8px 10px;font-size:11px;font-weight:700;color:var(--marrom-2);">Creme · 60%</div>
+      <div style="flex:18;background:var(--bege);display:flex;align-items:flex-end;padding:8px 8px;font-size:11px;font-weight:700;color:var(--marrom-2);">Bege 18%</div>
+      <div style="flex:11;background:var(--queijo);display:flex;align-items:flex-end;padding:8px 8px;font-size:11px;font-weight:700;color:var(--vinho);">Queijo 11%</div>
+      <div style="flex:9;background:var(--red);display:flex;align-items:flex-end;padding:8px 8px;font-size:11px;font-weight:700;color:#fff;">Verm. 9%</div>
+    </div>
+    <p style="margin:10px 2px 0;font-size:13.5px;color:var(--marrom-2);">Proporção de uso recomendada na página. A base é sempre clara; vermelho e queijo são acentos.</p>
+  </div>
+
+  <!-- swatches -->
+  <div class="reveal keep" style="margin-top:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;">
+
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);">
+      <div style="height:110px;background:var(--red);display:flex;align-items:flex-end;justify-content:space-between;padding:12px 14px;"><span style="color:#fff;font-weight:800;font-family:'Bricolage Grotesque';">Aa</span><span style="background:rgba(255,255,255,.9);border-radius:6px;padding:3px 7px;font-size:11px;font-weight:700;color:var(--red-700);">AA · branco ok</span></div>
+      <div style="padding:16px;">
+        <div style="font-weight:800;font-size:16px;color:var(--marrom);">Vermelho Proteijo</div>
+        <div style="font-family:'Mulish';font-weight:700;font-size:13px;color:var(--red-700);letter-spacing:.04em;">#EA1C24</div>
+        <p style="margin:8px 0 0;font-size:13.5px;color:var(--marrom-2);">Identidade e energia. CTAs primários, links de destaque, ícones-chave, números.</p>
+        <p style="margin:8px 0 0;font-size:12.5px;color:#9A7C46;"><strong style="color:var(--red-700);">Cuidado:</strong> só com texto branco ≥16px bold. Escurece p/ #C2151B no hover.</p>
+      </div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);">
+      <div style="height:110px;background:var(--vinho);display:flex;align-items:flex-end;justify-content:space-between;padding:12px 14px;"><span style="color:#fff;font-weight:800;font-family:'Bricolage Grotesque';">Aa</span><span style="background:rgba(255,255,255,.9);border-radius:6px;padding:3px 7px;font-size:11px;font-weight:700;color:var(--vinho);">AAA · branco</span></div>
+      <div style="padding:16px;">
+        <div style="font-weight:800;font-size:16px;color:var(--marrom);">Vinho / Vermelho Escuro</div>
+        <div style="font-family:'Mulish';font-weight:700;font-size:13px;color:var(--vinho);letter-spacing:.04em;">#6B1815</div>
+        <p style="margin:8px 0 0;font-size:13.5px;color:var(--marrom-2);">Contraste e títulos de impacto. Blocos escuros (rodapé, faixa de lojistas), texto sobre creme.</p>
+        <p style="margin:8px 0 0;font-size:12.5px;color:#9A7C46;"><strong style="color:var(--vinho);">Uso:</strong> ótimo para texto — alto contraste em fundos claros.</p>
+      </div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);">
+      <div style="height:110px;background:var(--queijo);display:flex;align-items:flex-end;justify-content:space-between;padding:12px 14px;"><span style="color:var(--vinho);font-weight:800;font-family:'Bricolage Grotesque';">Aa</span><span style="background:rgba(58,27,20,.12);border-radius:6px;padding:3px 7px;font-size:11px;font-weight:700;color:var(--vinho);">texto escuro</span></div>
+      <div style="padding:16px;">
+        <div style="font-weight:800;font-size:16px;color:var(--marrom);">Amarelo Queijo</div>
+        <div style="font-family:'Mulish';font-weight:700;font-size:13px;color:var(--queijo-600);letter-spacing:.04em;">#FAAD3D</div>
+        <p style="margin:8px 0 0;font-size:13.5px;color:var(--marrom-2);">Calor e sabor. Selos, badges, destaques, fundo de seções apetitosas, detalhes do elemento-queijo.</p>
+        <p style="margin:8px 0 0;font-size:12.5px;color:#9A7C46;"><strong style="color:var(--queijo-600);">Cuidado:</strong> nunca com texto branco — sempre vinho/marrom por cima.</p>
+      </div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);">
+      <div style="height:110px;background:var(--queijo-600);display:flex;align-items:flex-end;justify-content:space-between;padding:12px 14px;"><span style="color:#fff;font-weight:800;font-family:'Bricolage Grotesque';">Aa</span><span style="background:rgba(255,255,255,.9);border-radius:6px;padding:3px 7px;font-size:11px;font-weight:700;color:var(--queijo-600);">faixa embalagem</span></div>
+      <div style="padding:16px;">
+        <div style="font-weight:800;font-size:16px;color:var(--marrom);">Laranja Queijo</div>
+        <div style="font-family:'Mulish';font-weight:700;font-size:13px;color:var(--queijo-600);letter-spacing:.04em;">#F2962E</div>
+        <p style="margin:8px 0 0;font-size:13.5px;color:var(--marrom-2);">Tom mais profundo do queijo (faixa da embalagem). Hover de badges, ícones, divisores quentes.</p>
+        <p style="margin:8px 0 0;font-size:12.5px;color:#9A7C46;"><strong style="color:var(--queijo-600);">Uso:</strong> par natural do amarelo para profundidade.</p>
+      </div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);">
+      <div style="height:110px;background:var(--creme);border-bottom:1px solid var(--line);display:flex;align-items:flex-end;justify-content:space-between;padding:12px 14px;"><span style="color:var(--marrom);font-weight:800;font-family:'Bricolage Grotesque';">Aa</span><span style="background:#fff;border:1px solid var(--line);border-radius:6px;padding:3px 7px;font-size:11px;font-weight:700;color:var(--marrom-2);">fundo base</span></div>
+      <div style="padding:16px;">
+        <div style="font-weight:800;font-size:16px;color:var(--marrom);">Creme / Off-white</div>
+        <div style="font-family:'Mulish';font-weight:700;font-size:13px;color:var(--queijo-600);letter-spacing:.04em;">#FBF4E9</div>
+        <p style="margin:8px 0 0;font-size:13.5px;color:var(--marrom-2);">Fundo principal de toda a página. Sensação caseira e confortável, descansa a leitura.</p>
+      </div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);">
+      <div style="height:110px;background:var(--bege);border-bottom:1px solid var(--line);display:flex;align-items:flex-end;justify-content:space-between;padding:12px 14px;"><span style="color:var(--marrom);font-weight:800;font-family:'Bricolage Grotesque';">Aa</span><span style="background:#fff;border:1px solid var(--line);border-radius:6px;padding:3px 7px;font-size:11px;font-weight:700;color:var(--marrom-2);">áreas 2ª</span></div>
+      <div style="padding:16px;">
+        <div style="font-weight:800;font-size:16px;color:var(--marrom);">Bege Quente</div>
+        <div style="font-family:'Mulish';font-weight:700;font-size:13px;color:var(--queijo-600);letter-spacing:.04em;">#F3E5CE</div>
+        <p style="margin:8px 0 0;font-size:13.5px;color:var(--marrom-2);">Seções alternadas, cards de apoio, criar ritmo sem quebrar o calor. Bordas: #E7D6BC.</p>
+      </div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);">
+      <div style="height:110px;background:var(--marrom);display:flex;align-items:flex-end;justify-content:space-between;padding:12px 14px;"><span style="color:#fff;font-weight:800;font-family:'Bricolage Grotesque';">Aa</span><span style="background:rgba(255,255,255,.9);border-radius:6px;padding:3px 7px;font-size:11px;font-weight:700;color:var(--marrom);">AAA · texto</span></div>
+      <div style="padding:16px;">
+        <div style="font-weight:800;font-size:16px;color:var(--marrom);">Marrom Texto</div>
+        <div style="font-family:'Mulish';font-weight:700;font-size:13px;color:var(--queijo-600);letter-spacing:.04em;">#3A2A22</div>
+        <p style="margin:8px 0 0;font-size:13.5px;color:var(--marrom-2);">Cor principal de texto e títulos no corpo. Warm-black: contrasta sem o peso frio do preto puro.</p>
+      </div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);">
+      <div style="height:110px;background:var(--marrom-2);display:flex;align-items:flex-end;justify-content:space-between;padding:12px 14px;"><span style="color:#fff;font-weight:800;font-family:'Bricolage Grotesque';">Aa</span><span style="background:rgba(255,255,255,.9);border-radius:6px;padding:3px 7px;font-size:11px;font-weight:700;color:var(--marrom-2);">AA · texto</span></div>
+      <div style="padding:16px;">
+        <div style="font-weight:800;font-size:16px;color:var(--marrom);">Marrom Suave</div>
+        <div style="font-family:'Mulish';font-weight:700;font-size:13px;color:var(--queijo-600);letter-spacing:.04em;">#6E5A4E</div>
+        <p style="margin:8px 0 0;font-size:13.5px;color:var(--marrom-2);">Texto secundário, legendas e descrições. Hierarquia sem competir com o texto principal.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- pairings -->
+  <div class="reveal keep" style="margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
+    <div style="border-radius:var(--r-md);padding:20px;background:var(--red);color:#fff;border:1px solid rgba(0,0,0,.06);">
+      <div style="font-weight:800;font-size:15px;">Texto branco sobre vermelho</div>
+      <p style="margin:6px 0 0;font-size:13px;opacity:.9;">Contraste 4.5:1 — só botões e títulos bold.</p>
+    </div>
+    <div style="border-radius:var(--r-md);padding:20px;background:var(--queijo);color:var(--vinho);border:1px solid var(--line);">
+      <div style="font-weight:800;font-size:15px;">Vinho sobre queijo</div>
+      <p style="margin:6px 0 0;font-size:13px;opacity:.85;">Combinação da própria logo. Alto apetite.</p>
+    </div>
+    <div style="border-radius:var(--r-md);padding:20px;background:var(--creme);color:var(--marrom);border:1px solid var(--line);">
+      <div style="font-weight:800;font-size:15px;">Marrom sobre creme</div>
+      <p style="margin:6px 0 0;font-size:13px;color:var(--marrom-2);">Par padrão de leitura — 11:1, confortável.</p>
+    </div>
+    <div style="border-radius:var(--r-md);padding:20px;background:var(--vinho);color:#FFF6E8;border:1px solid rgba(0,0,0,.1);">
+      <div style="font-weight:800;font-size:15px;color:var(--queijo);">Queijo sobre vinho</div>
+      <p style="margin:6px 0 0;font-size:13px;opacity:.85;">Destaque quente em blocos escuros.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 03 TIPOGRAFIA ===================== -->
+<section id="s3" style="margin-top:clamp(56px,9vw,100px);scroll-margin-top:24px;">
+  <div class="reveal">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;color:#fff;background:var(--red);width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-sm);">03</span>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Tipografia</span>
+    </div>
+    <h2 style="margin:18px 0 0;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.02;letter-spacing:-.02em;color:var(--vinho);">A logo tem a personalidade. A tipografia traz a clareza.</h2>
+    <p style="margin:18px 0 0;max-width:760px;font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--marrom-2);">Duas famílias de trabalho e um toque manual. Nada infantil, nada decorativo demais — o objetivo é leitura confortável com calor.</p>
+  </div>
+
+  <div class="reveal keep" style="margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-sm);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">Títulos</div>
+      <div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:52px;line-height:1;color:var(--marrom);margin-top:10px;">Ag</div>
+      <div style="margin-top:8px;font-family:'Bricolage Grotesque';font-weight:700;font-size:20px;color:var(--marrom);">Bricolage Grotesque</div>
+      <p style="margin:8px 0 0;font-size:14px;color:var(--marrom-2);">Caráter contemporâneo e caloroso sem ser corporativo. Pesos 600–800 para títulos e números.</p>
+      <div style="margin-top:12px;font-family:'Bricolage Grotesque';font-size:18px;color:var(--marrom-2);letter-spacing:.02em;">AaBbCcGg 0123456789</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-sm);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">Corpo / UI</div>
+      <div style="font-family:'Mulish';font-weight:700;font-size:52px;line-height:1;color:var(--marrom);margin-top:10px;">Ag</div>
+      <div style="margin-top:8px;font-family:'Mulish';font-weight:700;font-size:20px;color:var(--marrom);">Mulish</div>
+      <p style="margin:8px 0 0;font-size:14px;color:var(--marrom-2);">Humanista, limpa e amigável. Excelente legibilidade no mobile. Pesos 400–800.</p>
+      <div style="margin-top:12px;font-family:'Mulish';font-size:18px;color:var(--marrom-2);">AaBbCcGg 0123456789</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-sm);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">Acento manual</div>
+      <div style="font-family:'Caveat';font-weight:700;font-size:54px;line-height:1;color:var(--queijo-600);margin-top:10px;">Ag</div>
+      <div style="margin-top:8px;font-family:'Mulish';font-weight:700;font-size:20px;color:var(--marrom);">Caveat <span style="font-weight:500;color:var(--marrom-2);font-size:15px;">— uso pontual</span></div>
+      <p style="margin:8px 0 0;font-size:14px;color:var(--marrom-2);">Eco do traço manual da logo. Só em selos, frases curtas e legendas afetivas. Nunca em parágrafos.</p>
+      <div style="margin-top:12px;font-family:'Caveat';font-size:24px;color:var(--queijo-600);">feito em casa, com carinho</div>
+    </div>
+  </div>
+
+  <p class="reveal" style="margin-top:16px;font-size:13.5px;color:var(--marrom-2);">Fallback seguro: <code style="background:var(--bege);border-radius:6px;padding:2px 7px;font-family:'Mulish';font-weight:700;">system-ui, -apple-system, Segoe UI, Roboto, sans-serif</code> — usado se as Google Fonts não carregarem.</p>
+
+  <!-- escala -->
+  <div class="reveal keep" style="margin-top:24px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-sm);overflow:hidden;">
+    <div style="padding:16px 24px;border-bottom:1px solid var(--line);background:var(--bege);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+      <span style="font-weight:800;color:var(--marrom);">Escala tipográfica</span>
+      <span style="font-size:13px;color:var(--marrom-2);font-weight:600;">desktop / mobile · line-height · peso</span>
+    </div>
+    <div style="padding:8px 24px 20px;">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid #F0E6D4;flex-wrap:wrap;">
+        <span style="font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(34px,5vw,52px);line-height:1;color:var(--vinho);">Pão de queijo de verdade</span>
+        <span style="font-size:13px;color:var(--marrom-2);font-weight:600;white-space:nowrap;">H1 · 52/36px · 1.04 · 800</span>
+      </div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid #F0E6D4;flex-wrap:wrap;">
+        <span style="font-family:'Bricolage Grotesque';font-weight:700;font-size:clamp(26px,3.6vw,38px);line-height:1.05;color:var(--marrom);">Feito com muuuuito queijo</span>
+        <span style="font-size:13px;color:var(--marrom-2);font-weight:600;white-space:nowrap;">H2 · 38/28px · 1.1 · 700</span>
+      </div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid #F0E6D4;flex-wrap:wrap;">
+        <span style="font-family:'Bricolage Grotesque';font-weight:700;font-size:clamp(20px,2.6vw,26px);line-height:1.2;color:var(--marrom);">Sabor que lembra a infância</span>
+        <span style="font-size:13px;color:var(--marrom-2);font-weight:600;white-space:nowrap;">H3 · 26/22px · 1.25 · 700</span>
+      </div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid #F0E6D4;flex-wrap:wrap;">
+        <span style="font-family:'Mulish';font-weight:700;font-size:20px;line-height:1.4;color:var(--marrom);">Subtítulo de apoio (lead)</span>
+        <span style="font-size:13px;color:var(--marrom-2);font-weight:600;white-space:nowrap;">Lead · 20/18px · 1.45 · 700</span>
+      </div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid #F0E6D4;flex-wrap:wrap;">
+        <span style="font-family:'Mulish';font-weight:400;font-size:17px;line-height:1.65;color:var(--marrom);max-width:60ch;">Parágrafo de corpo. O texto de leitura confortável fica em 17px no desktop e 16px no mobile, com altura de linha generosa.</span>
+        <span style="font-size:13px;color:var(--marrom-2);font-weight:600;white-space:nowrap;">Body · 17/16px · 1.65 · 400</span>
+      </div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid #F0E6D4;flex-wrap:wrap;">
+        <span style="font-family:'Mulish';font-weight:500;font-size:14px;line-height:1.5;color:var(--marrom-2);">Texto pequeno, legendas e observações.</span>
+        <span style="font-size:13px;color:var(--marrom-2);font-weight:600;white-space:nowrap;">Small · 14px · 1.5 · 500</span>
+      </div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid #F0E6D4;flex-wrap:wrap;">
+        <span style="font-family:'Mulish';font-weight:700;font-size:13px;line-height:1;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Label · eyebrow</span>
+        <span style="font-size:13px;color:var(--marrom-2);font-weight:600;white-space:nowrap;">Label · 13px · 0.14em · 700 caixa alta</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid #F0E6D4;flex-wrap:wrap;">
+        <span style="font-family:'Mulish';font-weight:700;font-size:16px;color:#fff;background:var(--red);padding:10px 20px;border-radius:var(--r-pill);">Texto de botão</span>
+        <span style="font-size:13px;color:var(--marrom-2);font-weight:600;white-space:nowrap;">Botão · 16px · 600–700</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;flex-wrap:wrap;">
+        <span style="font-family:'Bricolage Grotesque';font-weight:800;font-size:48px;line-height:1;color:var(--queijo-600);">400<span style="font-size:22px;color:var(--marrom-2);">g</span></span>
+        <span style="font-size:13px;color:var(--marrom-2);font-weight:600;white-space:nowrap;">Destaque numérico · 48/40px · 800</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 04 GRID E LAYOUT ===================== -->
+<section id="s4" style="margin-top:clamp(56px,9vw,100px);scroll-margin-top:24px;">
+  <div class="reveal">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;color:#fff;background:var(--red);width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-sm);">04</span>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Grid e Layout</span>
+    </div>
+    <h2 style="margin:18px 0 0;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.02;letter-spacing:-.02em;color:var(--vinho);">Mobile-first, escaneável, simples de implementar.</h2>
+    <p style="margin:18px 0 0;max-width:760px;font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--marrom-2);">Container máximo de <strong style="color:var(--marrom);">1140px</strong> centralizado. Conteúdo de leitura limitado a ~65ch. Layout comercial e direto — nada de composições difíceis.</p>
+  </div>
+
+  <div class="reveal keep" style="margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:800;color:var(--marrom);">Desktop</span><span style="font-size:12px;font-weight:700;color:var(--queijo-600);">≥ 1024px</span></div>
+      <div style="margin-top:14px;display:grid;grid-template-columns:repeat(12,1fr);gap:5px;height:60px;">
+        <div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div>
+      </div>
+      <p style="margin:14px 0 0;font-size:14px;color:var(--marrom-2);"><strong style="color:var(--marrom);">12 colunas</strong> · gutter 32px · margens 40px · container 1140px.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:800;color:var(--marrom);">Tablet</span><span style="font-size:12px;font-weight:700;color:var(--queijo-600);">640–1024px</span></div>
+      <div style="margin-top:14px;display:grid;grid-template-columns:repeat(8,1fr);gap:6px;height:60px;">
+        <div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div>
+      </div>
+      <p style="margin:14px 0 0;font-size:14px;color:var(--marrom-2);"><strong style="color:var(--marrom);">8 colunas</strong> · gutter 24px · margens 24px. Cards em 2 colunas.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:800;color:var(--marrom);">Mobile</span><span style="font-size:12px;font-weight:700;color:var(--queijo-600);">&lt; 640px</span></div>
+      <div style="margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:7px;height:60px;">
+        <div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div><div style="background:var(--queijo-50);border:1px solid var(--line);border-radius:3px;"></div>
+      </div>
+      <p style="margin:14px 0 0;font-size:14px;color:var(--marrom-2);"><strong style="color:var(--marrom);">4 colunas</strong> · gutter 16px · margens 20px. Tudo empilha em coluna única.</p>
+    </div>
+  </div>
+
+  <div class="reveal keep" style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
+    <div style="background:var(--bege);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;"><div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:24px;color:var(--vinho);">1140px</div><div style="font-size:13.5px;color:var(--marrom-2);font-weight:600;">largura máx. do conteúdo</div></div>
+    <div style="background:var(--bege);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;"><div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:24px;color:var(--vinho);">~65ch</div><div style="font-size:13.5px;color:var(--marrom-2);font-weight:600;">medida ideal de leitura</div></div>
+    <div style="background:var(--bege);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;"><div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:24px;color:var(--vinho);">96–128px</div><div style="font-size:13.5px;color:var(--marrom-2);font-weight:600;">espaço entre seções (desktop)</div></div>
+    <div style="background:var(--bege);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;"><div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:24px;color:var(--vinho);">56–72px</div><div style="font-size:13.5px;color:var(--marrom-2);font-weight:600;">espaço entre seções (mobile)</div></div>
+  </div>
+</section>
+
+<!-- ===================== 05 ESPAÇAMENTO ===================== -->
+<section id="s5" style="margin-top:clamp(56px,9vw,100px);scroll-margin-top:24px;">
+  <div class="reveal">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;color:#fff;background:var(--red);width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-sm);">05</span>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Sistema de Espaçamento</span>
+    </div>
+    <h2 style="margin:18px 0 0;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.02;letter-spacing:-.02em;color:var(--vinho);">Escala de 4px. Sempre múltiplos.</h2>
+    <p style="margin:18px 0 0;max-width:760px;font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--marrom-2);">Espaçamento generoso é o que dá a sensação de cuidado e respiro. Use sempre tokens da escala — nunca valores soltos.</p>
+  </div>
+
+  <div class="reveal keep" style="margin-top:30px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:64px;font-family:'Mulish';font-weight:700;font-size:13px;color:var(--marrom-2);">4 · xs</span><div style="height:18px;width:4px;background:var(--queijo-600);border-radius:2px;"></div><span style="font-size:13px;color:var(--marrom-2);">ícone↔texto, ajustes finos</span></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:64px;font-family:'Mulish';font-weight:700;font-size:13px;color:var(--marrom-2);">8 · sm</span><div style="height:18px;width:8px;background:var(--queijo-600);border-radius:2px;"></div><span style="font-size:13px;color:var(--marrom-2);">entre chips, gap de tags</span></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:64px;font-family:'Mulish';font-weight:700;font-size:13px;color:var(--marrom-2);">12 · md</span><div style="height:18px;width:12px;background:var(--queijo-600);border-radius:2px;"></div><span style="font-size:13px;color:var(--marrom-2);">título↔texto, gap interno</span></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:64px;font-family:'Mulish';font-weight:700;font-size:13px;color:var(--marrom-2);">16 · lg</span><div style="height:18px;width:16px;background:var(--queijo);border-radius:2px;"></div><span style="font-size:13px;color:var(--marrom-2);">gap de grid, padding mobile</span></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:64px;font-family:'Mulish';font-weight:700;font-size:13px;color:var(--marrom-2);">24 · xl</span><div style="height:18px;width:24px;background:var(--queijo);border-radius:2px;"></div><span style="font-size:13px;color:var(--marrom-2);">padding de card, gap de cards</span></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:64px;font-family:'Mulish';font-weight:700;font-size:13px;color:var(--marrom-2);">32 · 2xl</span><div style="height:18px;width:32px;background:var(--red);border-radius:2px;"></div><span style="font-size:13px;color:var(--marrom-2);">gutter desktop, padding seção mobile</span></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:64px;font-family:'Mulish';font-weight:700;font-size:13px;color:var(--marrom-2);">48 · 3xl</span><div style="height:18px;width:48px;background:var(--red);border-radius:2px;"></div><span style="font-size:13px;color:var(--marrom-2);">blocos internos de seção</span></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:64px;font-family:'Mulish';font-weight:700;font-size:13px;color:var(--marrom-2);">64 · 4xl</span><div style="height:18px;width:64px;background:var(--vinho);border-radius:2px;"></div><span style="font-size:13px;color:var(--marrom-2);">padding seção tablet</span></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:64px;font-family:'Mulish';font-weight:700;font-size:13px;color:var(--marrom-2);">96 · 5xl</span><div style="height:18px;width:96px;background:var(--vinho);border-radius:2px;"></div><span style="font-size:13px;color:var(--marrom-2);">padding vertical de seção desktop</span></div>
+    </div>
+  </div>
+
+  <div class="reveal keep" style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;"><div style="font-weight:800;color:var(--marrom);font-size:15px;">Padding de seção</div><p style="margin:6px 0 0;font-size:13.5px;color:var(--marrom-2);">96px (desktop) · 64px (tablet) · 56px (mobile), vertical.</p></div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;"><div style="font-weight:800;color:var(--marrom);font-size:15px;">Padding de card</div><p style="margin:6px 0 0;font-size:13.5px;color:var(--marrom-2);">24–28px (desktop) · 20px (mobile).</p></div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;"><div style="font-weight:800;color:var(--marrom);font-size:15px;">Gap de grid</div><p style="margin:6px 0 0;font-size:13.5px;color:var(--marrom-2);">24px cards · 16px mobile · 32px colunas desktop.</p></div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;"><div style="font-weight:800;color:var(--marrom);font-size:15px;">Espaço de CTA</div><p style="margin:6px 0 0;font-size:13.5px;color:var(--marrom-2);">32–48px acima do botão; 12px entre botões irmãos.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 06 COMPONENTES BASE ===================== -->
+<section id="s6" style="margin-top:clamp(56px,9vw,100px);scroll-margin-top:24px;">
+  <div class="reveal">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;color:#fff;background:var(--red);width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-sm);">06</span>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Componentes Base</span>
+    </div>
+    <h2 style="margin:18px 0 0;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.02;letter-spacing:-.02em;color:var(--vinho);">Calorosos e comerciais — sem excesso de sombra ou efeito.</h2>
+    <p style="margin:18px 0 0;max-width:760px;font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--marrom-2);">Cantos arredondados orgânicos, bordas-hairline quentes e sombras suaves. Passe o mouse nos exemplos abaixo para ver os estados.</p>
+  </div>
+
+  <!-- BOTÕES -->
+  <div class="reveal keep" style="margin-top:30px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(22px,3vw,30px);box-shadow:var(--sh-sm);">
+    <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">Botões</div>
+    <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;">
+      <button style="font-family:'Mulish';font-weight:700;font-size:16px;color:#fff;background:var(--red);border:none;padding:14px 28px;border-radius:var(--r-pill);box-shadow:0 6px 16px rgba(234,28,36,.28);cursor:pointer;transition:all .2s var(--ease);" style-hover="background:#C2151B;transform:translateY(-2px);box-shadow:0 10px 22px rgba(234,28,36,.34);">Quero experimentar</button>
+      <button style="font-family:'Mulish';font-weight:700;font-size:16px;color:var(--red-700);background:#fff;border:2px solid var(--red);padding:12px 26px;border-radius:var(--r-pill);cursor:pointer;transition:all .2s var(--ease);" style-hover="background:#FCEDED;border-color:#C2151B;">Onde encontrar</button>
+      <button style="font-family:'Mulish';font-weight:700;font-size:16px;color:var(--red-700);background:transparent;border:none;padding:12px 14px;border-radius:var(--r-md);cursor:pointer;transition:all .2s var(--ease);display:inline-flex;align-items:center;gap:6px;" style-hover="color:#C2151B;background:#FCEDED;">Saber mais →</button>
+      <button disabled style="font-family:'Mulish';font-weight:700;font-size:16px;color:#B6A693;background:var(--bege);border:none;padding:14px 28px;border-radius:var(--r-pill);cursor:not-allowed;opacity:.85;">Indisponível</button>
+    </div>
+    <div style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+      <div style="font-size:13px;color:var(--marrom-2);"><strong style="color:var(--marrom);">Primário</strong> — vermelho sólido + texto branco. Hover escurece e sobe 2px. Ação principal de cada bloco.</div>
+      <div style="font-size:13px;color:var(--marrom-2);"><strong style="color:var(--marrom);">Secundário</strong> — contorno vermelho sobre branco. Ação alternativa, nunca compete com o primário.</div>
+      <div style="font-size:13px;color:var(--marrom-2);"><strong style="color:var(--marrom);">Ghost / texto</strong> — só para ações terciárias (ler mais, ver detalhes).</div>
+      <div style="font-size:13px;color:var(--marrom-2);"><strong style="color:var(--marrom);">Estados</strong> — foco: anel <code style="background:var(--bege);border-radius:5px;padding:1px 6px;">outline 3px var(--queijo)</code>. Disabled: bege, sem sombra. Altura mín. 48px.</div>
+    </div>
+  </div>
+
+  <!-- CARDS + TAGS -->
+  <div class="reveal keep" style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;">
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-sm);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">Card</div>
+      <div style="margin-top:16px;background:var(--creme);border:1px solid var(--line);border-radius:18px;padding:20px;transition:all .25s var(--ease);cursor:pointer;" style-hover="transform:translateY(-4px);box-shadow:var(--sh-md);border-color:var(--queijo);">
+        <div style="width:40px;height:40px;border-radius:12px;background:var(--queijo-50);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:20px;">🧀</div>
+        <h3 style="margin:14px 0 6px;font-size:19px;font-weight:700;color:var(--marrom);">Feito com queijo branco</h3>
+        <p style="font-size:14.5px;color:var(--marrom-2);">Muuuuito queijo Minas frescal de verdade em cada bolinha.</p>
+      </div>
+      <p style="margin:14px 0 0;font-size:13px;color:var(--marrom-2);">Raio 18px · borda hairline · hover sobe 4px e aquece a borda. Sombra só no hover.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-sm);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">Tags &amp; Badges</div>
+      <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;">
+        <span style="display:inline-flex;align-items:center;gap:6px;background:var(--queijo);color:var(--vinho);font-weight:700;font-size:13px;padding:7px 14px;border-radius:var(--r-pill);">Sem glúten</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:var(--queijo-50);color:var(--queijo-600);font-weight:700;font-size:13px;padding:7px 14px;border-radius:var(--r-pill);border:1px solid var(--line);">Fonte de proteínas</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:var(--vinho);color:#FFF1E2;font-weight:700;font-size:13px;padding:7px 14px;border-radius:var(--r-pill);">Artesanal</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--red-700);font-weight:700;font-size:13px;padding:7px 14px;border-radius:var(--r-pill);border:1px solid #F1CFCC;">Novo</span>
+      </div>
+      <p style="margin:16px 0 0;font-size:13px;color:var(--marrom-2);">Pílula, sempre. Selo de produto = queijo/vinho. Badge informativo = creme. Nunca depender só da cor — sempre com rótulo.</p>
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);margin-top:20px;">Ícones</div>
+      <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;">
+        <div style="width:46px;height:46px;border-radius:14px;background:var(--queijo-50);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:20px;">🌾</div>
+        <div style="width:46px;height:46px;border-radius:14px;background:var(--queijo-50);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:20px;">💪</div>
+        <div style="width:46px;height:46px;border-radius:14px;background:var(--queijo-50);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:20px;">❄️</div>
+        <div style="width:46px;height:46px;border-radius:14px;background:var(--queijo-50);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:20px;">⏱️</div>
+      </div>
+      <p style="margin:12px 0 0;font-size:13px;color:var(--marrom-2);">Estilo: linha arredondada, traço 1.75–2px, em cápsula quente. Coerentes em peso e tamanho (24px num quadro de 46px).</p>
+    </div>
+  </div>
+
+  <!-- BLOCO DE PRODUTO -->
+  <div class="reveal keep" style="margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(22px,3vw,30px);box-shadow:var(--sh-sm);">
+    <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">Bloco de produto</div>
+    <div style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
+      <div style="border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--creme);transition:all .25s var(--ease);" style-hover="transform:translateY(-4px);box-shadow:var(--sh-md);">
+        <div style="aspect-ratio:4/3;background:url('assets/packs.jpg') center/cover;"></div>
+        <div style="padding:18px;">
+          <span style="display:inline-block;background:var(--queijo);color:var(--vinho);font-weight:700;font-size:12px;padding:4px 11px;border-radius:var(--r-pill);">400g</span>
+          <h3 style="margin:10px 0 4px;font-size:19px;font-weight:700;color:var(--marrom);">Pão de Queijo Proteijo</h3>
+          <p style="font-size:14px;color:var(--marrom-2);">Feito com muuuuito queijo branco. Congelado, pronto em minutos.</p>
+        </div>
+      </div>
+      <div style="border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--creme);transition:all .25s var(--ease);" style-hover="transform:translateY(-4px);box-shadow:var(--sh-md);">
+        <div style="aspect-ratio:4/3;background:url('assets/product-bowl.jpg') center/cover;"></div>
+        <div style="padding:18px;">
+          <span style="display:inline-block;background:var(--queijo);color:var(--vinho);font-weight:700;font-size:12px;padding:4px 11px;border-radius:var(--r-pill);">Sem glúten</span>
+          <h3 style="margin:10px 0 4px;font-size:19px;font-weight:700;color:var(--marrom);">Douradinho na hora</h3>
+          <p style="font-size:14px;color:var(--marrom-2);">Casquinha crocante, recheio macio e cremoso de queijo.</p>
+        </div>
+      </div>
+      <div style="border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--creme);transition:all .25s var(--ease);" style-hover="transform:translateY(-4px);box-shadow:var(--sh-md);">
+        <div style="aspect-ratio:4/3;background:url('assets/cheese-pull.jpg') center/cover;"></div>
+        <div style="padding:18px;">
+          <span style="display:inline-block;background:var(--queijo);color:var(--vinho);font-weight:700;font-size:12px;padding:4px 11px;border-radius:var(--r-pill);">Puxa queijo</span>
+          <h3 style="margin:10px 0 4px;font-size:19px;font-weight:700;color:var(--marrom);">Recheio generoso</h3>
+          <p style="font-size:14px;color:var(--marrom-2);">A prova real do queijo de verdade em cada mordida.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BENEFÍCIOS + DIFERENCIAIS -->
+  <div class="reveal keep" style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;">
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-sm);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">Bloco de benefícios</div>
+      <div style="margin-top:16px;display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;gap:14px;align-items:flex-start;"><div style="flex:0 0 auto;width:42px;height:42px;border-radius:12px;background:var(--queijo-50);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:19px;">💪</div><div><div style="font-weight:700;color:var(--marrom);">Fonte de proteínas e cálcio</div><p style="font-size:14px;color:var(--marrom-2);">Nutritivo de verdade, para criar filhos fortes.</p></div></div>
+        <div style="display:flex;gap:14px;align-items:flex-start;"><div style="flex:0 0 auto;width:42px;height:42px;border-radius:12px;background:var(--queijo-50);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:19px;">🌾</div><div><div style="font-weight:700;color:var(--marrom);">Sem glúten</div><p style="font-size:14px;color:var(--marrom-2);">Para a família toda aproveitar sem preocupação.</p></div></div>
+        <div style="display:flex;gap:14px;align-items:flex-start;"><div style="flex:0 0 auto;width:42px;height:42px;border-radius:12px;background:var(--queijo-50);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:19px;">🏠</div><div><div style="font-weight:700;color:var(--marrom);">Artesanal congelado</div><p style="font-size:14px;color:var(--marrom-2);">Feito à mão, fresco quando você quiser.</p></div></div>
+      </div>
+      <p style="margin:16px 0 0;font-size:13px;color:var(--marrom-2);">Ícone em cápsula + título + descrição curta. Lista vertical no mobile, grid 2–3 col no desktop.</p>
+    </div>
+    <div style="background:var(--vinho);border:1px solid rgba(0,0,0,.1);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-md);color:#FFF6E8;">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--queijo);">Bloco de diferenciais</div>
+      <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+        <div><div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:34px;color:var(--queijo);line-height:1;">+queijo</div><p style="margin:6px 0 0;font-size:13.5px;color:#F3D9C6;">muuuuito queijo branco</p></div>
+        <div><div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:34px;color:var(--queijo);line-height:1;">0 glúten</div><p style="margin:6px 0 0;font-size:13.5px;color:#F3D9C6;">para todos à mesa</p></div>
+        <div><div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:34px;color:var(--queijo);line-height:1;">min.</div><p style="margin:6px 0 0;font-size:13.5px;color:#F3D9C6;">pronto rapidinho</p></div>
+        <div><div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:34px;color:var(--queijo);line-height:1;">à mão</div><p style="margin:6px 0 0;font-size:13.5px;color:#F3D9C6;">receita artesanal</p></div>
+      </div>
+      <p style="margin:18px 0 0;font-size:13px;color:#E9C9B4;">Fundo vinho dá contraste e respiro entre seções claras. Números/destaques em amarelo-queijo.</p>
+    </div>
+  </div>
+
+  <!-- LOJISTAS + PROVA SOCIAL -->
+  <div class="reveal keep" style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;">
+    <div style="background:linear-gradient(150deg,#FFFDF8,#FDEBCB);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-sm);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">Bloco lojistas / parceiros</div>
+      <h3 style="margin:14px 0 8px;font-family:'Bricolage Grotesque';font-weight:800;font-size:24px;color:var(--vinho);">Quer vender Proteijo?</h3>
+      <p style="font-size:14.5px;color:var(--marrom-2);">Margem saudável, giro rápido e um produto que a clientela já ama. Seja um ponto de venda.</p>
+      <button style="margin-top:16px;font-family:'Mulish';font-weight:700;font-size:15px;color:#fff;background:var(--vinho);border:none;padding:12px 22px;border-radius:var(--r-pill);cursor:pointer;transition:all .2s var(--ease);" style-hover="transform:translateY(-2px);background:#54110F;">Quero ser parceiro</button>
+      <p style="margin:14px 0 0;font-size:13px;color:var(--marrom-2);">Tom B2B mais sóbrio (vinho) mas ainda quente. CTA distinto do consumidor final.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-sm);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">Prova social</div>
+      <div style="margin-top:16px;background:var(--creme);border:1px solid var(--line);border-radius:16px;padding:20px;">
+        <div style="color:var(--queijo-600);font-size:18px;letter-spacing:2px;">★★★★★</div>
+        <p style="margin:10px 0 0;font-size:15.5px;color:var(--marrom);font-style:italic;">"Melhor pão de queijo congelado que já comi. Vai sempre na cesta.”</p>
+        <div style="margin-top:14px;display:flex;align-items:center;gap:10px;"><div style="width:34px;height:34px;border-radius:50%;background:var(--queijo);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--vinho);">M</div><div><div style="font-weight:700;font-size:14px;color:var(--marrom);">Mariana S.</div><div style="font-size:12px;color:var(--marrom-2);">cliente desde 2022</div></div></div>
+      </div>
+      <p style="margin:14px 0 0;font-size:13px;color:var(--marrom-2);">Estrelas em queijo, depoimento curto, avatar com inicial. Carrossel no mobile, grid no desktop.</p>
+    </div>
+  </div>
+
+  <!-- FAQ + HEADER/FOOTER -->
+  <div class="reveal keep" style="margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(22px,3vw,30px);box-shadow:var(--sh-sm);">
+    <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">FAQ (acordeão)</div>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:10px;">
+      <details style="background:var(--creme);border:1px solid var(--line);border-radius:14px;padding:16px 20px;">
+        <summary style="cursor:pointer;font-weight:700;color:var(--marrom);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;">Como preparo o pão de queijo?<span style="color:var(--queijo-600);font-size:20px;">+</span></summary>
+        <p style="margin:12px 0 0;font-size:14.5px;color:var(--marrom-2);">Direto do congelador ao forno ou airfryer. Fica douradinho em poucos minutos, sem descongelar.</p>
+      </details>
+      <details style="background:var(--creme);border:1px solid var(--line);border-radius:14px;padding:16px 20px;">
+        <summary style="cursor:pointer;font-weight:700;color:var(--marrom);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;">É realmente sem glúten?<span style="color:var(--queijo-600);font-size:20px;">+</span></summary>
+        <p style="margin:12px 0 0;font-size:14.5px;color:var(--marrom-2);">Sim. Feito com polvilho e muito queijo branco, naturalmente sem glúten.</p>
+      </details>
+    </div>
+    <p style="margin:14px 0 0;font-size:13px;color:var(--marrom-2);">Itens em cartão creme, abre um por vez. Ícone +/− indica estado (não só cor). Área de clique alta.</p>
+  </div>
+
+  <div class="reveal keep" style="margin-top:18px;display:grid;gap:16px;">
+    <!-- header -->
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;box-shadow:var(--sh-sm);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);margin:4px 4px 12px;">Header</div>
+      <div style="background:rgba(251,244,233,.9);border:1px solid var(--line);border-radius:14px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <img src="assets/logo-primary.jpg" alt="Proteijo" style="height:38px;width:auto;border-radius:8px;"/>
+        <div style="display:flex;gap:22px;align-items:center;font-weight:600;font-size:14.5px;color:var(--marrom);">
+          <span>Produto</span><span>Benefícios</span><span>Lojistas</span>
+          <button style="font-family:'Mulish';font-weight:700;font-size:14px;color:#fff;background:var(--red);border:none;padding:10px 18px;border-radius:var(--r-pill);cursor:pointer;">Onde comprar</button>
+        </div>
+      </div>
+      <p style="margin:12px 4px 0;font-size:13px;color:var(--marrom-2);">Fundo creme translúcido com leve blur ao rolar. Logo à esquerda, CTA à direita. Vira menu hambúrguer no mobile.</p>
+    </div>
+    <!-- footer -->
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;box-shadow:var(--sh-sm);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);margin:4px 4px 12px;">Footer</div>
+      <div style="background:var(--vinho);border-radius:14px;padding:24px;color:#F3D9C6;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+        <div><img src="assets/logo-onred.png" alt="Proteijo" style="height:34px;width:auto;"/><p style="margin:12px 0 0;font-size:13.5px;max-width:240px;">Pão de queijo feito com muuuuito queijo branco. #CriandoFilhosFortes</p></div>
+        <div style="display:flex;gap:40px;font-size:14px;"><div style="display:flex;flex-direction:column;gap:8px;"><span style="color:var(--queijo);font-weight:700;">Marca</span><span>Produto</span><span>Lojistas</span></div><div style="display:flex;flex-direction:column;gap:8px;"><span style="color:var(--queijo);font-weight:700;">Contato</span><span>WhatsApp</span><span>Instagram</span></div></div>
+      </div>
+      <p style="margin:12px 4px 0;font-size:13px;color:var(--marrom-2);">Bloco escuro vinho fecha a página com calor. Logo em versão clara, links em queijo nos títulos.</p>
+    </div>
+  </div>
+
+  <!-- CTA FINAL -->
+  <div class="reveal keep" style="margin-top:18px;">
+    <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);margin:0 4px 12px;">CTA final</div>
+    <div style="background:linear-gradient(150deg,var(--red),#C2151B);border-radius:24px;padding:clamp(28px,4vw,48px);text-align:center;box-shadow:var(--sh-lg);position:relative;overflow:hidden;">
+      <div style="position:absolute;left:-50px;bottom:-50px;width:180px;height:180px;border-radius:50%;background:var(--queijo);opacity:.18;"></div>
+      <div style="position:relative;">
+        <h3 style="font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(26px,4vw,40px);color:#fff;line-height:1.05;">Matou a vontade?</h3>
+        <p style="margin:12px auto 0;max-width:440px;color:#FFE2DF;font-size:16px;">Peça agora pelo WhatsApp ou encontre o ponto de venda mais perto de você.</p>
+        <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <button style="font-family:'Mulish';font-weight:700;font-size:16px;color:var(--red-700);background:#fff;border:none;padding:14px 28px;border-radius:var(--r-pill);cursor:pointer;transition:all .2s var(--ease);" style-hover="transform:translateY(-2px);background:#FFF6E8;">Pedir no WhatsApp</button>
+          <button style="font-family:'Mulish';font-weight:700;font-size:16px;color:#fff;background:transparent;border:2px solid rgba(255,255,255,.7);padding:12px 26px;border-radius:var(--r-pill);cursor:pointer;transition:all .2s var(--ease);" style-hover="background:rgba(255,255,255,.14);border-color:#fff;">Onde encontrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 07 SISTEMA DE CTA ===================== -->
+<section id="s7" style="margin-top:clamp(56px,9vw,100px);scroll-margin-top:24px;">
+  <div class="reveal">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;color:#fff;background:var(--red);width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-sm);">07</span>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Sistema de CTA</span>
+    </div>
+    <h2 style="margin:18px 0 0;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.02;letter-spacing:-.02em;color:var(--vinho);">Claros, diretos e fáceis de encontrar.</h2>
+    <p style="margin:18px 0 0;max-width:760px;font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--marrom-2);">Um objetivo por seção. O CTA principal é sempre vermelho sólido; o secundário nunca compete com ele. A página repete o convite em pontos-chave.</p>
+  </div>
+
+  <div class="reveal keep" style="margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <span style="display:inline-block;background:var(--red);color:#fff;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:var(--r-pill);">CTA primário</span>
+      <h3 style="margin:14px 0 6px;font-size:19px;color:var(--marrom);">Consumidor final</h3>
+      <p style="font-size:14.5px;color:var(--marrom-2);">"Pedir no WhatsApp" / "Onde comprar". Vermelho sólido, texto branco bold, pílula. Sempre a ação mais visível da tela.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <span style="display:inline-block;background:#fff;color:var(--red-700);border:2px solid var(--red);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border-radius:var(--r-pill);">CTA secundário</span>
+      <h3 style="margin:14px 0 6px;font-size:19px;color:var(--marrom);">Ação de apoio</h3>
+      <p style="font-size:14.5px;color:var(--marrom-2);">"Ver benefícios", "Conhecer a marca". Contorno vermelho ou ghost. Acompanha o primário sem roubar atenção.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <span style="display:inline-block;background:var(--vinho);color:#FFF1E2;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:var(--r-pill);">CTA lojista</span>
+      <h3 style="margin:14px 0 6px;font-size:19px;color:var(--marrom);">B2B / parceiros</h3>
+      <p style="font-size:14.5px;color:var(--marrom-2);">"Quero ser parceiro". Vinho sólido para diferenciar do consumidor, mantendo o calor da marca.</p>
+    </div>
+  </div>
+
+  <div class="reveal keep" style="margin-top:18px;display:grid;grid-template-columns:1.3fr 1fr;gap:18px;">
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-sm);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">Onde os CTAs aparecem</div>
+      <ul style="margin:14px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;">
+        <li style="display:flex;gap:12px;align-items:center;font-size:15px;color:var(--marrom);"><span style="width:24px;height:24px;border-radius:50%;background:var(--queijo);color:var(--vinho);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;">1</span>Header (fixo) — "Onde comprar"</li>
+        <li style="display:flex;gap:12px;align-items:center;font-size:15px;color:var(--marrom);"><span style="width:24px;height:24px;border-radius:50%;background:var(--queijo);color:var(--vinho);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;">2</span>Hero — CTA primário + secundário</li>
+        <li style="display:flex;gap:12px;align-items:center;font-size:15px;color:var(--marrom);"><span style="width:24px;height:24px;border-radius:50%;background:var(--queijo);color:var(--vinho);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;">3</span>Pós-benefícios — reforço do pedido</li>
+        <li style="display:flex;gap:12px;align-items:center;font-size:15px;color:var(--marrom);"><span style="width:24px;height:24px;border-radius:50%;background:var(--queijo);color:var(--vinho);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;">4</span>Seção lojistas — CTA B2B dedicado</li>
+        <li style="display:flex;gap:12px;align-items:center;font-size:15px;color:var(--marrom);"><span style="width:24px;height:24px;border-radius:50%;background:var(--queijo);color:var(--vinho);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;">5</span>CTA final — bloco vermelho de fechamento</li>
+      </ul>
+      <p style="margin:14px 0 0;font-size:13px;color:var(--marrom-2);">Hierarquia: em qualquer tela, só <strong style="color:var(--marrom);">um</strong> botão vermelho sólido por vez. Demais ações em contorno/ghost.</p>
+    </div>
+    <div style="background:linear-gradient(160deg,#25D366,#1EBE5A);border:1px solid rgba(0,0,0,.08);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-md);color:#fff;">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.9;">Botão fixo de WhatsApp</div>
+      <div style="margin:18px auto;width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 10px 24px rgba(0,0,0,.18);">💬</div>
+      <p style="font-size:14.5px;text-align:center;opacity:.95;">Recomendado. Flutuante no canto inferior direito, ~56–64px, sempre acessível no mobile. Não cobre CTAs nem texto; respeita safe-area.</p>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-top:16px;background:var(--queijo-50);border:1px solid var(--line);border-radius:var(--r-md);padding:18px 22px;font-size:14.5px;color:var(--marrom-2);"><strong style="color:var(--marrom);">Mobile:</strong> CTA primário ocupa largura total (ou quase), altura mín. 48px, fixo no rodapé quando a seção for longa. Texto curto e verbo de ação ("Pedir", "Comprar", "Falar agora").</div>
+</section>
+
+<!-- ===================== 08 IMAGENS E ELEMENTOS ===================== -->
+<section id="s8" style="margin-top:clamp(56px,9vw,100px);scroll-margin-top:24px;">
+  <div class="reveal">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;color:#fff;background:var(--red);width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-sm);">08</span>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Imagens e Elementos Visuais</span>
+    </div>
+    <h2 style="margin:18px 0 0;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.02;letter-spacing:-.02em;color:var(--vinho);">A fotografia é a estrela. Quente, próxima, apetitosa.</h2>
+    <p style="margin:18px 0 0;max-width:760px;font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--marrom-2);">Fundos quentes (pêssego, creme, amarelo), luz natural e macro do produto. Nada de banco de imagem genérico — a própria marca já tem o material certo.</p>
+  </div>
+
+  <div class="reveal keep" style="margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
+    <figure style="margin:0;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-sm);background:var(--card);">
+      <div style="aspect-ratio:3/4;background:url('assets/product-bowl.jpg') center/cover;"></div>
+      <figcaption style="padding:12px 14px;font-size:13px;color:var(--marrom-2);"><strong style="color:var(--marrom);">Macro do produto</strong> — fundo pêssego, foco no dourado.</figcaption>
+    </figure>
+    <figure style="margin:0;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-sm);background:var(--card);">
+      <div style="aspect-ratio:3/4;background:url('assets/cheese-pull.jpg') center/cover;"></div>
+      <figcaption style="padding:12px 14px;font-size:13px;color:var(--marrom-2);"><strong style="color:var(--marrom);">Apetite em ação</strong> — o "puxa-queijo", prova de sabor.</figcaption>
+    </figure>
+    <figure style="margin:0;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-sm);background:var(--card);">
+      <div style="aspect-ratio:3/4;background:url('assets/lifestyle-coffee.jpg') center/cover;"></div>
+      <figcaption style="padding:12px 14px;font-size:13px;color:var(--marrom-2);"><strong style="color:var(--marrom);">Momento de mesa</strong> — café, madeira, embalagem real.</figcaption>
+    </figure>
+    <figure style="margin:0;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-sm);background:var(--card);">
+      <div style="aspect-ratio:3/4;background:url('assets/closeup-labels.jpg') center/cover;"></div>
+      <figcaption style="padding:12px 14px;font-size:13px;color:var(--marrom-2);"><strong style="color:var(--marrom);">Selos &amp; confiança</strong> — destaca atributos no produto.</figcaption>
+    </figure>
+  </div>
+
+  <div class="reveal keep" style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;">
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">Tratamento</div>
+      <ul style="margin:12px 0 0;padding-left:18px;font-size:14.5px;color:var(--marrom-2);line-height:1.7;">
+        <li>Luz natural, temperatura quente, sombras suaves.</li>
+        <li>Fundos sólidos pêssego / creme / amarelo (sem ruído).</li>
+        <li>Macro e ângulos próximos — textura e vapor.</li>
+        <li>Cantos arredondados 18–22px nas imagens.</li>
+        <li>Sem filtros frios, sem alto-contraste duro.</li>
+      </ul>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">Pessoas &amp; família</div>
+      <p style="margin:12px 0 0;font-size:14.5px;color:var(--marrom-2);">Mãos partindo o pão de queijo, mesa compartilhada, momentos reais — <span style="font-family:'Caveat';font-size:19px;color:var(--queijo-600);">#momentosincríveis</span>. Sempre genuíno, nunca posado em estúdio frio. Diversidade brasileira.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">Bordas &amp; sombras</div>
+      <p style="margin:12px 0 0;font-size:14.5px;color:var(--marrom-2);">Borda hairline quente (#E7D6BC). Sombra suave e morna — nunca cinza-azulada. Profundidade discreta: a página respira, não pesa.</p>
+    </div>
+  </div>
+
+  <!-- elementos gráficos inspirados em queijo -->
+  <div class="reveal keep" style="margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(22px,3vw,30px);box-shadow:var(--sh-sm);">
+    <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red-700);">Elementos gráficos da marca</div>
+    <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;">
+      <div style="text-align:center;"><div style="width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at 35% 32%,#FBB861,#F2962E);box-shadow:inset -4px -6px 10px rgba(107,24,21,.18);position:relative;"><span style="position:absolute;top:20px;left:22px;width:7px;height:7px;border-radius:50%;background:#E58820;"></span><span style="position:absolute;top:16px;left:34px;width:5px;height:5px;border-radius:50%;background:#E58820;"></span></div><p style="margin:8px 0 0;font-size:12.5px;color:var(--marrom-2);">Bolinha-queijo (da logo)</p></div>
+      <div style="text-align:center;"><div style="width:80px;height:80px;border-radius:50%;background:var(--red);opacity:.9;"></div><p style="margin:8px 0 0;font-size:12.5px;color:var(--marrom-2);">Círculo vermelho de apoio</p></div>
+      <div style="text-align:center;"><div style="width:120px;height:44px;border-radius:0 0 60px 60px / 0 0 40px 40px;background:var(--vinho);"></div><p style="margin:8px 0 0;font-size:12.5px;color:var(--marrom-2);">Pratinho / base vinho</p></div>
+      <div style="flex:1;min-width:200px;"><p style="font-size:14.5px;color:var(--marrom-2);">Use os formatos orgânicos da logo (a bolinha de queijo, a sombra-pratinho) como detalhes pontuais: marcadores de lista, separadores, formas decorativas atrás de blocos. <strong style="color:var(--marrom);">Sem ilustrações novas nem SVGs elaborados</strong> — o sistema é fotográfico.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 09 MOTION SYSTEM ===================== -->
+<section id="s9" style="margin-top:clamp(56px,9vw,100px);scroll-margin-top:24px;">
+  <div class="reveal">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;color:#fff;background:var(--red);width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-sm);">09</span>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Motion System</span>
+    </div>
+    <h2 style="margin:18px 0 0;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.02;letter-spacing:-.02em;color:var(--vinho);">Leve, suave, a serviço do conteúdo.</h2>
+    <p style="margin:18px 0 0;max-width:760px;font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--marrom-2);">Animações curtas que dão vida sem distrair. Toda a página respeita <code style="background:var(--bege);border-radius:6px;padding:2px 7px;font-weight:700;">prefers-reduced-motion</code>. As próprias seções deste documento usam o reveal abaixo.</p>
+  </div>
+
+  <div class="reveal keep" style="margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <div style="height:60px;display:flex;align-items:center;justify-content:center;"><div style="width:48px;height:48px;border-radius:14px;background:var(--queijo);animation:floaty 2.6s ease-in-out infinite;"></div></div>
+      <h3 style="margin:14px 0 4px;font-size:17px;color:var(--marrom);">Entrada / reveal</h3>
+      <p style="font-size:13.5px;color:var(--marrom-2);">Fade + subida de 18px ao entrar na viewport. <strong style="color:var(--marrom);">600ms</strong>, ease suave, uma vez só.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <div style="height:60px;display:flex;align-items:center;justify-content:center;"><button style="font-family:'Mulish';font-weight:700;font-size:14px;color:#fff;background:var(--red);border:none;padding:11px 20px;border-radius:var(--r-pill);cursor:pointer;transition:all .2s var(--ease);" style-hover="transform:translateY(-3px);box-shadow:0 10px 20px rgba(234,28,36,.3);">Passe o mouse</button></div>
+      <h3 style="margin:14px 0 4px;font-size:17px;color:var(--marrom);">Hover</h3>
+      <p style="font-size:13.5px;color:var(--marrom-2);">Botões e cards sobem 2–4px e ganham sombra. <strong style="color:var(--marrom);">160–240ms</strong>.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <div style="height:60px;display:flex;align-items:center;justify-content:center;"><div style="width:140px;height:14px;border-radius:8px;background:linear-gradient(90deg,var(--bege) 25%,var(--queijo-50) 50%,var(--bege) 75%);background-size:200% 100%;animation:shimmer 1.6s linear infinite;"></div></div>
+      <h3 style="margin:14px 0 4px;font-size:17px;color:var(--marrom);">Microinterações</h3>
+      <p style="font-size:13.5px;color:var(--marrom-2);">Loading shimmer, +/− do FAQ, contadores. Sutis e funcionais.</p>
+    </div>
+  </div>
+
+  <div class="reveal keep" style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;">
+    <div style="background:var(--bege);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;"><div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:22px;color:var(--vinho);">Durações</div><p style="margin:8px 0 0;font-size:13.5px;color:var(--marrom-2);">micro 120–160ms · hover 200–240ms · reveal 500–600ms. Nada acima de 600ms.</p></div>
+    <div style="background:var(--bege);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;"><div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:22px;color:var(--vinho);">Easing</div><p style="margin:8px 0 0;font-size:13px;color:var(--marrom-2);font-family:'Mulish';">cubic-bezier(.2,.7,.2,1) — saída macia, sensação acolhedora. Evite linear e bounce.</p></div>
+    <div style="background:var(--bege);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;"><div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:22px;color:var(--vinho);">Reduced motion</div><p style="margin:8px 0 0;font-size:13.5px;color:var(--marrom-2);">Com a preferência ativa: sem transform/animação, conteúdo aparece estático. Acessível por padrão.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 10 ACESSIBILIDADE ===================== -->
+<section id="s10" style="margin-top:clamp(56px,9vw,100px);scroll-margin-top:24px;">
+  <div class="reveal">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;color:#fff;background:var(--red);width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-sm);">10</span>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Acessibilidade</span>
+    </div>
+    <h2 style="margin:18px 0 0;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.02;letter-spacing:-.02em;color:var(--vinho);">WCAG AA como piso, não como meta.</h2>
+    <p style="margin:18px 0 0;max-width:760px;font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--marrom-2);">Acolher é incluir. Toda a interface segue contraste, foco visível e navegação por teclado.</p>
+  </div>
+
+  <div class="reveal keep" style="margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;">
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <h3 style="font-size:17px;color:var(--marrom);margin:0 0 10px;">Contraste mínimo</h3>
+      <ul style="margin:0;padding-left:18px;font-size:14px;color:var(--marrom-2);line-height:1.7;"><li>Texto normal ≥ 4.5:1; grande/bold ≥ 3:1.</li><li>Vermelho só com branco em texto bold ≥16px.</li><li>Texto de corpo sempre em marrom, nunca vermelho.</li><li>Amarelo-queijo nunca leva texto branco.</li></ul>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <h3 style="font-size:17px;color:var(--marrom);margin:0 0 10px;">Foco visível</h3>
+      <p style="font-size:14px;color:var(--marrom-2);">Anel de foco em queijo, 3px, deslocado 2px. Nunca remover outline sem substituir.</p>
+      <div style="margin-top:12px;"><button style="font-family:'Mulish';font-weight:700;font-size:14px;color:#fff;background:var(--red);border:none;padding:11px 20px;border-radius:var(--r-pill);outline:3px solid var(--queijo);outline-offset:2px;">Exemplo focado</button></div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <h3 style="font-size:17px;color:var(--marrom);margin:0 0 10px;">Área clicável</h3>
+      <p style="font-size:14px;color:var(--marrom-2);">Alvos de toque ≥ 44×44px. Espaço entre botões irmãos ≥ 8px. Links de texto com padding generoso no mobile.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <h3 style="font-size:17px;color:var(--marrom);margin:0 0 10px;">Cor + rótulo</h3>
+      <p style="font-size:14px;color:var(--marrom-2);">Nunca comunicar só por cor. Selos têm texto/ícone; estados (FAQ +/−, erro/sucesso) usam forma além da cor.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <h3 style="font-size:17px;color:var(--marrom);margin:0 0 10px;">Semântica &amp; teclado</h3>
+      <p style="font-size:14px;color:var(--marrom-2);">Hierarquia h1→h6 correta, landmarks (header/main/footer), foco em ordem lógica, skip-link, <code style="background:var(--bege);border-radius:5px;padding:1px 6px;">alt</code> descritivo em todas as imagens.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);">
+      <h3 style="font-size:17px;color:var(--marrom);margin:0 0 10px;">Leitura no mobile</h3>
+      <p style="font-size:14px;color:var(--marrom-2);">Corpo ≥ 16px, line-height ≥ 1.55, medida ≤ 65ch. Zoom permitido (sem <code style="background:var(--bege);border-radius:5px;padding:1px 6px;">user-scalable=no</code>).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 11 REGRAS RESPONSIVAS ===================== -->
+<section id="s11" style="margin-top:clamp(56px,9vw,100px);scroll-margin-top:24px;">
+  <div class="reveal">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;color:#fff;background:var(--red);width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-sm);">11</span>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Regras Responsivas</span>
+    </div>
+    <h2 style="margin:18px 0 0;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.02;letter-spacing:-.02em;color:var(--vinho);">Mobile é prioridade — não adaptação.</h2>
+    <p style="margin:18px 0 0;max-width:760px;font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--marrom-2);">Projete primeiro a coluna única e expanda. Cada elemento tem um comportamento claro em cada breakpoint.</p>
+  </div>
+
+  <div class="reveal keep" style="margin-top:30px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-sm);overflow:hidden;">
+    <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;background:var(--vinho);color:#FFF1E2;font-weight:700;font-size:13px;">
+      <div style="padding:14px 18px;">Elemento</div><div style="padding:14px 14px;">Mobile</div><div style="padding:14px 14px;">Tablet</div><div style="padding:14px 14px;">Desktop</div>
+    </div>
+    <div style="font-size:13.5px;color:var(--marrom-2);">
+      <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;border-bottom:1px solid #F0E6D4;"><div style="padding:13px 18px;font-weight:700;color:var(--marrom);">Hero</div><div style="padding:13px 14px;">Imagem acima, texto e CTA abaixo</div><div style="padding:13px 14px;">Texto + imagem 60/40</div><div style="padding:13px 14px;">Split 50/50, CTA duplo</div></div>
+      <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;border-bottom:1px solid #F0E6D4;"><div style="padding:13px 18px;font-weight:700;color:var(--marrom);">Cards</div><div style="padding:13px 14px;">1 coluna</div><div style="padding:13px 14px;">2 colunas</div><div style="padding:13px 14px;">3–4 colunas</div></div>
+      <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;border-bottom:1px solid #F0E6D4;"><div style="padding:13px 18px;font-weight:700;color:var(--marrom);">Grids</div><div style="padding:13px 14px;">Empilha (4 col)</div><div style="padding:13px 14px;">8 col</div><div style="padding:13px 14px;">12 col</div></div>
+      <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;border-bottom:1px solid #F0E6D4;"><div style="padding:13px 18px;font-weight:700;color:var(--marrom);">Botões</div><div style="padding:13px 14px;">Largura total, fixo no rodapé</div><div style="padding:13px 14px;">Auto, inline</div><div style="padding:13px 14px;">Auto, inline</div></div>
+      <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;border-bottom:1px solid #F0E6D4;"><div style="padding:13px 18px;font-weight:700;color:var(--marrom);">Imagens</div><div style="padding:13px 14px;">Full-bleed, 3:4</div><div style="padding:13px 14px;">4:3</div><div style="padding:13px 14px;">4:3 / 16:9</div></div>
+      <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;border-bottom:1px solid #F0E6D4;"><div style="padding:13px 18px;font-weight:700;color:var(--marrom);">Header</div><div style="padding:13px 14px;">Logo + hambúrguer</div><div style="padding:13px 14px;">Nav completa</div><div style="padding:13px 14px;">Nav + CTA</div></div>
+      <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;border-bottom:1px solid #F0E6D4;"><div style="padding:13px 18px;font-weight:700;color:var(--marrom);">Seções longas</div><div style="padding:13px 14px;">Quebrar em blocos curtos</div><div style="padding:13px 14px;">2 colunas</div><div style="padding:13px 14px;">Texto + mídia lado a lado</div></div>
+      <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;"><div style="padding:13px 18px;font-weight:700;color:var(--marrom);">WhatsApp</div><div style="padding:13px 14px;">FAB fixo, sempre visível</div><div style="padding:13px 14px;">FAB fixo</div><div style="padding:13px 14px;">FAB ou no header</div></div>
+    </div>
+  </div>
+  <div class="reveal" style="margin-top:16px;background:var(--queijo-50);border:1px solid var(--line);border-radius:var(--r-md);padding:18px 22px;font-size:14.5px;color:var(--marrom-2);"><strong style="color:var(--marrom);">Espaçamentos respiram com a tela:</strong> padding de seção 56px (mobile) → 64px (tablet) → 96px (desktop). Nunca espremer o conteúdo nas bordas — margem mínima de 20px no mobile.</div>
+</section>
+
+<!-- ===================== 12 TOKENS DE DESIGN ===================== -->
+<section id="s12" style="margin-top:clamp(56px,9vw,100px);scroll-margin-top:24px;">
+  <div class="reveal">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;color:#fff;background:var(--red);width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-sm);">12</span>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Tokens de Design</span>
+    </div>
+    <h2 style="margin:18px 0 0;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.02;letter-spacing:-.02em;color:var(--vinho);">Prontos para implementar.</h2>
+    <p style="margin:18px 0 0;max-width:760px;font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--marrom-2);">CSS custom properties para colar direto no <code style="background:var(--bege);border-radius:6px;padding:2px 7px;font-weight:700;">:root</code>. Todo o sistema deriva destes valores.</p>
+  </div>
+
+  <div class="reveal keep" style="margin-top:30px;background:#2A1C16;border:1px solid #3D2A20;border-radius:var(--r-lg);padding:clamp(20px,3vw,28px);box-shadow:var(--sh-md);overflow-x:auto;">
+    <pre style="margin:0;font-family:'Mulish','SFMono-Regular',ui-monospace,monospace;font-size:13px;line-height:1.7;color:#EBD9C6;white-space:pre;"><span style="color:#F2962E;">:root</span> {
+  <span style="color:#9FB98C;">/* Cores — marca */</span>
+  <span style="color:#F4B45C;">--red</span>:        #EA1C24;   <span style="color:#8A7567;">/* identidade, CTA primário */</span>
+  <span style="color:#F4B45C;">--red-700</span>:    #C2151B;   <span style="color:#8A7567;">/* hover/pressed do vermelho */</span>
+  <span style="color:#F4B45C;">--vinho</span>:      #6B1815;   <span style="color:#8A7567;">/* contraste, blocos escuros */</span>
+  <span style="color:#F4B45C;">--queijo</span>:     #FAAD3D;   <span style="color:#8A7567;">/* sabor, selos, destaques */</span>
+  <span style="color:#F4B45C;">--queijo-600</span>: #F2962E;   <span style="color:#8A7567;">/* laranja profundo (faixa) */</span>
+  <span style="color:#F4B45C;">--queijo-50</span>:  #FBF1DD;   <span style="color:#8A7567;">/* wash quente claro */</span>
+
+  <span style="color:#9FB98C;">/* Cores — base & texto */</span>
+  <span style="color:#F4B45C;">--creme</span>:      #FBF4E9;   <span style="color:#8A7567;">/* fundo principal */</span>
+  <span style="color:#F4B45C;">--card</span>:       #FFFDF8;   <span style="color:#8A7567;">/* fundo de cards */</span>
+  <span style="color:#F4B45C;">--bege</span>:       #F3E5CE;   <span style="color:#8A7567;">/* áreas secundárias */</span>
+  <span style="color:#F4B45C;">--line</span>:       #E7D6BC;   <span style="color:#8A7567;">/* bordas hairline */</span>
+  <span style="color:#F4B45C;">--marrom</span>:     #3A2A22;   <span style="color:#8A7567;">/* texto principal */</span>
+  <span style="color:#F4B45C;">--marrom-2</span>:   #6E5A4E;   <span style="color:#8A7567;">/* texto secundário */</span>
+
+  <span style="color:#9FB98C;">/* Tipografia */</span>
+  <span style="color:#F4B45C;">--font-title</span>: 'Bricolage Grotesque', system-ui, sans-serif;
+  <span style="color:#F4B45C;">--font-body</span>:  'Mulish', system-ui, sans-serif;
+  <span style="color:#F4B45C;">--font-hand</span>:  'Caveat', cursive;
+
+  <span style="color:#9FB98C;">/* Espaçamento (base 4px) */</span>
+  <span style="color:#F4B45C;">--s-1</span>:4px; <span style="color:#F4B45C;">--s-2</span>:8px; <span style="color:#F4B45C;">--s-3</span>:12px; <span style="color:#F4B45C;">--s-4</span>:16px;
+  <span style="color:#F4B45C;">--s-5</span>:24px; <span style="color:#F4B45C;">--s-6</span>:32px; <span style="color:#F4B45C;">--s-7</span>:48px;
+  <span style="color:#F4B45C;">--s-8</span>:64px; <span style="color:#F4B45C;">--s-9</span>:96px; <span style="color:#F4B45C;">--s-10</span>:128px;
+
+  <span style="color:#9FB98C;">/* Raio */</span>
+  <span style="color:#F4B45C;">--r-sm</span>:8px; <span style="color:#F4B45C;">--r-md</span>:14px; <span style="color:#F4B45C;">--r-lg</span>:22px; <span style="color:#F4B45C;">--r-pill</span>:999px;
+
+  <span style="color:#9FB98C;">/* Sombras (quentes) */</span>
+  <span style="color:#F4B45C;">--sh-sm</span>: 0 1px 2px rgba(58,27,20,.06);
+  <span style="color:#F4B45C;">--sh-md</span>: 0 10px 26px rgba(58,27,20,.08);
+  <span style="color:#F4B45C;">--sh-lg</span>: 0 20px 50px rgba(107,24,21,.12);
+
+  <span style="color:#9FB98C;">/* Transições */</span>
+  <span style="color:#F4B45C;">--ease</span>: cubic-bezier(.2,.7,.2,1);
+  <span style="color:#F4B45C;">--t-micro</span>:150ms; <span style="color:#F4B45C;">--t-hover</span>:220ms; <span style="color:#F4B45C;">--t-reveal</span>:600ms;
+
+  <span style="color:#9FB98C;">/* Breakpoints */</span>
+  <span style="color:#F4B45C;">--bp-mobile</span>:640px; <span style="color:#F4B45C;">--bp-tablet</span>:1024px; <span style="color:#F4B45C;">--bp-max</span>:1140px;
+
+  <span style="color:#9FB98C;">/* z-index */</span>
+  <span style="color:#F4B45C;">--z-header</span>:100; <span style="color:#F4B45C;">--z-fab</span>:200; <span style="color:#F4B45C;">--z-modal</span>:300;
+}</pre>
+  </div>
+</section>
+
+<!-- ===================== 13 APLICAÇÃO NA LP ===================== -->
+<section id="s13" style="margin-top:clamp(56px,9vw,100px);scroll-margin-top:24px;">
+  <div class="reveal">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;color:#fff;background:var(--red);width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-sm);">13</span>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Aplicação na Landing Page</span>
+    </div>
+    <h2 style="margin:18px 0 0;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.02;letter-spacing:-.02em;color:var(--vinho);">O sistema, seção por seção.</h2>
+    <p style="margin:18px 0 0;max-width:760px;font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--marrom-2);">Como cada parte da página usa cor, tipografia, imagem e CTA. A copy final (GitHub) define os textos; aqui fica a orientação visual de cada bloco.</p>
+  </div>
+
+  <div class="reveal keep" style="margin-top:30px;display:flex;flex-direction:column;gap:12px;">
+
+    <div style="display:flex;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh-sm);align-items:flex-start;">
+      <div style="flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:var(--red);color:#fff;font-family:'Bricolage Grotesque';font-weight:800;display:flex;align-items:center;justify-content:center;">01</div>
+      <div><h3 style="margin:2px 0 6px;font-size:19px;color:var(--marrom);">Hero</h3><p style="font-size:14.5px;color:var(--marrom-2);">Fundo creme, H1 em vinho, subtítulo em marrom-2. Foto macro do produto (puxa-queijo ou tigela). CTA primário vermelho + secundário contorno. Selo "sem glúten / proteínas" como chip de queijo.</p></div>
+    </div>
+
+    <div style="display:flex;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh-sm);align-items:flex-start;">
+      <div style="flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:var(--queijo);color:var(--vinho);font-family:'Bricolage Grotesque';font-weight:800;display:flex;align-items:center;justify-content:center;">02</div>
+      <div><h3 style="margin:2px 0 6px;font-size:19px;color:var(--marrom);">Apresentação da marca</h3><p style="font-size:14.5px;color:var(--marrom-2);">Bloco creme ou bege. Texto curto e afetivo (acento Caveat pontual). Logo/imagem de bastidores artesanais. Tom familiar e brasileiro.</p></div>
+    </div>
+
+    <div style="display:flex;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh-sm);align-items:flex-start;">
+      <div style="flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:var(--queijo);color:var(--vinho);font-family:'Bricolage Grotesque';font-weight:800;display:flex;align-items:center;justify-content:center;">03</div>
+      <div><h3 style="margin:2px 0 6px;font-size:19px;color:var(--marrom);">Problema / desejo do público</h3><p style="font-size:14.5px;color:var(--marrom-2);">Empatia: a fome de um pão de queijo de verdade, sem glúten, nutritivo. Texto em marrom sobre creme, imagem de mesa/momento. Sem peso — leve e desejável.</p></div>
+    </div>
+
+    <div style="display:flex;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh-sm);align-items:flex-start;">
+      <div style="flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:var(--queijo);color:var(--vinho);font-family:'Bricolage Grotesque';font-weight:800;display:flex;align-items:center;justify-content:center;">04</div>
+      <div><h3 style="margin:2px 0 6px;font-size:19px;color:var(--marrom);">Produto</h3><p style="font-size:14.5px;color:var(--marrom-2);">Blocos de produto (foto + badge 400g + nome + descrição curta). Fundo creme; cards com hover. Foto do douradinho e da embalagem real.</p></div>
+    </div>
+
+    <div style="display:flex;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh-sm);align-items:flex-start;">
+      <div style="flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:var(--vinho);color:var(--queijo);font-family:'Bricolage Grotesque';font-weight:800;display:flex;align-items:center;justify-content:center;">05</div>
+      <div><h3 style="margin:2px 0 6px;font-size:19px;color:var(--marrom);">Diferenciais</h3><p style="font-size:14.5px;color:var(--marrom-2);">Faixa <strong style="color:var(--marrom);">vinho</strong> para contraste e respiro. Números/destaques em queijo ("+queijo", "0 glúten"). Quebra o ritmo claro da página.</p></div>
+    </div>
+
+    <div style="display:flex;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh-sm);align-items:flex-start;">
+      <div style="flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:var(--queijo);color:var(--vinho);font-family:'Bricolage Grotesque';font-weight:800;display:flex;align-items:center;justify-content:center;">06</div>
+      <div><h3 style="margin:2px 0 6px;font-size:19px;color:var(--marrom);">Benefícios</h3><p style="font-size:14.5px;color:var(--marrom-2);">Grid de ícone-em-cápsula + título + descrição. Proteínas, cálcio, sem glúten, artesanal. Fundo creme, ícones em queijo-50.</p></div>
+    </div>
+
+    <div style="display:flex;gap:18px;background:linear-gradient(150deg,#FFFDF8,#FDEBCB);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh-sm);align-items:flex-start;">
+      <div style="flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:var(--vinho);color:var(--queijo);font-family:'Bricolage Grotesque';font-weight:800;display:flex;align-items:center;justify-content:center;">07</div>
+      <div><h3 style="margin:2px 0 6px;font-size:19px;color:var(--marrom);">Lojistas / parceiros</h3><p style="font-size:14.5px;color:var(--marrom-2);">Bloco de calor B2B (gradiente creme→queijo). Argumento comercial (margem, giro), CTA vinho "Quero ser parceiro". Tom profissional mas acolhedor.</p></div>
+    </div>
+
+    <div style="display:flex;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh-sm);align-items:flex-start;">
+      <div style="flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:var(--queijo);color:var(--vinho);font-family:'Bricolage Grotesque';font-weight:800;display:flex;align-items:center;justify-content:center;">08</div>
+      <div><h3 style="margin:2px 0 6px;font-size:19px;color:var(--marrom);">Prova social</h3><p style="font-size:14.5px;color:var(--marrom-2);">Depoimentos curtos, estrelas em queijo, avatares. Carrossel no mobile. Reforça confiança antes do CTA final.</p></div>
+    </div>
+
+    <div style="display:flex;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh-sm);align-items:flex-start;">
+      <div style="flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:var(--queijo);color:var(--vinho);font-family:'Bricolage Grotesque';font-weight:800;display:flex;align-items:center;justify-content:center;">09</div>
+      <div><h3 style="margin:2px 0 6px;font-size:19px;color:var(--marrom);">Onde encontrar / como comprar</h3><p style="font-size:14.5px;color:var(--marrom-2);">Pontos de venda, link WhatsApp, mapa ou lista. CTA primário claro. Ícone de localização em cápsula quente.</p></div>
+    </div>
+
+    <div style="display:flex;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh-sm);align-items:flex-start;">
+      <div style="flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:var(--queijo);color:var(--vinho);font-family:'Bricolage Grotesque';font-weight:800;display:flex;align-items:center;justify-content:center;">10</div>
+      <div><h3 style="margin:2px 0 6px;font-size:19px;color:var(--marrom);">FAQ</h3><p style="font-size:14.5px;color:var(--marrom-2);">Acordeão em cartões creme, ícone +/−. Preparo, glúten, validade, entrega. Fundo creme, abertura suave.</p></div>
+    </div>
+
+    <div style="display:flex;gap:18px;background:linear-gradient(150deg,var(--red),#C2151B);border:1px solid rgba(0,0,0,.08);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh-md);align-items:flex-start;">
+      <div style="flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:#fff;color:var(--red-700);font-family:'Bricolage Grotesque';font-weight:800;display:flex;align-items:center;justify-content:center;">11</div>
+      <div><h3 style="margin:2px 0 6px;font-size:19px;color:#fff;">CTA final</h3><p style="font-size:14.5px;color:#FFE2DF;">Bloco <strong style="color:#fff;">vermelho</strong> de fechamento — único momento de vermelho dominante. Frase curta + WhatsApp + onde comprar. Bolinha-queijo decorativa.</p></div>
+    </div>
+
+    <div style="display:flex;gap:18px;background:var(--vinho);border:1px solid rgba(0,0,0,.1);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh-md);align-items:flex-start;">
+      <div style="flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:var(--queijo);color:var(--vinho);font-family:'Bricolage Grotesque';font-weight:800;display:flex;align-items:center;justify-content:center;">12</div>
+      <div><h3 style="margin:2px 0 6px;font-size:19px;color:#fff;">Footer</h3><p style="font-size:14.5px;color:#F3D9C6;">Fundo vinho, logo clara, links com títulos em queijo. Contato, redes, hashtags da marca (#CriandoFilhosFortes). Fecha com calor.</p></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== RESUMO FINAL ===================== -->
+<section style="margin-top:clamp(56px,9vw,100px);scroll-margin-top:24px;">
+  <div class="reveal" style="background:linear-gradient(160deg,#FFFDF8,#FBF1DD);border:1px solid var(--line);border-radius:28px;padding:clamp(28px,4vw,52px);box-shadow:var(--sh-md);position:relative;overflow:hidden;">
+    <div style="position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FBB861,#F2962E);opacity:.16;"></div>
+    <div style="position:relative;">
+      <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-700);">Resumo</span>
+      <h2 style="margin:14px 0 0;font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.04;letter-spacing:-.02em;color:var(--vinho);">Em uma mordida.</h2>
+
+      <div style="margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;">
+        <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;">
+          <h3 style="margin:0 0 10px;font-size:17px;color:var(--marrom);">🎨 Direção recomendada</h3>
+          <p style="font-size:14.5px;color:var(--marrom-2);">Artesanal premium e quente. Base creme, vermelho como energia pontual, amarelo-queijo como sabor. Fotografia próxima e apetitosa no centro.</p>
+        </div>
+        <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;">
+          <h3 style="margin:0 0 10px;font-size:17px;color:var(--marrom);">🧩 Principais decisões</h3>
+          <p style="font-size:14.5px;color:var(--marrom-2);">Cores direto da logo; Bricolage + Mulish + Caveat; escala 4px; grid 12/8/4 mobile-first; componentes calorosos com sombra mínima; vermelho só em CTA e acento.</p>
+        </div>
+        <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;">
+          <h3 style="margin:0 0 10px;font-size:17px;color:var(--marrom);">⚠️ Cuidados de implementação</h3>
+          <p style="font-size:14.5px;color:var(--marrom-2);">Não usar vermelho em blocos de texto; branco só sobre vermelho bold ≥16px; nunca texto branco sobre queijo; respeitar contraste AA, foco visível, alvos ≥44px e reduced-motion.</p>
+        </div>
+        <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;">
+          <h3 style="margin:0 0 10px;font-size:17px;color:var(--marrom);">🚀 Próximos passos</h3>
+          <ol style="margin:0;padding-left:18px;font-size:14.5px;color:var(--marrom-2);line-height:1.7;"><li>Conectar a copy do GitHub às seções.</li><li>Montar wireframe mobile-first.</li><li>Aplicar tokens em alta fidelidade.</li><li>Validar contraste e responsividade.</li></ol>
+        </div>
+      </div>
+
+      <div style="margin-top:28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:24px;">
+        <img src="assets/logo-primary.jpg" alt="Proteijo" style="height:48px;width:auto;border-radius:10px;"/>
+        <p style="font-family:'Caveat';font-size:24px;color:var(--queijo-600);margin:0;">Pronto pra virar landing page. 🧀</p>
+        <span style="margin-left:auto;font-size:13px;color:var(--marrom-2);font-weight:600;">Design System Proteijo · v1.0</span>
+      </div>
+
+      <p style="margin:22px 0 0;font-size:13px;color:var(--marrom-2);background:var(--queijo-50);border:1px solid var(--line);border-radius:12px;padding:14px 18px;"><strong style="color:var(--marrom);">Nota:</strong> o link do GitHub com a copy não chegou nesta etapa. Os textos de exemplo foram inferidos da embalagem real (sem glúten, fonte de proteínas e cálcio, artesanal, 400g, #CriandoFilhosFortes). Ao receber a copy, ela orienta os textos finais — o sistema visual permanece o mesmo.</p>
+    </div>
+  </div>
+</section>
+
+</td></tr></tbody>
+<tfoot><tr><td class="ftr-space"></td></tr></tfoot></table>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+    const attach = ()=>document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+    attach();
+    this._mo = new MutationObserver(attach);
+    this._mo.observe(document.body,{childList:true,subtree:true});
+  }
+  componentWillUnmount(){ if(this._mo) this._mo.disconnect(); }
+}
+</script>
+</body>
+</html>
