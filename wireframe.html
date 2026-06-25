@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wireframe — Proteijo · Mobile-First</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gray-100: #f5f5f5;
+      --gray-200: #e0e0e0;
+      --gray-300: #cccccc;
+      --gray-400: #aaaaaa;
+      --gray-500: #888888;
+      --gray-600: #666666;
+      --gray-700: #444444;
+      --gray-900: #111111;
+      --border: 1.5px dashed #aaaaaa;
+      --section-border: 1px solid #cccccc;
+    }
+
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background: #ffffff;
+      color: var(--gray-900);
+      font-size: 14px;
+      line-height: 1.5;
+      /* padding-bottom for sticky CTA on mobile */
+      padding-bottom: 72px;
+    }
+
+    /* ════════════════════════════════
+       DEVICE FRAME TOGGLE SYSTEM
+    ════════════════════════════════ */
+    .view-toggle {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 1000;
+      display: flex;
+      border: 2px solid var(--gray-900);
+      background: #fff;
+    }
+    .view-btn {
+      padding: 5px 12px;
+      font-family: inherit;
+      font-size: 9px;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: var(--gray-500);
+      border-right: 1px solid var(--gray-300);
+    }
+    .view-btn:last-child { border-right: none; }
+    .view-btn.active { background: var(--gray-900); color: #fff; }
+
+    /* Frame mode wrapping */
+    .page-wrapper { width: 100%; }
+
+    body.frame-mode {
+      background: var(--gray-200);
+      padding: 56px 0 0;
+    }
+    body.frame-mode .page-wrapper {
+      width: 390px;
+      margin: 0 auto;
+      background: #fff;
+      border: 2px solid var(--gray-900);
+      box-shadow: 6px 6px 0 var(--gray-500);
+      overflow: hidden;
+      position: relative;
+    }
+    .frame-bar {
+      display: none;
+      background: var(--gray-900);
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .frame-bar span { width: 8px; height: 8px; border-radius: 50%; background: var(--gray-600); }
+    body.frame-mode .frame-bar { display: flex; }
+
+    /* ════════════════════════════════
+       SECTION LABEL
+    ════════════════════════════════ */
+    .section-label {
+      display: inline-block;
+      background: var(--gray-900);
+      color: #fff;
+      font-size: 9px;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      padding: 2px 7px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    /* ════════════════════════════════
+       LAYOUT — MOBILE FIRST
+    ════════════════════════════════ */
+    .container {
+      width: 100%;
+      padding: 0 16px;
+    }
+
+    section {
+      border-bottom: var(--section-border);
+      padding: 32px 0;
+    }
+
+    /* ════════════════════════════════
+       PLACEHOLDER COMPONENTS
+    ════════════════════════════════ */
+    .placeholder-img {
+      border: var(--border);
+      background: var(--gray-100);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-500);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      gap: 6px;
+      text-align: center;
+      padding: 12px;
+    }
+    .placeholder-img::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--gray-400);
+      border-radius: 50%;
+      background: var(--gray-200);
+      flex-shrink: 0;
+    }
+
+    /* Full-width by default on mobile */
+    .btn {
+      display: block;
+      width: 100%;
+      border: 2px solid var(--gray-900);
+      padding: 14px 20px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      background: transparent;
+      cursor: pointer;
+      color: var(--gray-900);
+      text-align: center;
+    }
+    .btn.filled { background: var(--gray-900); color: #fff; }
+    .btn.secondary { border-color: var(--gray-400); color: var(--gray-600); background: var(--gray-100); }
+    .btn.ghost { border-color: #fff; color: #fff; background: transparent; }
+
+    .placeholder-input {
+      border: var(--border);
+      background: var(--gray-100);
+      padding: 12px;
+      color: var(--gray-400);
+      font-family: inherit;
+      font-size: 12px;
+      width: 100%;
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    /* ════════════════════════════════
+       TYPOGRAPHY
+    ════════════════════════════════ */
+    h1.wf {
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+    }
+    h2.wf {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--gray-900);
+      margin-bottom: 10px;
+    }
+    h3.wf {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 6px;
+    }
+    p.wf {
+      color: var(--gray-600);
+      margin-bottom: 10px;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    p.wf.big {
+      font-size: 15px;
+      color: var(--gray-700);
+      font-style: italic;
+      line-height: 1.65;
+    }
+    p.wf.quote {
+      font-size: 15px;
+      color: var(--gray-700);
+      font-style: italic;
+      line-height: 1.6;
+      border-left: 3px solid var(--gray-400);
+      padding-left: 14px;
+    }
+
+    /* ════════════════════════════════
+       NAVBAR — MOBILE
+    ════════════════════════════════ */
+    .navbar {
+      border-bottom: var(--section-border);
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 16px;
+    }
+    .logo-box {
+      border: var(--border);
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--gray-600);
+      background: var(--gray-100);
+    }
+
+    /* Desktop nav links — hidden on mobile */
+    .nav-links { display: none; gap: 20px; }
+    .nav-links span {
+      color: var(--gray-500);
+      font-size: 11px;
+      border-bottom: 1px solid var(--gray-300);
+      cursor: pointer;
+    }
+    .nav-cta-desktop { display: none; }
+
+    /* Hamburger */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 8px;
+      cursor: pointer;
+      border: var(--border);
+      background: var(--gray-100);
+    }
+    .hamburger span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--gray-700);
+      transition: transform 0.2s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* Mobile dropdown menu */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      border-top: var(--section-border);
+      background: #fff;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      display: block;
+      padding: 13px 16px;
+      font-size: 13px;
+      color: var(--gray-600);
+      border-bottom: 1px dotted var(--gray-200);
+      text-decoration: none;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu-cta {
+      padding: 12px 16px;
+      border-top: var(--section-border);
+    }
+
+    /* ════════════════════════════════
+       S1 · HERO — MOBILE
+    ════════════════════════════════ */
+    #hero { background: var(--gray-100); padding-top: 24px; }
+    .hero-badge {
+      border: var(--border);
+      display: inline-block;
+      padding: 3px 10px;
+      font-size: 10px;
+      color: var(--gray-500);
+      margin-bottom: 12px;
+      background: #fff;
+    }
+
+    /* Image wrapper + floating protein badge */
+    .hero-img-wrap {
+      position: relative;
+      margin-bottom: 36px; /* espaço para badge não clipar */
+    }
+    .hero-img {
+      width: 100%;
+      height: 200px;
+    }
+    .hero-protein-badge {
+      position: absolute;
+      bottom: -22px;
+      right: 14px;
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      background: var(--gray-900);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8px;
+      z-index: 2;
+      /* duplo anel: branco externo + dashed interno */
+      box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--gray-600);
+    }
+    .hero-protein-badge::before {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      border: 1px dashed var(--gray-500);
+    }
+    .hero-protein-badge-num {
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1;
+      color: #fff;
+    }
+    .hero-protein-badge-unit {
+      font-size: 7px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-top: 3px;
+      line-height: 1.3;
+    }
+
+    .hero-subtext {
+      color: var(--gray-500);
+      font-size: 13px;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+    .hero-ctas { display: flex; flex-direction: column; gap: 6px; }
+
+    /* Annotation below each CTA (audience label) */
+    .cta-annotation {
+      font-size: 8px;
+      color: var(--gray-400);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 3px;
+    }
+
+    /* Key stats strip */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      margin-top: 18px;
+      border: var(--border);
+      background: #fff;
+    }
+    .hero-stat {
+      padding: 10px 6px;
+      text-align: center;
+      border-right: var(--border);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num {
+      display: block;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--gray-900);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      display: block;
+      font-size: 8px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* ════════════════════════════════
+       S2 · CREDIBILITY STRIP
+    ════════════════════════════════ */
+    #credibility {
+      background: var(--gray-900);
+      padding: 18px 0;
+      border-bottom: none;
+    }
+    .credibility-inner { padding: 0 16px; text-align: center; }
+    .credibility-headline {
+      font-size: 10px;
+      font-weight: bold;
+      color: #fff;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .credibility-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+    }
+    .cred-tag {
+      border: 1px solid var(--gray-600);
+      padding: 3px 9px;
+      font-size: 9px;
+      color: var(--gray-300);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ════════════════════════════════
+       S3 · PROBLEMA
+    ════════════════════════════════ */
+    #problem { background: #fff; }
+    .problem-callout {
+      border: 2px solid var(--gray-900);
+      padding: 12px 14px;
+      margin-top: 14px;
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--gray-900);
+    }
+
+    /* ════════════════════════════════
+       S4 · POR QUE VENDE SOZINHO
+    ════════════════════════════════ */
+    #why-sells { background: var(--gray-100); }
+    .why-list { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+    .why-card {
+      border: var(--border);
+      background: #fff;
+      padding: 16px;
+    }
+    .why-card-num {
+      font-size: 9px;
+      font-weight: bold;
+      color: var(--gray-400);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    /* ════════════════════════════════
+       S5 · PROVA SOCIAL
+    ════════════════════════════════ */
+    #social-proof { background: var(--gray-200); text-align: center; }
+    .proof-highlight {
+      border: 2px solid var(--gray-900);
+      display: inline-block;
+      padding: 5px 16px;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      color: var(--gray-700);
+    }
+
+    /* ════════════════════════════════
+       S6 · INGREDIENTES + NUTRICIONAL
+    ════════════════════════════════ */
+    #ingredients { background: #fff; }
+    .ingredients-stack { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+    .ingredients-img { width: 100%; height: 180px; }
+    .ingredient-list {
+      border: var(--border);
+      background: var(--gray-100);
+      padding: 14px;
+    }
+    .il-title {
+      font-weight: bold;
+      color: var(--gray-700);
+      font-size: 10px;
+      margin-bottom: 6px;
+      border-bottom: 1.5px solid var(--gray-400);
+      padding-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      display: block;
+    }
+    .ingredient-list p {
+      font-size: 11px;
+      color: var(--gray-500);
+      border-bottom: 1px dotted var(--gray-300);
+      padding: 5px 0;
+      margin: 0;
+    }
+    .ingredient-list .il-note {
+      font-size: 10px;
+      color: var(--gray-400);
+      margin-top: 6px;
+      font-style: italic;
+      border: none;
+      padding-top: 6px;
+      border-top: 1px dotted var(--gray-300);
+    }
+    .nutrition-table {
+      border: var(--border);
+      background: var(--gray-100);
+      overflow: hidden;
+    }
+    .nt-header {
+      background: var(--gray-700);
+      color: #fff;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 12px;
+    }
+    .nt-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dotted var(--gray-300);
+      padding: 5px 12px;
+      font-size: 11px;
+      color: var(--gray-600);
+    }
+    .nt-row:last-child { border-bottom: none; }
+    .nt-row.dim { font-size: 10px; color: var(--gray-400); font-style: italic; }
+    .ingredients-note {
+      margin-top: 14px;
+      font-weight: bold;
+      font-size: 13px;
+      color: var(--gray-700);
+    }
+
+    /* ════════════════════════════════
+       S7 · COMO FUNCIONA — VERTICAL
+    ════════════════════════════════ */
+    #how-it-works { background: var(--gray-100); }
+    .steps-list { display: flex; flex-direction: column; gap: 0; margin-top: 18px; }
+    .step {
+      border: var(--border);
+      border-bottom: none;
+      background: #fff;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px;
+    }
+    .step:last-child { border-bottom: var(--border); }
+    .step-num {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      border: 2px solid var(--gray-400);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--gray-600);
+      background: var(--gray-100);
+    }
+    .step-body h3.wf { font-size: 13px; margin-bottom: 4px; }
+    .step-body p { font-size: 12px; color: var(--gray-500); margin: 0; }
+    .step-connector {
+      width: 2px;
+      height: 16px;
+      background: var(--gray-300);
+      margin-left: 31px;
+      border: none;
+    }
+
+    /* ════════════════════════════════
+       S8 · PARA QUEM É
+    ════════════════════════════════ */
+    #audience { background: #fff; }
+    .audience-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .audience-item {
+      border: var(--border);
+      padding: 12px 8px;
+      background: var(--gray-100);
+      font-size: 11px;
+      color: var(--gray-600);
+      text-align: center;
+      line-height: 1.4;
+    }
+    .audience-icon {
+      width: 28px;
+      height: 28px;
+      border: var(--border);
+      background: var(--gray-200);
+      margin: 0 auto 7px;
+    }
+    .audience-item.placeholder-more {
+      border-style: dotted;
+      background: #fff;
+      color: var(--gray-400);
+      font-style: italic;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ════════════════════════════════
+       S9 · FAQ — ACCORDION
+    ════════════════════════════════ */
+    #faq { background: var(--gray-100); }
+    .faq-list { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .faq-item {
+      border: var(--border);
+      background: #fff;
+    }
+    .faq-q {
+      padding: 14px 14px;
+      font-weight: bold;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--gray-900);
+      cursor: pointer;
+      user-select: none;
+      gap: 10px;
+    }
+    .faq-q-text { flex: 1; line-height: 1.4; }
+    .faq-icon {
+      font-size: 20px;
+      color: var(--gray-400);
+      line-height: 1;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+    }
+    .faq-item.open .faq-a { max-height: 120px; }
+    .faq-a-inner {
+      padding: 0 14px 14px;
+      font-size: 12px;
+      color: var(--gray-500);
+      border-top: 1px solid var(--gray-200);
+      padding-top: 10px;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    /* ════════════════════════════════
+       S10 · CTA FINAL + FORM
+    ════════════════════════════════ */
+    #final-cta {
+      background: var(--gray-900);
+      color: #fff;
+      border-bottom: none;
+    }
+    .final-cta-text h2.wf { color: #fff; font-size: 20px; }
+    .final-cta-text p.wf { color: var(--gray-400); font-size: 12px; }
+    .cta-reassurance {
+      border: 1.5px dashed var(--gray-700);
+      padding: 10px 12px;
+      font-size: 11px;
+      color: var(--gray-500);
+      background: rgba(255,255,255,0.04);
+      line-height: 1.5;
+      margin-top: 14px;
+    }
+    .form-box {
+      border: 1.5px dashed var(--gray-600);
+      background: rgba(255,255,255,0.05);
+      padding: 18px 16px;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .form-label {
+      font-size: 9px;
+      color: var(--gray-400);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+      display: block;
+    }
+    .form-field { display: flex; flex-direction: column; }
+    .form-divider {
+      border-top: 1px solid var(--gray-700);
+      margin: 4px 0;
+    }
+    .whatsapp-alt {
+      text-align: center;
+      font-size: 11px;
+      color: var(--gray-500);
+      padding-top: 6px;
+    }
+    .whatsapp-alt span {
+      color: var(--gray-300);
+      border-bottom: 1px solid var(--gray-600);
+    }
+
+    /* ════════════════════════════════
+       STICKY BOTTOM CTA (MOBILE)
+    ════════════════════════════════ */
+    .sticky-bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--gray-900);
+      border-top: 2px solid var(--gray-700);
+      padding: 10px 14px 10px;
+      z-index: 80;
+      display: flex;
+      gap: 8px;
+    }
+    .sticky-bottom .s-primary {
+      flex: 2;
+      padding: 12px 10px;
+      background: #fff;
+      color: var(--gray-900);
+      border: none;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+    }
+    .sticky-bottom .s-wpp {
+      flex: 1;
+      padding: 12px 10px;
+      background: transparent;
+      color: var(--gray-400);
+      border: 1.5px dashed var(--gray-600);
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      text-align: center;
+    }
+    .sticky-label {
+      text-align: center;
+      font-size: 8px;
+      color: var(--gray-600);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-top: 5px;
+    }
+
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
+    footer {
+      border-top: var(--section-border);
+      padding: 24px 0 16px;
+      background: var(--gray-100);
+    }
+    .footer-inner {
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .logo-box-sm {
+      border: var(--border);
+      display: inline-block;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--gray-600);
+      background: #fff;
+      margin-bottom: 8px;
+    }
+    .footer-tagline {
+      font-size: 11px;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+    .footer-col h3.wf { font-size: 12px; margin-bottom: 8px; }
+    .footer-links { list-style: none; }
+    .footer-links li {
+      font-size: 11px;
+      color: var(--gray-500);
+      padding: 4px 0;
+      border-bottom: 1px dotted var(--gray-200);
+    }
+    .footer-bottom {
+      margin: 14px 16px 0;
+      padding-top: 12px;
+      border-top: 1px solid var(--gray-200);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .footer-bottom span { font-size: 10px; color: var(--gray-400); }
+
+    /* ════════════════════════════════
+       PROTEIN SEAL
+    ════════════════════════════════ */
+    .protein-seal-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      margin-top: 20px;
+      padding: 20px 0 4px;
+      border-top: var(--section-border);
+    }
+    .protein-seal {
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      border: 3px solid var(--gray-900);
+      background: var(--gray-100);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .protein-seal::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      border: 1.5px dashed var(--gray-400);
+    }
+    .protein-seal-num {
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--gray-900);
+    }
+    .protein-seal-unit {
+      font-size: 10px;
+      color: var(--gray-600);
+      letter-spacing: 0.05em;
+      margin-top: 3px;
+    }
+    .protein-seal-label {
+      font-size: 8px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+    .protein-seal-sub {
+      font-size: 8px;
+      color: var(--gray-400);
+      margin-top: 2px;
+      font-style: italic;
+    }
+    .protein-seal-copy {
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.7;
+      font-style: italic;
+      max-width: 240px;
+    }
+    .protein-seal-copy strong {
+      font-style: normal;
+      font-weight: bold;
+      color: var(--gray-900);
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .protein-mini-badge {
+      display: inline-block;
+      border: 1.5px solid var(--gray-500);
+      padding: 4px 9px;
+      font-size: 9px;
+      font-weight: bold;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--gray-700);
+      margin-top: 10px;
+      background: var(--gray-200);
+    }
+
+    /* ════════════════════════════════
+       WIREFRAME BADGE
+    ════════════════════════════════ */
+    .wf-note {
+      position: fixed;
+      bottom: 82px;
+      right: 12px;
+      background: var(--gray-900);
+      color: #fff;
+      font-size: 9px;
+      padding: 5px 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 2px solid var(--gray-700);
+      opacity: 0.85;
+      z-index: 95;
+    }
+
+    /* ════════════════════════════════
+       TABLET / DESKTOP OVERRIDES
+       (min-width: 640px)
+    ════════════════════════════════ */
+    @media (min-width: 640px) {
+      body { padding-bottom: 0; }
+
+      .container { padding: 0 24px; max-width: 960px; margin: 0 auto; }
+      section { padding: 48px 0; }
+
+      h1.wf { font-size: 32px; }
+      h2.wf { font-size: 22px; }
+
+      /* Nav */
+      .hamburger { display: none; }
+      .nav-links { display: flex; }
+      .nav-cta-desktop { display: block; }
+      .navbar-inner { padding: 14px 24px; }
+
+      /* Hero */
+      .hero-layout {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: 40px;
+        align-items: center;
+      }
+      /* Restore natural order: text left, image right */
+      .hero-img-wrap {
+        order: 0;
+        margin-bottom: 0;
+        padding-bottom: 26px; /* espaço para o badge overflow em desktop */
+      }
+      .hero-img { height: 280px; }
+      .hero-protein-badge { width: 96px; height: 96px; bottom: -4px; right: 16px; }
+      .hero-protein-badge-num { font-size: 28px; }
+      .hero-protein-badge-unit { font-size: 8px; }
+      .hero-text-col { order: -1; }
+      .hero-ctas { flex-direction: row; flex-wrap: wrap; gap: 10px; }
+      .btn { width: auto; display: inline-block; }
+
+      /* Why sells */
+      .why-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 20px;
+      }
+
+      /* Ingredients */
+      .ingredients-stack {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      /* Steps — horizontal */
+      .steps-list { flex-direction: row; gap: 0; }
+      .step {
+        flex: 1;
+        flex-direction: column;
+        border-bottom: var(--border);
+        border-right: none;
+        text-align: center;
+        align-items: center;
+        padding: 20px 14px;
+      }
+      .step:last-child { border-right: var(--border); }
+      .step-body { text-align: center; }
+      .step-connector { display: none; }
+
+      /* Audience */
+      .audience-grid { grid-template-columns: repeat(4, 1fr); }
+
+      /* Final CTA */
+      .final-cta-layout {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 48px;
+        align-items: start;
+      }
+      .form-box { margin-top: 0; }
+      .final-cta-text h2.wf { font-size: 26px; }
+
+      /* Protein seal — horizontal on desktop */
+      .protein-seal-wrap { flex-direction: row; align-items: center; justify-content: flex-start; padding-left: 0; }
+      .protein-seal-copy { text-align: left; }
+
+      /* Footer */
+      .footer-inner {
+        flex-direction: row;
+        padding: 0 24px;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 14px 24px 0;
+        padding: 12px 0 0;
+        max-width: 960px;
+      }
+
+      /* Hide sticky CTA on desktop */
+      .sticky-bottom { display: none; }
+      .wf-note { bottom: 16px; right: 16px; font-size: 10px; }
+    }
+
+    @media (min-width: 960px) {
+      h1.wf { font-size: 36px; }
+      .hero-layout { grid-template-columns: 1fr 400px; gap: 48px; }
+      .hero-img { height: 320px; }
+      .credibility-inner { padding: 0 24px; max-width: 960px; margin: 0 auto; }
+      .credibility-headline { font-size: 12px; }
+      .cred-tag { font-size: 10px; padding: 4px 12px; }
+    }
+
+    /* ════════════════════════════════
+       FRAME MODE OVERRIDES
+       (forces mobile layout even on big screens)
+    ════════════════════════════════ */
+    body.frame-mode section { padding: 28px 0; }
+    body.frame-mode .container { padding: 0 16px; max-width: none; }
+    body.frame-mode h1.wf { font-size: 24px; }
+    body.frame-mode h2.wf { font-size: 20px; }
+    body.frame-mode .hamburger { display: flex !important; }
+    body.frame-mode .nav-links { display: none !important; }
+    body.frame-mode .nav-cta-desktop { display: none !important; }
+    body.frame-mode .navbar-inner { padding: 11px 16px; }
+    body.frame-mode .hero-layout { display: block !important; }
+    body.frame-mode .hero-img-wrap { margin-bottom: 36px !important; padding-bottom: 0 !important; order: 0 !important; }
+    body.frame-mode .hero-img { height: 200px !important; }
+    body.frame-mode .hero-protein-badge { width: 82px !important; height: 82px !important; bottom: -22px !important; right: 14px !important; }
+    body.frame-mode .hero-ctas { flex-direction: column !important; gap: 6px; }
+    body.frame-mode .btn { width: 100% !important; display: block !important; }
+    body.frame-mode .why-list { display: flex !important; flex-direction: column !important; }
+    body.frame-mode .ingredients-stack { display: flex !important; flex-direction: column !important; }
+    body.frame-mode .steps-list { flex-direction: column !important; }
+    body.frame-mode .step { flex-direction: row !important; border-right: var(--border) !important; border-bottom: none !important; text-align: left !important; align-items: flex-start !important; padding: 16px !important; }
+    body.frame-mode .step:last-child { border-bottom: var(--border) !important; }
+    body.frame-mode .step-body { text-align: left !important; }
+    body.frame-mode .audience-grid { grid-template-columns: 1fr 1fr !important; }
+    body.frame-mode .final-cta-layout { display: block !important; }
+    body.frame-mode .form-box { margin-top: 20px !important; }
+    body.frame-mode .footer-inner { flex-direction: column !important; padding: 0 16px !important; max-width: none !important; }
+    body.frame-mode .footer-bottom { flex-direction: column !important; margin: 14px 16px 0 !important; max-width: none !important; }
+    body.frame-mode .sticky-bottom { display: flex !important; position: static; border-top: 2px solid var(--gray-700); }
+    body.frame-mode .wf-note { display: none; }
+    body.frame-mode .credibility-inner { padding: 0 16px; max-width: none; }
+    body.frame-mode .cred-tag { font-size: 9px; }
+    body.frame-mode .protein-seal-wrap { flex-direction: column !important; align-items: center !important; }
+    body.frame-mode .protein-seal-copy { text-align: center !important; }
+  </style>
+</head>
+<body>
+
+<!-- ── Device Frame Toggle ── -->
+<div class="view-toggle">
+  <button class="view-btn active" onclick="setView('mobile')">☎ Mobile</button>
+  <button class="view-btn" onclick="setView('desktop')">⬜ Desktop</button>
+</div>
+
+<div class="page-wrapper">
+  <div class="frame-bar">
+    <span></span><span></span><span></span>
+  </div>
+
+<!-- ══════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <div class="logo-box">[ LOGO — Proteijo ]</div>
+
+    <!-- Desktop links -->
+    <div class="nav-links">
+      <span>Por que o Proteijo</span>
+      <span>Como funciona</span>
+      <span>Para quem é</span>
+      <span>FAQ</span>
+    </div>
+    <button class="btn nav-cta-desktop" style="width:auto;padding:8px 16px;font-size:11px;">Quero ser revendedor</button>
+
+    <!-- Mobile hamburger -->
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- Mobile dropdown -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#why-sells">Por que o Proteijo</a>
+    <a href="#how-it-works">Como funciona</a>
+    <a href="#audience">Para quem é</a>
+    <a href="#faq">FAQ</a>
+    <div class="mobile-menu-cta">
+      <button class="btn filled">Quero ser revendedor</button>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════
+     S1 — HERO
+══════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="container">
+    <span class="section-label">S1 · Hero</span>
+
+    <div class="hero-layout">
+
+      <!-- Image first on mobile + floating protein badge -->
+      <div class="hero-img-wrap">
+        <div class="placeholder-img hero-img">
+          [ IMAGEM HERO ]<br/>Foto do pão de queijo Proteijo
+        </div>
+        <!-- Badge flutua sobre o canto da imagem -->
+        <div class="hero-protein-badge">
+          <span class="hero-protein-badge-num">48g</span>
+          <span class="hero-protein-badge-unit">proteína<br/>natural</span>
+        </div>
+      </div>
+
+      <!-- Text col — order: -1 no desktop (texto à esquerda) -->
+      <div class="hero-text-col">
+        <div class="hero-badge">[ Badge ] Artesanal · Proteico · Sem Glúten · Desde 2015</div>
+
+        <h1 class="wf">O pão de queijo que, quem prova, não para de pedir.</h1>
+
+        <p class="hero-subtext">
+          Feito com Queijo Minas Frescal de verdade —
+          48g de proteína natural por embalagem, o dobro de qualquer concorrente.
+          Sem glúten, sem conservantes, sem corantes.
+          Há 9 anos sendo pedido de volta.
+        </p>
+
+        <!-- CTAs bifurcados: B2C + B2B -->
+        <div class="hero-ctas">
+          <div>
+            <button class="btn filled">[ CTA ] Onde Encontrar</button>
+            <div class="cta-annotation">→ consumidor final</div>
+          </div>
+          <div>
+            <button class="btn secondary">[ CTA ] Quero Revender ↗</button>
+            <div class="cta-annotation">→ lojista / revendedor</div>
+          </div>
+        </div>
+
+        <!-- Stats strip: âncoras numéricas rápidas -->
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="hero-stat-num">48g</span>
+            <span class="hero-stat-label">Proteína<br/>por embalagem</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">2×</span>
+            <span class="hero-stat-label">mais que a<br/>concorrência</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">9+</span>
+            <span class="hero-stat-label">anos no<br/>mercado</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S2 — FAIXA DE CREDIBILIDADE
+══════════════════════════════════════════════ -->
+<section id="credibility" style="padding: 18px 0; border-bottom: none;">
+  <div class="credibility-inner">
+    <p class="credibility-headline">9 anos na mesa das famílias brasileiras</p>
+    <div class="credibility-tags">
+      <span class="cred-tag">Sem Glúten</span>
+      <span class="cred-tag">Sem Conservantes</span>
+      <span class="cred-tag">Sem Corantes</span>
+      <span class="cred-tag">Fonte de Proteína</span>
+      <span class="cred-tag">Fonte de Cálcio</span>
+      <span class="cred-tag">Artesanal</span>
+      <span class="cred-tag">Recomendado por Nutricionistas</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S3 — O PROBLEMA
+══════════════════════════════════════════════ -->
+<section id="problem">
+  <div class="container">
+    <span class="section-label">S3 · O Problema</span>
+    <h2 class="wf">Pão de queijo virou commodity.<br/>O seu não precisa ser.</h2>
+    <p class="wf big">
+      A gôndola está cheia de marcas iguais, com receitas iguais, brigando por preço.
+      O lojista que entra nessa disputa perde margem, perde diferenciação e perde o cliente
+      que busca algo melhor.
+    </p>
+    <div class="problem-callout">
+      O Proteijo joga em outro campeonato.
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S4 — POR QUE O PROTEIJO VENDE SOZINHO
+══════════════════════════════════════════════ -->
+<section id="why-sells">
+  <div class="container">
+    <span class="section-label">S4 · Diferenciais do Produto</span>
+    <h2 class="wf">O que faz o Proteijo diferente de tudo.</h2>
+
+    <div class="why-list">
+      <div class="why-card">
+        <div class="why-card-num">Diferencial 01</div>
+        <h3 class="wf">Mais queijo do que qualquer concorrente.</h3>
+        <p class="wf">
+          O queijo é o primeiro ingrediente da nossa lista. Não é detalhe — é o nosso segredo.
+          É o que faz o cliente provar, sentir a diferença e voltar na semana seguinte.
+        </p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-num">Diferencial 02</div>
+        <h3 class="wf">O único feito com Queijo Minas Frescal.</h3>
+        <p class="wf">
+          Enquanto o mercado padroniza com queijos industriais, o Proteijo usa Minas Frescal de verdade.
+          Sabor artesanal autêntico, impossível de imitar.
+        </p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-num">Diferencial 03</div>
+        <h3 class="wf">Fonte de proteína e cálcio.</h3>
+        <p class="wf">
+          Não é só gostoso — é nutritivo. Encaixa naturalmente no público que busca alimentação
+          saudável, fitness e funcional. Recomendado por nutricionistas.
+        </p>
+        <div class="protein-mini-badge">[ SELÃO ] 48g proteína natural · por embalagem</div>
+      </div>
+      <div class="why-card">
+        <div class="why-card-num">Diferencial 04</div>
+        <h3 class="wf">Sem glúten, sem conservantes, sem corantes.</h3>
+        <p class="wf">
+          Atende ao consumidor com restrição alimentar e ao consumidor consciente —
+          dois dos públicos que mais crescem no varejo alimentar brasileiro.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S5 — PROVA SOCIAL
+══════════════════════════════════════════════ -->
+<section id="social-proof">
+  <div class="container" style="text-align:center;">
+    <span class="section-label">S5 · Prova Social</span><br/>
+    <div class="proof-highlight">Líder de vendas onde chega.</div>
+    <p class="wf big">
+      Há 9 anos o Proteijo é referência em hortifrútis, empórios e lojas de produtos naturais.
+      Não pela embalagem. Não pela propaganda. Pelo produto.
+    </p>
+    <br/>
+    <p class="wf quote" style="text-align:left;">
+      Quem prova, volta. Quem vende, repete o pedido.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S6 — INGREDIENTES E INFORMAÇÃO NUTRICIONAL
+══════════════════════════════════════════════ -->
+<section id="ingredients">
+  <div class="container">
+    <span class="section-label">S6 · Ingredientes e Informação Nutricional</span>
+    <h2 class="wf">Transparência total. Do rótulo à mesa.</h2>
+
+    <div class="ingredients-stack">
+
+      <div class="placeholder-img ingredients-img">
+        [ IMAGEM ]<br/>Embalagem / Produto
+      </div>
+
+      <div class="ingredient-list">
+        <span class="il-title">Ingredientes</span>
+        <p>[ Queijo Minas Frescal ]</p>
+        <p>[ Polvilho azedo ]</p>
+        <p>[ Polvilho doce ]</p>
+        <p>[ Ovos ]</p>
+        <p>[ Óleo vegetal ]</p>
+        <p>[ Sal ]</p>
+        <p class="il-note">[ Lista completa conforme rótulo aprovado pela ANVISA ]</p>
+      </div>
+
+      <div class="nutrition-table">
+        <div class="nt-header">Informação Nutricional</div>
+        <div class="nt-row dim">Porção de [ X ] g · [ Y ] porções</div>
+        <div class="nt-row"><span>Valor energético</span><span>[ ] kcal</span></div>
+        <div class="nt-row" style="font-weight: bold; color: var(--gray-900); background: var(--gray-200);"><span>Proteínas ★</span><span>[ ] g</span></div>
+        <div class="nt-row"><span>Carboidratos</span><span>[ ] g</span></div>
+        <div class="nt-row"><span>Gorduras totais</span><span>[ ] g</span></div>
+        <div class="nt-row"><span>Gorduras saturadas</span><span>[ ] g</span></div>
+        <div class="nt-row"><span>Sódio</span><span>[ ] mg</span></div>
+        <div class="nt-row"><span>Cálcio</span><span>[ ] mg</span></div>
+        <div class="nt-row dim">[ Dados conforme tabela nutricional oficial ]</div>
+      </div>
+
+    </div>
+
+    <!-- Protein Seal — selão grande -->
+    <div class="protein-seal-wrap">
+      <div class="protein-seal">
+        <span class="protein-seal-num">48g</span>
+        <span class="protein-seal-unit">de proteína</span>
+        <span class="protein-seal-label">por embalagem</span>
+        <span class="protein-seal-sub">proteína natural</span>
+      </div>
+      <div class="protein-seal-copy">
+        <strong>O dobro da concorrência.</strong>
+        Proteína naturalmente presente no queijo Minas Frescal — não adicionada, não processada.
+        O Proteijo tem mais proteína que qualquer pão de queijo do mercado.<br/>
+        <span style="font-size:10px; color: var(--gray-400);">[ comparativo baseado em embalagem equivalente ]</span>
+      </div>
+    </div>
+
+    <p class="wf ingredients-note">Nada para esconder. Tudo para mostrar.</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S7 — COMO FUNCIONA A PARCERIA
+══════════════════════════════════════════════ -->
+<section id="how-it-works">
+  <div class="container">
+    <span class="section-label">S7 · Como Funciona a Parceria</span>
+    <h2 class="wf">Simples assim:</h2>
+
+    <!-- Steps: vertical on mobile, horizontal on desktop -->
+    <div class="steps-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3 class="wf">Entre em contato</h3>
+          <p>Conte sobre sua loja e seu volume estimado.</p>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3 class="wf">Receba sua proposta comercial</h3>
+          <p>Condições, preços e prazos personalizados para o seu negócio.</p>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3 class="wf">Entregamos no seu CD</h3>
+          <p>Sem complicação logística. Você só recebe e abastece.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S8 — PARA QUEM É O PROTEIJO
+══════════════════════════════════════════════ -->
+<section id="audience">
+  <div class="container">
+    <span class="section-label">S8 · Para Quem É o Proteijo</span>
+    <h2 class="wf">Se a sua loja atende quem valoriza qualidade, o Proteijo tem espaço garantido na sua gôndola.</h2>
+
+    <div class="audience-grid">
+      <div class="audience-item">
+        <div class="audience-icon"></div>
+        Hortifrútis
+      </div>
+      <div class="audience-item">
+        <div class="audience-icon"></div>
+        Empórios e mercearias premium
+      </div>
+      <div class="audience-item">
+        <div class="audience-icon"></div>
+        Lojas de produtos naturais
+      </div>
+      <div class="audience-item">
+        <div class="audience-icon"></div>
+        Supermercados de bairro
+      </div>
+      <div class="audience-item">
+        <div class="audience-icon"></div>
+        Cafeterias
+      </div>
+      <div class="audience-item">
+        <div class="audience-icon"></div>
+        Padarias artesanais
+      </div>
+      <div class="audience-item">
+        <div class="audience-icon"></div>
+        Restaurantes e buffets
+      </div>
+      <div class="audience-item placeholder-more">
+        + outros canais<br/>a definir
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S9 — FAQ
+══════════════════════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <span class="section-label">S9 · Perguntas Frequentes</span>
+    <h2 class="wf">Dúvidas sobre a parceria</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Qual o pedido mínimo?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">[ A definir conforme política comercial ]</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Quais regiões vocês atendem?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">[ A definir ]</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Qual o prazo de entrega?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">[ A definir ]</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Qual a validade do produto?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">[ A definir ]</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Quais as condições de pagamento?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">[ A definir ]</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Vocês enviam degustação?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">[ A definir ]</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     S10 — CTA FINAL + FORMULÁRIO
+══════════════════════════════════════════════ -->
+<section id="final-cta" style="border-bottom: none;">
+  <div class="container">
+    <span class="section-label" style="background:#fff; color:#111;">S10 · CTA Final</span>
+
+    <div class="final-cta-layout">
+
+      <!-- Texto -->
+      <div class="final-cta-text">
+        <h2 class="wf">Pronto para vender o pão de queijo que fideliza?</h2>
+        <p class="wf">Preencha o formulário e nosso time entra em contato para fechar a parceria.</p>
+        <div class="cta-reassurance">
+          [ ÍCONE ] Sem compromisso. Sem taxa de adesão.<br/>
+          Você recebe uma proposta personalizada para o perfil da sua loja.
+        </div>
+      </div>
+
+      <!-- Formulário -->
+      <div class="form-box">
+        <div class="form-field">
+          <span class="form-label">Nome</span>
+          <input class="placeholder-input" type="text" placeholder="Nome completo" disabled />
+        </div>
+        <div class="form-field">
+          <span class="form-label">Empresa / Razão Social</span>
+          <input class="placeholder-input" type="text" placeholder="Nome da empresa" disabled />
+        </div>
+        <div class="form-field">
+          <span class="form-label">Cidade / Estado</span>
+          <input class="placeholder-input" type="text" placeholder="Ex.: São Paulo / SP" disabled />
+        </div>
+        <div class="form-field">
+          <span class="form-label">Tipo de estabelecimento</span>
+          <input class="placeholder-input" type="text" placeholder="Ex.: Hortifrúti, Empório..." disabled />
+        </div>
+        <div class="form-field">
+          <span class="form-label">WhatsApp</span>
+          <input class="placeholder-input" type="text" placeholder="(00) 00000-0000" disabled />
+        </div>
+        <div class="form-field">
+          <span class="form-label">E-mail</span>
+          <input class="placeholder-input" type="text" placeholder="seu@email.com.br" disabled />
+        </div>
+        <div class="form-divider"></div>
+        <button class="btn ghost" style="width:100%;">
+          [ CTA ] Quero ser revendedor Proteijo
+        </button>
+        <div class="whatsapp-alt">
+          Ou fale agora no WhatsApp → <span>[ Link WhatsApp ]</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="logo-box-sm">[ LOGO — Proteijo ]</div>
+      <p class="footer-tagline">Há 9 anos na mesa<br/>das famílias brasileiras.</p>
+    </div>
+    <div>
+      <h3 class="wf">Navegação</h3>
+      <ul class="footer-links">
+        <li>Por que o Proteijo</li>
+        <li>Como funciona a parceria</li>
+        <li>Para quem é</li>
+        <li>FAQ</li>
+        <li>Política de Privacidade</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="wf">Contato</h3>
+      <ul class="footer-links">
+        <li>[ WhatsApp ]</li>
+        <li>[ Instagram ]</li>
+        <li>[ E-mail ]</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Proteijo · Há 9 anos na mesa das famílias · [ CNPJ ]</span>
+    <span>[ Política de Privacidade ]</span>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════
+     STICKY BOTTOM CTA (mobile only)
+══════════════════════════════════════════════ -->
+<div class="sticky-bottom">
+  <button class="s-primary">Quero o Proteijo</button>
+  <button class="s-wpp">WhatsApp ↗</button>
+</div>
+
+</div><!-- /page-wrapper -->
+
+<div class="wf-note">WF · Proteijo · Mobile-First</div>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const ham  = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    ham.classList.toggle('open');
+  }
+
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  function setView(mode) {
+    const body = document.body;
+    const btns = document.querySelectorAll('.view-btn');
+    btns.forEach(b => b.classList.remove('active'));
+    if (mode === 'mobile') {
+      body.classList.add('frame-mode');
+      btns[0].classList.add('active');
+    } else {
+      body.classList.remove('frame-mode');
+      btns[1].classList.add('active');
+    }
+  }
+
+  // Default: mobile frame
+  setView('mobile');
+</script>
+
+</body>
+</html>
