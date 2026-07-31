@@ -298,21 +298,36 @@ section{padding:clamp(56px,8vw,96px) 0;}
 #prova{background:var(--queijo-50);}
 .proof-headline{background:var(--vinho);display:inline-block;padding:6px 18px;border-radius:var(--r-pill);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--queijo);margin-bottom:18px;}
 .proof-sub{max-width:56ch;}
-.testimonials{display:grid;grid-template-columns:1fr;gap:16px;margin-top:40px;}
-@media(min-width:640px){.testimonials{grid-template-columns:1fr 1fr;}}
-@media(min-width:1024px){.testimonials{grid-template-columns:repeat(3,1fr);}}
-.testi-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);}
-.testi-stars{color:var(--queijo-600);font-size:18px;letter-spacing:3px;margin-bottom:12px;}
-.testi-quote{font-size:15.5px;color:var(--marrom);font-style:italic;line-height:1.65;margin-bottom:16px;}
-.testi-author{display:flex;align-items:center;gap:12px;}
-.testi-avatar{width:38px;height:38px;border-radius:50%;background:var(--queijo);display:flex;align-items:center;justify-content:center;font-family:var(--font-title);font-weight:800;font-size:16px;color:var(--vinho);flex-shrink:0;}
-.testi-name{font-weight:700;font-size:14px;color:var(--marrom);}
-.testi-since{font-size:12px;color:var(--marrom-2);}
-/* social divider quote */
-.big-quote{text-align:center;margin:40px 0 0;font-family:var(--font-title);font-size:clamp(20px,3vw,28px);font-weight:700;color:var(--vinho);border-left:4px solid var(--queijo);padding-left:24px;text-align:left;max-width:600px;}
+.instagram-reels{display:grid;grid-auto-flow:column;grid-auto-columns:min(82vw,340px);gap:16px;margin:36px -20px 0;padding:4px 20px 18px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-inline:contain;scrollbar-width:thin;scrollbar-color:var(--queijo) transparent;}
+.instagram-reels::-webkit-scrollbar{height:6px;}
+.instagram-reels::-webkit-scrollbar-thumb{background:var(--queijo);border-radius:var(--r-pill);}
+.reel-card{scroll-snap-align:center;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-md);}
+.reel-frame{display:block;width:100%;height:620px;border:0;background:var(--card);}
+.reels-cta{display:flex;justify-content:center;margin-top:26px;}
+@media(min-width:640px){.instagram-reels{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible;margin:40px 0 0;padding:4px 0 10px;}.reel-frame{height:clamp(540px,50vw,620px);}}
+
+/* ═══════════════════════════════════════════ CLIENTES / DISTRIBUIDORES */
+#parceiros-logos{background:var(--creme);padding:clamp(52px,7vw,80px) 0;overflow:hidden;position:relative;border-top:1px solid rgba(231,214,188,.72);border-bottom:1px solid rgba(231,214,188,.72);}
+.partners-head{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:clamp(28px,4vw,42px);}
+.partners-head .lead{max-width:48ch;}
+@media(min-width:768px){.partners-head{grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr);align-items:end;gap:52px;}.partners-head .lead{justify-self:end;}}
+.partners-viewport{width:100%;max-width:100%;overflow:hidden;position:relative;padding:8px 0 14px;contain:paint;}
+.partners-viewport::before,.partners-viewport::after{content:'';position:absolute;z-index:2;top:0;bottom:0;width:clamp(20px,6vw,92px);pointer-events:none;}
+.partners-viewport::before{left:0;background:linear-gradient(90deg,var(--creme),rgba(251,244,233,0));}
+.partners-viewport::after{right:0;background:linear-gradient(270deg,var(--creme),rgba(251,244,233,0));}
+.partners-track{--partner-gap:clamp(18px,3vw,36px);display:flex;align-items:center;width:max-content;max-width:none;will-change:transform;animation:partners-scroll 42s linear infinite;}
+.partners-group{display:flex;align-items:center;gap:var(--partner-gap);padding-right:var(--partner-gap);list-style:none;flex:none;}
+.partner-logo{width:clamp(96px,11vw,132px);height:clamp(96px,11vw,132px);flex:0 0 auto;border-radius:50%;overflow:hidden;background:var(--card);border:4px solid var(--card);box-shadow:0 0 0 1px var(--line),var(--sh-md);transition:transform var(--t-hover) var(--ease),box-shadow var(--t-hover) var(--ease);}
+.partner-logo img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.partner-logo--text{display:flex;align-items:center;justify-content:center;padding:15px;background:linear-gradient(145deg,var(--vinho),var(--red-700));color:#fff;text-align:center;font-family:var(--font-title);font-size:clamp(14px,1.5vw,17px);font-weight:800;line-height:1.05;letter-spacing:-.01em;}
+.partner-logo:hover{transform:translateY(-4px) scale(1.035);box-shadow:0 0 0 2px var(--queijo),0 14px 32px rgba(58,27,20,.14);}
+.partners-viewport:hover .partners-track,.partners-viewport:focus-within .partners-track{animation-play-state:paused;}
+@keyframes partners-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:639px){.partners-track{animation-duration:34s}.partner-logo{width:94px;height:94px}}
+@media(prefers-reduced-motion:reduce){.partners-viewport{overflow:visible;contain:none}.partners-viewport::before,.partners-viewport::after{display:none}.partners-track{width:100%;animation:none;will-change:auto}.partners-group:first-child{width:100%;flex-wrap:wrap;justify-content:center;padding-right:0}.partners-group[aria-hidden="true"]{display:none}}
 
 /* ═══════════════════════════════════════════ LOJISTAS / B2B */
-#lojistas{background:linear-gradient(155deg,var(--card) 0%,var(--queijo-50) 55%,var(--queijo-100) 100%);position:relative;}
+#lojistas{background:linear-gradient(155deg,var(--card) 0%,var(--queijo-50) 55%,var(--queijo-100) 100%);position:relative;overflow:hidden;}
 #lojistas::before{content:'';position:absolute;top:-80px;right:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(250,173,61,.09) 0%,transparent 70%);pointer-events:none;}
 .lojistas-layout{display:grid;grid-template-columns:1fr;gap:40px;align-items:start;}
 @media(min-width:768px){.lojistas-layout{grid-template-columns:1fr 1fr;gap:60px;align-items:stretch;}}
@@ -366,6 +381,10 @@ section{padding:clamp(56px,8vw,96px) 0;}
 .aud-item:hover{border-color:var(--queijo);background:var(--queijo-50);color:var(--vinho);transform:translateY(-3px);}
 .aud-icon{width:40px;height:40px;border-radius:12px;background:var(--queijo-50);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:20px;transition:background var(--t-hover) var(--ease);}
 .aud-item:hover .aud-icon{background:var(--queijo-100);}
+.audience-note{display:flex;align-items:center;gap:14px;margin-top:20px;padding:18px 20px;background:var(--queijo-50);border:1px solid var(--line);border-radius:var(--r-lg);color:var(--marrom-2);font-size:15px;}
+.audience-note-icon{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--queijo-100);flex-shrink:0;font-size:20px;}
+.audience-note strong{color:var(--vinho);}
+.audience-note a{color:var(--red-700);font-weight:800;text-decoration:underline;text-underline-offset:3px;}
 
 /* ═══════════════════════════════════════════ FAQ */
 #faq{background:linear-gradient(168deg,var(--creme) 0%,var(--bege) 55%,var(--queijo-50) 100%);position:relative;overflow:hidden;}
@@ -460,7 +479,7 @@ footer{background:var(--vinho);padding:clamp(40px,6vw,64px) 0 clamp(24px,3vw,32p
     </nav>
 
     <div class="hdr-cta">
-      <a href="https://wa.me/5512996315241" class="btn btn-outline" style="padding:10px 20px;font-size:14px;" target="_blank" rel="noopener">Onde Comprar</a>
+      <a href="#parceiros-logos" class="btn btn-outline" style="padding:10px 20px;font-size:14px;">Onde Comprar</a>
       <a href="#lojistas" class="btn btn-vinho" style="padding:10px 20px;font-size:14px;">Quero Revender</a>
     </div>
 
@@ -497,7 +516,7 @@ footer{background:var(--vinho);padding:clamp(40px,6vw,64px) 0 clamp(24px,3vw,32p
       </a>
     </div>
     <div class="mob-ctas">
-      <a href="https://wa.me/5512996315241" class="btn btn-outline btn-full" onclick="closeMenu()" target="_blank" rel="noopener">Onde Comprar</a>
+      <a href="#parceiros-logos" class="btn btn-outline btn-full" onclick="closeMenu()">Onde Comprar</a>
       <a href="#ctafinal" class="btn btn-primary btn-full" onclick="closeMenu()">Quero o Proteijo</a>
     </div>
   </div>
@@ -516,10 +535,10 @@ footer{background:var(--vinho);padding:clamp(40px,6vw,64px) 0 clamp(24px,3vw,32p
       <div class="hero-img-col rv">
         <div class="hero-img-wrap">
           <!-- Floating social proof pill -->
-          <div class="hero-sp" aria-label="Mais de 300 lojistas parceiros com 5 estrelas">
+          <div class="hero-sp" aria-label="Mais de 100 lojistas parceiros com 5 estrelas">
             <span class="hero-sp-stars">★★★★★</span>
             <div>
-              <span class="hero-sp-name">+300 lojistas</span>
+              <span class="hero-sp-name">+100 lojistas</span>
               <span class="hero-sp-sub">parceiros ativos</span>
             </div>
           </div>
@@ -556,8 +575,7 @@ footer{background:var(--vinho);padding:clamp(40px,6vw,64px) 0 clamp(24px,3vw,32p
         </p>
 
         <div class="hero-ctas rv rv-d4">
-          <a href="https://wa.me/5512996315241" target="_blank" rel="noopener" class="btn btn-primary btn-full">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.103 1.51 5.827L.057 23.804a.5.5 0 0 0 .61.63l6.101-1.6A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.668-.504-5.215-1.386l-.374-.214-3.873 1.015 1.033-3.77-.23-.382A9.97 9.97 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          <a href="#parceiros-logos" class="btn btn-primary btn-full">
             Onde Encontrar
           </a>
           <a href="#lojistas" class="btn btn-vinho btn-full">
@@ -736,32 +754,32 @@ footer{background:var(--vinho);padding:clamp(40px,6vw,64px) 0 clamp(24px,3vw,32p
     <div class="rv">
       <p class="eyebrow">O produto</p>
       <h2 class="h2" style="margin-top:12px;">Feito pra dar água na boca.</h2>
-      <p class="lead" style="margin-top:14px;max-width:52ch;">Casquinha dourada, recheio cremoso, queijo que puxa. Pronto do congelador ao forno em minutos.</p>
+      <p class="lead" style="margin-top:14px;max-width:52ch;">Bem branquinho, cremoso, queijudo e suculento. Pronto do congelador ao forno em minutos.</p>
     </div>
 
     <div class="prod-grid">
       <div class="prod-card rv rv-d1">
-        <img src="DSProteijo/assets/product-bowl.jpg" alt="Pão de queijo Proteijo em tigela — douradinho e crocante" class="prod-img"/>
+        <img src="assets/site/proteijo2.webp" alt="Pães de queijo Proteijo bem branquinhos servidos em uma bandeja" class="prod-img" style="object-position:center 56%;" loading="lazy" decoding="async"/>
         <div class="prod-body">
-          <span class="badge badge-queijo" style="margin-bottom:10px;">Douradinho</span>
-          <h3 class="h3">Casquinha crocante por fora</h3>
-          <p>Direto do congelador ao forno. Fica perfeito em minutos, sem descongelar.</p>
+          <span class="badge badge-queijo" style="margin-bottom:10px;">Bem branquinho</span>
+          <h3 class="h3">A cor do queijo de verdade</h3>
+          <p>O tom clarinho vem do Queijo Minas Frescal, primeiro ingrediente da receita.</p>
         </div>
       </div>
       <div class="prod-card rv rv-d2">
         <img src="DSProteijo/assets/cheese-pull.jpg" alt="Pão de queijo Proteijo mostrando o queijo puxando — muuuito queijo dentro" class="prod-img"/>
         <div class="prod-body">
-          <span class="badge badge-queijo" style="margin-bottom:10px;">Puxa queijo</span>
-          <h3 class="h3">Recheio generoso por dentro</h3>
-          <p>A prova real do queijo de verdade em cada mordida. Não tem como fingir.</p>
+          <span class="badge badge-queijo" style="margin-bottom:10px;">Queijudo e suculento</span>
+          <h3 class="h3">Muuuuito queijo por dentro</h3>
+          <p>Queijo Minas Frescal de verdade em cada mordida: macio, úmido e cheio de sabor.</p>
         </div>
       </div>
       <div class="prod-card rv rv-d3">
-        <img src="DSProteijo/assets/lifestyle-coffee.jpg" alt="Proteijo ao lado de café — o lanche perfeito do dia a dia" class="prod-img"/>
+        <img src="assets/site/paodequeijo1.webp" alt="Pães de queijo Proteijo sendo preparados na chapa" class="prod-img" style="object-position:center 58%;" loading="lazy" decoding="async"/>
         <div class="prod-body">
-          <span class="badge badge-queijo" style="margin-bottom:10px;">Momento real</span>
-          <h3 class="h3">Faz parte do dia a dia</h3>
-          <p>No café da manhã, no lanche, na reunião. O Proteijo encaixa onde você precisar.</p>
+          <span class="badge badge-queijo" style="margin-bottom:10px;">Pronto em minutos</span>
+          <h3 class="h3">Prático para o dia a dia</h3>
+          <p>Vai direto do congelador para o preparo, sem descongelar. Branquinho, macio e suculento.</p>
         </div>
       </div>
     </div>
@@ -788,10 +806,11 @@ footer{background:var(--vinho);padding:clamp(40px,6vw,64px) 0 clamp(24px,3vw,32p
       <div class="ingr-list rv rv-d2">
         <span class="ingr-list-title">Ingredientes</span>
         <div class="ingr-item"><span class="ingr-dot"></span>Queijo Minas Frescal</div>
-        <div class="ingr-item"><span class="ingr-dot"></span>Polvilho azedo</div>
         <div class="ingr-item"><span class="ingr-dot"></span>Polvilho doce</div>
         <div class="ingr-item"><span class="ingr-dot"></span>Ovos</div>
-        <div class="ingr-item"><span class="ingr-dot"></span>Óleo vegetal</div>
+        <div class="ingr-item"><span class="ingr-dot"></span>Água</div>
+        <div class="ingr-item"><span class="ingr-dot"></span>Óleo de Girassol</div>
+        <div class="ingr-item"><span class="ingr-dot"></span>Manteiga</div>
         <div class="ingr-item"><span class="ingr-dot"></span>Sal</div>
         <p class="ingr-note">Lista completa conforme rótulo aprovado pela ANVISA. Sem conservantes, sem corantes, sem glúten.</p>
       </div>
@@ -892,67 +911,86 @@ footer{background:var(--vinho);padding:clamp(40px,6vw,64px) 0 clamp(24px,3vw,32p
 </section>
 
 <!-- ════════ S7 PROVA SOCIAL ════════ -->
-<section id="prova" aria-label="Prova social e depoimentos">
+<section id="prova" aria-label="Feedbacks em vídeo no Instagram">
   <div class="wrap">
     <div class="rv">
-      <span class="proof-headline">Líder de vendas onde chega.</span>
-      <h2 class="h2" style="margin-top:16px;max-width:16ch;">Quem prova, pede de volta.</h2>
-      <p class="lead proof-sub" style="margin-top:14px;">Há 9 anos o Proteijo é referência em hortifrútis, empórios e lojas de produtos naturais. Não pela embalagem — pelo produto.</p>
+      <span class="proof-headline">Feedbacks reais</span>
+      <h2 class="h2" style="margin-top:16px;max-width:16ch;">Quem prova, mostra.</h2>
+      <p class="lead proof-sub" style="margin-top:14px;">Assista aos vídeos publicados no Instagram da Proteijo e veja o produto de perto.</p>
     </div>
 
-    <div class="testimonials">
-      <div class="testi-card rv rv-d1">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"Melhor pão de queijo congelado que já provei. Compro toda semana, minha família é viciada."</p>
-        <div class="testi-author">
-          <div class="testi-avatar">M</div>
-          <div>
-            <div class="testi-name">Mariana S.</div>
-            <div class="testi-since">Cliente desde 2022</div>
-          </div>
-        </div>
+    <div class="instagram-reels rv" aria-label="Vídeos do Instagram da Proteijo">
+      <div class="reel-card">
+        <iframe class="reel-frame" src="https://www.instagram.com/reel/Dba8YNuBz6H/embed/" title="Vídeo da Proteijo no Instagram" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
-      <div class="testi-card rv rv-d2">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"Vendo no meu empório e é o item que mais gira. Os clientes chegam já pedindo o 'pão de queijo do queijo'."</p>
-        <div class="testi-author">
-          <div class="testi-avatar">R</div>
-          <div>
-            <div class="testi-name">Roberto M.</div>
-            <div class="testi-since">Parceiro revendedor · SP</div>
-          </div>
-        </div>
+      <div class="reel-card">
+        <iframe class="reel-frame" src="https://www.instagram.com/reel/DbBMhWMBVRG/embed/" title="Feedback em vídeo sobre a Proteijo no Instagram" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
-      <div class="testi-card rv rv-d3">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"Sou nutricionista e recomendo para meus pacientes. Proteína natural, sem glúten, ingredientes limpos. Raro encontrar isso em produto congelado."</p>
-        <div class="testi-author">
-          <div class="testi-avatar">A</div>
-          <div>
-            <div class="testi-name">Dra. Ana L.</div>
-            <div class="testi-since">Nutricionista · RJ</div>
-          </div>
-        </div>
+      <div class="reel-card">
+        <iframe class="reel-frame" src="https://www.instagram.com/reel/DbMCCJCh6LM/embed/" title="Proteijo apresentado em vídeo no Instagram" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
     </div>
 
-    <blockquote class="big-quote rv">
-      "Quem prova, volta. Quem vende, repete o pedido."
-    </blockquote>
+    <div class="reels-cta rv">
+      <a href="https://www.instagram.com/proteijo/" target="_blank" rel="noopener" class="btn btn-outline">Ver mais no Instagram ↗</a>
+    </div>
 
   </div>
 </section>
 
-<!-- ════════ S8 LOJISTAS / PARCEIROS ════════ -->
+<!-- ════════ S8 CLIENTES / DISTRIBUIDORES ════════ -->
+<section id="parceiros-logos" aria-labelledby="parceiros-title">
+  <div class="wrap partners-head rv">
+    <div>
+      <p class="eyebrow">Onde encontrar</p>
+      <h2 class="h2" id="parceiros-title" style="margin-top:12px;max-width:18ch;">Encontre Proteijo perto de você.</h2>
+    </div>
+    <p class="lead">A Proteijo chega até você por uma rede de distribuidores que escolhe qualidade de verdade.</p>
+  </div>
+
+  <div class="partners-viewport rv" aria-label="Clientes e distribuidores parceiros da Proteijo">
+    <div class="partners-track">
+      <ul class="partners-group">
+        <li class="partner-logo"><img src="assets/logos_clientes/image_146_1x.webp" alt="Natural Valle Empório e Granel" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/sitio-verde.png" alt="Sítio Verde Hortifruti" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_150_1x.webp" alt="Com-Sciência Saúde" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_149_1x.webp" alt="Kitandinha Hortifruti e Produtos Orientais" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_147_1x.webp" alt="Granovie Mercado Natural" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_144_1x.webp" alt="Hort Shopping Jardim" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_145_1x.webp" alt="Santa Tereza Hortifrutti" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_151_1x.webp" alt="Cia Natural Saúde" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_154_1x.webp" alt="Bella Granel" decoding="async"/></li>
+        <li class="partner-logo partner-logo--text" aria-label="Queijo Cremoso"><span>Queijo<br/>Cremoso</span></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_148_1x.webp" alt="Fruit City Hortifruti" decoding="async"/></li>
+      </ul>
+
+      <ul class="partners-group" aria-hidden="true">
+        <li class="partner-logo"><img src="assets/logos_clientes/image_146_1x.webp" alt="" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/sitio-verde.png" alt="" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_150_1x.webp" alt="" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_149_1x.webp" alt="" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_147_1x.webp" alt="" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_144_1x.webp" alt="" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_145_1x.webp" alt="" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_151_1x.webp" alt="" decoding="async"/></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_154_1x.webp" alt="" decoding="async"/></li>
+        <li class="partner-logo partner-logo--text"><span>Queijo<br/>Cremoso</span></li>
+        <li class="partner-logo"><img src="assets/logos_clientes/image_148_1x.webp" alt="" decoding="async"/></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ S9 LOJISTAS / PARCEIROS ════════ -->
 <section id="lojistas" aria-label="Seção para lojistas e revendedores">
   <div class="wrap">
     <div class="lojistas-layout">
 
       <div class="lojistas-img-wrap rv rv-d1">
         <img src="DSProteijo/assets/lifestyle-coffee.jpg" alt="Pão de queijo Proteijo servido em ambiente de café — produto artesanal para revenda" class="lojistas-img"/>
-        <div class="lojistas-img-badge" aria-label="Mais de 300 lojistas parceiros ativos">
+        <div class="lojistas-img-badge" aria-label="Mais de 100 lojistas parceiros ativos">
           <div>
-            <span class="lojistas-img-badge-num">+300</span>
+            <span class="lojistas-img-badge-num">+100</span>
           </div>
           <div class="lojistas-img-badge-label">lojistas<br>parceiros</div>
         </div>
@@ -1028,8 +1066,8 @@ footer{background:var(--vinho);padding:clamp(40px,6vw,64px) 0 clamp(24px,3vw,32p
   <div class="wrap">
     <div class="rv">
       <p class="eyebrow">Para quem é</p>
-      <h2 class="h2" style="margin-top:12px;max-width:20ch;">Se você ama qualidade, o Proteijo é pra você.</h2>
-      <p class="lead" style="margin-top:14px;max-width:54ch;">Do consumidor que busca um lanche nutritivo ao lojista que quer uma marca que fideliza — o Proteijo serve os dois.</p>
+      <h2 class="h2" style="margin-top:12px;max-width:20ch;">Para quem coloca qualidade na prateleira.</h2>
+      <p class="lead" style="margin-top:14px;max-width:54ch;">A Proteijo atende lojistas e revendedores que querem oferecer um produto artesanal, nutritivo e com alta recorrência.</p>
     </div>
 
     <div class="audience-grid">
@@ -1061,10 +1099,10 @@ footer{background:var(--vinho);padding:clamp(40px,6vw,64px) 0 clamp(24px,3vw,32p
         <div class="aud-icon">🍽️</div>
         Restaurantes e buffets
       </div>
-      <div class="aud-item rv rv-d2" style="background:var(--queijo-50);border-color:var(--line);">
-        <div class="aud-icon" style="background:var(--queijo-100);">💪</div>
-        Você — consumidor final
-      </div>
+    </div>
+    <div class="audience-note rv">
+      <span class="audience-note-icon" aria-hidden="true">📍</span>
+      <p><strong>Compra para consumo?</strong> A Proteijo não vende direto da fábrica para o consumidor final. <a href="#parceiros-logos">Encontre um distribuidor perto de você.</a></p>
     </div>
   </div>
 </section>
@@ -1095,7 +1133,7 @@ footer{background:var(--vinho);padding:clamp(40px,6vw,64px) 0 clamp(24px,3vw,32p
               <span class="faq-q-text">Onde posso comprar o Proteijo?</span>
               <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
             </div>
-            <div class="faq-a" role="region"><div class="faq-a-inner">Em hortifrútis, empórios, lojas de produtos naturais e supermercados de bairro. Fale no WhatsApp para encontrar o ponto de venda mais perto de você.</div></div>
+            <div class="faq-a" role="region"><div class="faq-a-inner">Em hortifrútis, empórios, lojas naturais e distribuidores parceiros. A fábrica não vende diretamente ao consumidor final; consulte a seção “Onde encontrar” para localizar um ponto de venda.</div></div>
           </div>
           <div class="faq-item">
             <div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this)}">
@@ -1109,7 +1147,7 @@ footer{background:var(--vinho);padding:clamp(40px,6vw,64px) 0 clamp(24px,3vw,32p
               <span class="faq-q-text">Como preparo o pão de queijo?</span>
               <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
             </div>
-            <div class="faq-a" role="region"><div class="faq-a-inner">Direto do congelador ao forno ou airfryer — sem descongelar. Fica douradinho em poucos minutos. O prazo de validade e as instruções estão na embalagem.</div></div>
+            <div class="faq-a" role="region"><div class="faq-a-inner">Direto do congelador ao forno ou airfryer — sem descongelar. Ele fica bem branquinho, macio e suculento. As instruções completas estão na embalagem.</div></div>
           </div>
           <div class="faq-item">
             <div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this)}">
@@ -1150,7 +1188,7 @@ footer{background:var(--vinho);padding:clamp(40px,6vw,64px) 0 clamp(24px,3vw,32p
               <span class="faq-q-text">Qual a validade do produto?</span>
               <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
             </div>
-            <div class="faq-a" role="region"><div class="faq-a-inner">Produto congelado com validade conforme embalagem. Entre em contato para detalhes de conservação e logística.</div></div>
+            <div class="faq-a" role="region"><div class="faq-a-inner">Mantido congelado conforme as orientações da embalagem, o Proteijo tem 6 meses de validade. A embalagem a vácuo dispensa conservantes e preserva a qualidade e o sabor de feito na hora.</div></div>
           </div>
           <div class="faq-item">
             <div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this)}">
@@ -1185,10 +1223,10 @@ footer{background:var(--vinho);padding:clamp(40px,6vw,64px) 0 clamp(24px,3vw,32p
     <div class="cta-block rv">
       <div class="cta-block-inner">
         <h2 class="cta-block-h">Matou a vontade?</h2>
-        <p class="cta-block-sub">Peça agora pelo WhatsApp ou encontre o ponto de venda mais perto de você. Se quiser vender, a gente está pronto para conversar.</p>
+        <p class="cta-block-sub">Encontre o ponto de venda mais perto de você. Se quiser vender Proteijo, a gente está pronto para conversar.</p>
         <div class="cta-block-btns">
-          <a href="https://wa.me/5512996315241" target="_blank" rel="noopener" class="btn" style="background:#fff;color:var(--red-700);box-shadow:0 4px 14px rgba(0,0,0,.14);">
-            Pedir no WhatsApp
+          <a href="#parceiros-logos" class="btn" style="background:#fff;color:var(--red-700);box-shadow:0 4px 14px rgba(0,0,0,.14);">
+            Procurar o mais próximo
           </a>
           <a href="#lojistas" class="btn btn-ghost-white">Quero Revender →</a>
         </div>
@@ -1245,7 +1283,7 @@ footer{background:var(--vinho);padding:clamp(40px,6vw,64px) 0 clamp(24px,3vw,32p
 
 <!-- Sticky CTA Mobile -->
 <div class="sticky-cta" aria-label="Ações rápidas">
-  <button class="s-btn-a" onclick="window.location.href='https://wa.me/5512996315241'">Quero o Proteijo</button>
+  <button class="s-btn-a" onclick="document.getElementById('parceiros-logos').scrollIntoView({behavior:'smooth'})">Onde encontrar</button>
   <button class="s-btn-b" onclick="document.getElementById('lojistas').scrollIntoView({behavior:'smooth'})">Revender ↗</button>
 </div>
 
