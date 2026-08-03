@@ -1,0 +1,20 @@
+{
+  "name": "Proteijo — Pão de Queijo Artesanal",
+  "short_name": "Proteijo",
+  "description": "Pão de queijo artesanal feito com Queijo Minas Frescal, sem glúten e sem conservantes.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FBF4E9",
+  "theme_color": "#EA1C24",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

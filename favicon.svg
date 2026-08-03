@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Proteijo</title>
+  <desc id="desc">Símbolo de queijo da marca Proteijo</desc>
+  <rect width="512" height="512" rx="96" fill="#C2151B"/>
+  <path d="M119 397c35-18 76-27 121-27 52 0 99 12 140 36-31 22-78 34-139 34-54 0-95-14-122-43Z" fill="#8F1016"/>
+  <path d="M146 328c-14-34-10-85 13-131 26-52 63-87 105-91 42-4 78 27 101 80 20 46 21 101 3 142-18 40-54 61-107 61-58 0-97-20-115-61Z" fill="#FAAD3D"/>
+  <circle cx="273" cy="184" r="28" fill="#F2962E"/>
+  <circle cx="317" cy="166" r="13" fill="#F2962E"/>
+</svg>
